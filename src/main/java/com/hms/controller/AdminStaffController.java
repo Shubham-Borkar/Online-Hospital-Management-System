@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hms.dto.RegisterDto;
-import com.hms.pojos.Entry;
 import com.hms.pojos.Staff;
 import com.hms.service.AdminStaffService;
 
@@ -36,7 +35,7 @@ public class AdminStaffController {
 		
 		System.out.println(doctorDetails);
 		try {
-			return new ResponseEntity<>(StaffImp.addDoctor(doctorDetails), HttpStatus.CREATED);
+			return new ResponseEntity<>(StaffImp.addDoctor(doctorDetails,education,speciality), HttpStatus.CREATED);
 			
 		} catch (RuntimeException e) {
 			e.printStackTrace();
@@ -80,9 +79,10 @@ public class AdminStaffController {
 	public ResponseEntity<?> updateStaffDetails(@PathVariable int staffId, @RequestBody Staff staffDetails)
 	{
 		staffDetails.setId(staffId);
-		Staff updatedStaff=StaffImp.updateStaff(staffDetails);
-		if(updatedStaff!=null)
-		return ResponseEntity.ok(updatedStaff);
+		System.out.println(staffDetails);
+//		Staff updatedStaff=StaffImp.updateStaff(staffDetails);
+//		if(updatedStaff!=null)
+//		return ResponseEntity.ok(updatedStaff);
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		
 	}

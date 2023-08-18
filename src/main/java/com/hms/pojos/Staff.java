@@ -22,7 +22,7 @@ public class Staff extends BaseClass {
 	private String name;
 	private String gender;
 	private String address;
-	@DateTimeFormat(pattern = "yy-MM-dd")
+//	@DateTimeFormat(pattern = "yy-MM-dd")
 	private LocalDate dob;
 //	@Temporal(TemporalType.DATE)
 //	private Date dob;

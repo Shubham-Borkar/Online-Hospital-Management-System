@@ -9,7 +9,8 @@ import com.hms.pojos.Staff;
 
 public interface AdminStaffService {
 
-	ApiResponse addDoctor(RegisterDto doctorDetails);
+	ApiResponse addDoctor(RegisterDto doctorDetails,String eduString,String speString);
+	//ApiResponse addDoctor(Entry doctorDetails);
 
 	ApiResponse addStaff(RegisterDto staffDetails);
 

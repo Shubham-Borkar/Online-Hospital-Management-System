@@ -16,7 +16,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import lombok.NoArgsConstructor;
+
 @Entity
+@NoArgsConstructor
 public class Doctor extends BaseClass {
     @Column(name = "Education" ,length = 30)
 	private String education;
@@ -24,7 +27,7 @@ public class Doctor extends BaseClass {
     private String speciality;
     
     
-	@JsonManagedReference //(value = "user-doctor")
+    @JsonManagedReference //(value = "user-doctor")
 	@OneToOne(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Entry login;
 	
@@ -36,6 +39,13 @@ public class Doctor extends BaseClass {
 	@JsonProperty(access=Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "doctor")
 	private List<Appointment> appoinList = new ArrayList<Appointment>();
+	
+	public Doctor(String eduString,String speString,Staff staff) {
+		this.education=eduString;
+		this.speciality=speString;
+		this.staff=staff;
+		
+	}
 
 	public String getEducation() {
 		return education;

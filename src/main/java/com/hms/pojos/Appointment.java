@@ -24,7 +24,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Appointment extends BaseClass {
-	@DateTimeFormat(pattern = "yy-MM-dd")
+	//@DateTimeFormat(pattern = "yy-MM-dd")
 	private LocalDate apointdate;
 	//@Temporal(TemporalType.DATE)
 	//private Date apointdate;

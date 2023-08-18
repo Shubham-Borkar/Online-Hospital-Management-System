@@ -32,25 +32,30 @@ public class AdminStaffServiceImp implements AdminStaffService {
 	private ModelMapper mapper;
 	
 	@Override
-	public ApiResponse addDoctor(RegisterDto doctorDetails) {
-		Doctor docdetails=mapper.map(doctorDetails,Doctor.class);
-		Doctor dsaved = dDao.save(docdetails);
-		Entry docentry=mapper.map(doctorDetails, Entry.class);
-		docentry.setDoctor(dsaved);
-		Entry save = lDao.save(docentry);
-		System.out.println("Doctor received after mapped"+docdetails+"after saving doctor"+dsaved+"Entity after mapped"+docentry);
-		
-		/*Staff staff = sDao.save(doctorDetails.getStaff());
-		doctorDetails.setStaff(staff);
-		doctorDetails.getDoctor().setStaff(staff);
-		Doctor doc = dDao.save(doctorDetails.getDoctor());
-		doctorDetails.setDoctor(doc);
-		//sDao.save(doctorDetails.getDoctor().getStaff());
-		
-		lDao.save(doctorDetails);
-		//entry.setStaff(doctorDetails.getDoctor().getStaff());
-		//return "Doctor Details are added Successfully";*/
-		return null;
+	public ApiResponse addDoctor(RegisterDto doctorDetails,String eduString,String speString) {
+		Entry savedEntry=null;
+		Staff staffSaved=null;
+		Doctor docSaved=null;
+		try {
+		Staff staffEntity=mapper.map(doctorDetails, Staff.class);
+		staffSaved=sDao.save(staffEntity);
+		Doctor docDetails=new Doctor(eduString, speString, staffSaved);
+		docSaved=dDao.save(docDetails);
+		Entry docEntry=mapper.map(doctorDetails, Entry.class);
+		docEntry.setDoctor(docSaved);
+		docEntry.setStaff(staffSaved);
+		savedEntry = lDao.save(docEntry);
+		}
+		catch(RuntimeException e)
+		{
+			if(savedEntry==null) {
+			sDao.delete(staffSaved);
+			dDao.delete(docSaved);
+			}
+			return new ApiResponse("Error in Doctor Registration, Due to ->"+e);
+				
+		}
+		return new ApiResponse("Doctor Added");
 	}
 
 	@Override
