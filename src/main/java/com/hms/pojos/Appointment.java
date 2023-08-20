@@ -1,6 +1,7 @@
 package com.hms.pojos;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -24,7 +25,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Appointment extends BaseClass {
-	//@DateTimeFormat(pattern = "yy-MM-dd")
+	@DateTimeFormat(pattern = "yy-MM-dd")
+	//@Temporal(TemporalType.DATE)
 	private LocalDate apointdate;
 	//@Temporal(TemporalType.DATE)
 	//private Date apointdate;

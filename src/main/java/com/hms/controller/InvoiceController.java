@@ -41,7 +41,7 @@ public class InvoiceController {
 	@GetMapping("/{aid}")
 	public ResponseEntity<?> showInvoiceByAppointmentId(@PathVariable int aid)
 	{
-			return new ResponseEntity<>(InvoiceImp.InvoiceByAppointmentId(aid), HttpStatus.FOUND);
+			return new ResponseEntity<>(InvoiceImp.InvoiceByAppointmentId(aid), HttpStatus.OK);
 	}
 	
 

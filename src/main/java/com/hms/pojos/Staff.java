@@ -1,10 +1,15 @@
 package com.hms.pojos;
 import java.time.LocalDate;
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -22,10 +27,10 @@ public class Staff extends BaseClass {
 	private String name;
 	private String gender;
 	private String address;
-//	@DateTimeFormat(pattern = "yy-MM-dd")
-	private LocalDate dob;
-//	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yy-MM-dd")
+	//@Temporal(TemporalType.DATE)
 //	private Date dob;
+	private LocalDate dob;
 	private long phone;
 	@OneToOne(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Entry login;

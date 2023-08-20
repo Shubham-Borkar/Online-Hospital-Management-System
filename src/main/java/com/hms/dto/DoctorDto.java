@@ -1,5 +1,6 @@
 package com.hms.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import lombok.Getter;
@@ -14,7 +15,7 @@ public class DoctorDto {
 		private String name;
 		private String gender;
 		private String address;
-		private Date dob;
+		private LocalDate dob;
 		private long phone;
 		private String education;
 	    private String speciality;

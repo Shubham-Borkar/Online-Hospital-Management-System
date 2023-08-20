@@ -1,6 +1,7 @@
 package com.hms.pojos;
 
 import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -24,11 +25,10 @@ import lombok.Setter;
 @Setter
 
 public class Invoice extends BaseClass {
-//	@DateTimeFormat(pattern = "yy-MM-dd")
+    @DateTimeFormat(pattern = "yy-MM-dd")
+	//@Temporal(TemporalType.DATE)
+	//private Date idate;
 	private LocalDate idate;
-//	@Temporal(TemporalType.DATE)
-//	private Date idate;
-
 	private double medFees;
 	private double docFees;
 	private double labTestFees;

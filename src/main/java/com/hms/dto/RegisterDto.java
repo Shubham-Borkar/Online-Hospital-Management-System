@@ -1,5 +1,6 @@
 package com.hms.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import com.hms.pojos.Doctor;
@@ -23,7 +24,7 @@ public class RegisterDto {
 //	    "address": "string"
 	private String name;
 	private String gender;
-	private Date dob;
+	private LocalDate dob;
 	private long phone;
 	private String address;
 	

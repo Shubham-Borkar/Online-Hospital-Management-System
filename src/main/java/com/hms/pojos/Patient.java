@@ -1,6 +1,7 @@
 package com.hms.pojos;
 
 import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,10 +32,11 @@ public class Patient extends BaseClass {
 
 	private String name;
 	private String gender;
-//	@DateTimeFormat(pattern = "yy-MM-dd")
+	
+//	private LocalDate dob;
+	@DateTimeFormat(pattern = "yy-MM-dd")
+	//@Temporal(TemporalType.DATE)
 	private LocalDate dob;
-//	@Temporal(TemporalType.DATE)
-//	private Date dob;
 	private long phone;
 	private String address;
 

@@ -1,5 +1,6 @@
 package com.hms.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.validation.constraints.PastOrPresent;
@@ -20,7 +21,7 @@ public class InvoiceDto {
 //	  "otherFees": 1010,
 //	  "desc": "string",
 	@PastOrPresent
-	private Date idate;
+	private LocalDate idate;
 	private double medFees; 
 	private double docFees;
 	private double labTestFees;
