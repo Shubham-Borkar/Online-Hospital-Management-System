@@ -1,0 +1,21 @@
+.header{
+    height: 100px;
+    width:100%;
+    background-color: wheat;
+}
+
+.footer{
+    height: 100px;
+    width:100%;
+    background-color: white;
+}
+
+.myTable{
+    margin: 20px;
+    width: 80%;
+}
+
+.loginTable{
+    width: 400px;
+}
+
