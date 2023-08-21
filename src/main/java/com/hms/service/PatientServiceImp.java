@@ -1,12 +1,21 @@
 package com.hms.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
+
+import org.apache.commons.io.FileUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.hms.custom_exception.ApiException;
+import com.hms.custom_exception.ResourceNotFoundException;
 import com.hms.dao.EntryDao;
 import com.hms.dao.PatientDao;
 import com.hms.dto.ApiResponse;
@@ -24,6 +33,9 @@ public class PatientServiceImp implements PatientService {
 	private EntryDao lDao;
 	@Autowired
 	private ModelMapper mapper;
+
+	
+
 
 	@Override
 	public ApiResponse registerPatient(RegisterDto patientDetails) {
@@ -51,7 +63,7 @@ public class PatientServiceImp implements PatientService {
 		return new ApiResponse("Registration Sucessful");
 				
 	}
-
+	
 	@Override
 	public List<Patient> getAllPatients() {
 		return pDao.findAll();
@@ -67,5 +79,8 @@ public class PatientServiceImp implements PatientService {
 		return pDao.save(patient);
 
 	}
+
+	
+	
 
 }

@@ -2,6 +2,8 @@ package com.hms.controller;
 
 
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +14,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hms.custom_exception.ResourceNotFoundException;
 import com.hms.dto.RegisterDto;
 import com.hms.pojos.Patient;
+import com.hms.service.ImageService;
 import com.hms.service.PatientService;
+import static org.springframework.http.MediaType.*;
 
 
 @RequestMapping("/patient")
@@ -26,7 +32,25 @@ import com.hms.service.PatientService;
 public class PatientController {
 	@Autowired
 	private PatientService patientServiceImp;
+	@Autowired
+	private ImageService imageServiceImp;
 
+	@PostMapping(value="/uploadimage/{pid}", consumes = "multipart/form-data")
+	public ResponseEntity<?> registerPatient( @PathVariable int pid,@RequestParam MultipartFile imageFile) throws IOException  {
+		try {
+			return new ResponseEntity<>(imageServiceImp.uploadImageP(pid, imageFile), HttpStatus.CREATED);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(value="/get_image/{pid}",produces = {IMAGE_GIF_VALUE,
+			IMAGE_JPEG_VALUE,IMAGE_PNG_VALUE})
+	public ResponseEntity<?> serveEmpImage(@PathVariable int pid) throws IOException {
+		return ResponseEntity.ok(imageServiceImp.downloadImageP(pid));
+	}
+	
 	@PostMapping("/register")
 	public ResponseEntity<?> registerPatient(@RequestBody RegisterDto patientDetails) {
 		try {
@@ -37,7 +61,6 @@ public class PatientController {
 		}
 
 	}
-
 	@GetMapping("")
 	public ResponseEntity<?> getAllPatient() {
 		try {

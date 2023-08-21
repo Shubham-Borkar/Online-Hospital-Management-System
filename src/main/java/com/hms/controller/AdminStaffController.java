@@ -1,5 +1,10 @@
 package com.hms.controller;
 
+import static org.springframework.http.MediaType.IMAGE_GIF_VALUE;
+import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
+import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +20,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hms.dto.RegisterDto;
 import com.hms.pojos.Staff;
 import com.hms.service.AdminStaffService;
+import com.hms.service.ImageService;
 
 
 @CrossOrigin("*")
@@ -28,6 +36,9 @@ import com.hms.service.AdminStaffService;
 public class AdminStaffController {
 	@Autowired
 	private AdminStaffService StaffImp;
+	
+	@Autowired
+	private ImageService imageServiceImp;
 
 	@PostMapping("/register/doctor/{education}/{speciality}")
 	public ResponseEntity<?> addDoctorDetails(@RequestBody RegisterDto doctorDetails,@PathVariable String education,@PathVariable String speciality)
@@ -94,6 +105,22 @@ public class AdminStaffController {
 		if(staff==null)
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		return ResponseEntity.ok(staff);
+	}
+	
+	@PostMapping(value="/uploadStaffImage/{sid}", consumes = "multipart/form-data")
+	public ResponseEntity<?> registerPatient( @PathVariable int sid,@RequestParam MultipartFile imageFile) throws IOException  {
+		try {
+			return new ResponseEntity<>(imageServiceImp.uploadImageS(sid, imageFile), HttpStatus.CREATED);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(value="/getStaffImage/{sid}",produces = {IMAGE_GIF_VALUE,
+			IMAGE_JPEG_VALUE,IMAGE_PNG_VALUE})
+	public ResponseEntity<?> serveEmpImage(@PathVariable int sid) throws IOException {
+		return ResponseEntity.ok(imageServiceImp.downloadImageS(sid));
 	}
 
 }

@@ -46,6 +46,8 @@ public class Patient extends BaseClass {
 	@JsonIgnore
 	@OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Entry login;
+	
+	private String imagePath;
 
 	@Override
 	public String toString() {

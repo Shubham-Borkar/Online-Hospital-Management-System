@@ -42,6 +42,9 @@ public class Appointment extends BaseClass {
 	@JsonIgnore
 	@OneToOne(mappedBy = "appoint")
 	private Invoice invoice;
+//	private boolean checkedStatus;
+//	private String Prescription;
+
 
 	@Override
 	public String toString() {

@@ -37,6 +37,8 @@ public class Staff extends BaseClass {
 	@JsonManagedReference  //(value="user-staff")
 	@OneToOne(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Doctor doctor;
+	
+	private String imagePath;
 
 	@Override
 	public String toString() {
