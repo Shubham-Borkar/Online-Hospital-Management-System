@@ -1,0 +1,12 @@
+.appstyle {
+    width: 400px; font-size: large; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.oldappDiv {
+    border-style: outset; width: 50%; margin-top: 10px; margin-bottom: 10px;
+}
+
+.oldapp {
+    color: orangered; font-size: x-large; font-style: italic;
+}

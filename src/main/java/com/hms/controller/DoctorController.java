@@ -49,7 +49,7 @@ public class DoctorController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return ResponseEntity.ok(doctor);
 	}
-	
+	//test
 	@GetMapping("/aid/{aid}")
 	public ResponseEntity<?> getDoctorDetailsByAid(@PathVariable int aid)
 	{

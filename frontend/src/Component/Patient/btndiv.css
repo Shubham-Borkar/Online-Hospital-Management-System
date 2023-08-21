@@ -1,0 +1,40 @@
+.button {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin: 10px;
+    cursor: pointer;
+    background-color: rgb(200, 250, 300);
+    border-radius: 50px;
+    border-color: orangered;
+    margin-bottom: 75px;
+  }
+  
+  .button:hover {
+    background-color: rgb(50, 163, 167);
+    transform: scale(1.05);
+    transition:all .2s ease 0s
+  }
+
+  .backcolor {
+    background-color: rgb(130, 200, 230);
+    color: orangered;
+  }
+
+  .button:hover:hover {
+    --_p: 50%;
+  }
+
+  .button img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 1px;
+    margin-top: 1px;
+  }
+
+  .button span {
+    display: block;
+    margin-top: 1px;
+    font-size: large;
+  }
