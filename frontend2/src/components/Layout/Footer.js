@@ -20,7 +20,7 @@ function Footer() {
                         </div>
                     </div>
                     <div className="footer-copyright text-center py-3 default-color-dark backcolor">© 2023 Copyright:
-                        <span> marshospitalltd.com</span> <br /><br />
+                        <span> marshospitalltd.com</span>
                     </div> 
                 </div>
                 </footer>

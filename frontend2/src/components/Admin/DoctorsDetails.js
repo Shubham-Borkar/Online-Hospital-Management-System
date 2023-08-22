@@ -3,6 +3,7 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
 import Header from "../Layout/Header";
 import Footer from '../Layout/Footer';
+import { BaseApi } from "../api/BaseApi";
 
 function DoctorsDetails(props) 
 {
@@ -10,22 +11,21 @@ function DoctorsDetails(props)
         const [emps,setEmps] =  
             useState([
                 {quote_id: 0,text : "doctor 1 data", author: "AA aa a aa",user_id: 1,
-                    img: "http://localhost:3000/assets/adminimg/doctors/d1.png"},
+                    img: `${BaseApi.base_url}assets/adminimg/doctors/d1.png`},
                 {quote_id: 0,text : "doctor 2 data", author: "AA a a a a a a aa",user_id: 2,
-                    img: "http://localhost:3000/assets/adminimg/doctors/d2.png"},
+                    img: `${BaseApi.base_url}assets/adminimg/doctors/d2.png`},
                 {quote_id: 0,text : "doctor 3 data", author: "AA a a a a a a aa",user_id: 3,
-                    img: "http://localhost:3000/assets/adminimg/doctors/d3.jpg"},
+                    img: `${BaseApi.base_url}assets/adminimg/doctors/d3.jpg`},
                 {quote_id: 0,text : "doctor 4 data", author: "AA a a a a a a aa",user_id: 4,
-                    img: "http://localhost:3000/assets/adminimg/doctors/d4.png"}
+                    img: `${BaseApi.base_url}assets/adminimg/doctors/d4.png`}
                 ]);
 
-    const OnTextChange=(args)=>{
-        // var copyOfUser = {...user};
-        // copyOfUser[args.target.name] = args.target.value;
-        // setUser(copyOfUser);
-        console.log("value entered");
-   }
-   
+//     const OnTextChange=(args)=>{
+//         // var copyOfUser = {...user};
+//         // copyOfUser[args.target.name] = args.target.value;
+//         // setUser(copyOfUser);
+//         console.log("value entered");
+//    }
 
    const updatedoctor=()=>{
         console.log("Update doctor called");
@@ -59,7 +59,8 @@ debugger;
                                         <div className="caption">
                                             <h3>Thumbnail label</h3>
                                             <p>{emp.text}</p>
-                                            <p><a href="#" class="btn btn-primary" role="button">Edit</a> <a href="#" class="btn btn-danger" role="button">Delete</a></p>
+                                            <p><a href="#" class="btn btn-primary" role="button">Edit</a> 
+                                            <a href="#" class="btn btn-danger" role="button">Delete</a></p>
                                         </div>
                                         </div>
                                     </div>

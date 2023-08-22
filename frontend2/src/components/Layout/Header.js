@@ -1,5 +1,6 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
+import { BaseApi } from '../api/BaseApi';
 import './header.css'
 
 function Header() {
@@ -22,7 +23,7 @@ function Header() {
       {/* <!-- Collect the nav links, forms, and other content for toggling --> */} 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style={{color: "green"}}>
         <ul class="nav navbar-nav navbarfont">
-        <img src="http://localhost:3000/images/img.png" class="img-responsive imagenav" alt="Responsive image"/>
+        <img src={BaseApi.base_url+'assets/images/img.png'} class="img-responsive imagenav" alt="Responsive image"/>
         </ul>
         <form class="navbar-form navbar-left">
           <div class="form-group">

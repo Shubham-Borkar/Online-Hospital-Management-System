@@ -2,6 +2,7 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
 import Header from "../Layout/Header";
 import Footer from '../Layout/Footer';
+import { BaseApi } from '../api/BaseApi';
 
 function Doctor() {
     const handleButtonClick = (buttonId) => {
@@ -18,20 +19,20 @@ function Doctor() {
           <div className="container">
             <div className="row">
               <div className="col-md-4">
-                <div className="button" onClick={()=> handleButtonClick('button1') }>
-                  <img src="http://localhost:3000/assets/adminimg/pngs/avail.png" alt="Image 1"/>
+                <div className="button" onClick={()=> handleButtonClick('1') }>
+                  <img src={BaseApi.base_url+'assets/adminimg/pngs/avail.png'} alt="Image 1"/>
                   <span><b>Todays Schedule</b></span>
                 </div>
               </div>
               <div className="col-md-4">
-                <div className="button" onClick={()=> handleButtonClick('button2') }>
-                  <img src="http://localhost:3000/assets/adminimg/pngs/staff.png" alt="Image 2"/>
+                <div className="button" onClick={()=> handleButtonClick('2') }>
+                  <img src={BaseApi.base_url+'assets/adminimg/pngs/staff.png'} alt="Image 2"/>
                   <span><b>Staff Available</b></span>
                 </div>
               </div>
               <div className="col-md-4">
-                <div className="button" onClick={()=> handleButtonClick('button3') }>
-                  <img src="http://localhost:3000/assets/adminimg/pngs/resources.png" alt="Image 3"/>
+                <div className="button" onClick={()=> handleButtonClick('3') }>
+                  <img src={BaseApi.base_url+'assets/adminimg/pngs/resources.png'} alt="Image 3"/>
                   <span><b>Hospital Resources</b></span>
                 </div>
               </div>
@@ -43,20 +44,20 @@ function Doctor() {
           <div className="container">
             <div className="row">
               <div className="col-md-4">
-                <div className="button" onClick={()=> handleButtonClick('button1') }>
-                  <img src="http://localhost:3000/assets/adminimg/pngs/avail.png" alt="Image 4"/>
+                <div className="button" onClick={()=> handleButtonClick('4') }>
+                  <img src={BaseApi.base_url+'assets/adminimg/pngs/avail.png'} alt="Image 4"/>
                   <span><b>Patient History</b></span>
                 </div>
               </div>
               <div className="col-md-4">
-                <div className="button" onClick={()=> handleButtonClick('button2') }>
-                  <img src="http://localhost:3000/assets/adminimg/pngs/appointments.png" alt="Image 5"/>
+                <div className="button" onClick={()=> handleButtonClick('5') }>
+                  <img src={BaseApi.base_url+'assets/adminimg/pngs/appointments.png'} alt="Image 5"/>
                   <span><b>Manage Apointment</b></span>
                 </div>
               </div>
               <div className="col-md-4">
-                <div className="button" onClick={()=> handleButtonClick('button3') }>
-                  <img src="http://localhost:3000/assets/adminimg/pngs/avail.png" alt="Image 6"/>
+                <div className="button" onClick={()=> handleButtonClick('6') }>
+                  <img src={BaseApi.base_url+'assets/adminimg/pngs/avail.png'} alt="Image 6"/>
                   <span><b>Staff Availability</b></span>
                 </div>
               </div>

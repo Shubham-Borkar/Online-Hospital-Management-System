@@ -4,7 +4,11 @@ import Header from "../Layout/Header";
 import Footer from '../Layout/Footer';
 
 function DoctorAdd() {
-    const OnTextChange=()=>{}
+
+    const OnTextChange=()=>{
+
+    }
+
     return ( <>
                 <Header/>
             <center> <br /><br /><br />
@@ -54,9 +58,6 @@ function DoctorAdd() {
                                 >
                                 Add Doctor
                         </button>
-                        <br />
-                        {/* {message} */}
-                        <br />
                        
                         {/* <div className='form-group'>Email address
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style={{width: 500}}></input>

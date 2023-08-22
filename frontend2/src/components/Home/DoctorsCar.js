@@ -1,4 +1,5 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
+import {BaseApi} from '../api/BaseApi';
 
 function DoctorsCar() {
 
@@ -12,21 +13,21 @@ function DoctorsCar() {
     <div class="carousel-inner">
       <center>
       <div class="carousel-item active">
-        <img src="http://localhost:3000/assets/images/doc1.jpg" class="d-block w-50" alt="doc1.jpg"/>
+        <img src={BaseApi.base_url+'assets/images/doc1.jpg'} class="d-block w-50" alt="doc1.jpg"/>
         <div class="carousel-caption d-none d-md-block">
           <h5>Dr. Doctor 1</h5>
           <p>Some representative placeholder content for the first slide.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="http://localhost:3000/assets/images/doc2.jpg" class="d-block w-50" alt="doc2.jpg"/>
+        <img src={BaseApi.base_url+'assets/images/doc2.jpg'} class="d-block w-50" alt="doc2.jpg"/>
         <div class="carousel-caption d-none d-md-block">
           <h5>Dr. Doctor 2</h5>
           <p>Some representative placeholder content for the second slide.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="http://localhost:3000/assets/images/doc3.jpg" class="d-block w-50" alt="doc3.jpg"/>
+        <img src={BaseApi.base_url+'assets/images/doc3.jpg'} class="d-block w-50" alt="doc3.jpg"/>
         <div class="carousel-caption d-none d-md-block">
           <h5>Dr. Doctor 3</h5>
           <p>Some representative placeholder content for the third slide.</p>
