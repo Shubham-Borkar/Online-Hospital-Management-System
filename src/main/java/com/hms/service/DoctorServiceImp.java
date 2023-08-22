@@ -79,4 +79,11 @@ public class DoctorServiceImp implements DoctorService {
 		return null;
 	}
 
+//	@Override
+//	public List<DoctorDto> listofDoctorbyQuerySer() {	
+//		return dDao.listofDoctorbyQuery();
+//	}
+
+	
+
 }

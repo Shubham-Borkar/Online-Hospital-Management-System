@@ -23,22 +23,23 @@ public class DoctorController {
     @Autowired
 	private DoctorService doctorImp;
     
-//    @GetMapping("")
-//	public ResponseEntity<?> getAllDoctors()
-//	{
-//	List<DoctorDto> list=doctorImp.getAllDoctors();
-//	if(list==null)
-//		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//	return ResponseEntity.ok(list);
-//	}
     @GetMapping("")
-  	public ResponseEntity<?> getAllDoctors()
-  	{
-  	List<DoctorDto> list=doctorImp.getAllDoctors();
-  	if(list==null)
-  		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  	return ResponseEntity.ok(list);
-  	}
+	public ResponseEntity<?> getAllDoctors()
+	{
+	List<DoctorDto> list=doctorImp.getAllDoctors();
+	if(list==null)
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	return ResponseEntity.ok(list);
+	}
+//    @GetMapping("/listUsingQuery")
+//  	public ResponseEntity<?> getAllDocByQuery()
+//  	{
+//  	List<DoctorDto> list=doctorImp.listofDoctorbyQuerySer();
+//  	System.out.println("################"+list);
+//  	if(list==null)
+//  		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//  	return ResponseEntity.ok(list);
+//  	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findDoctorById(@PathVariable int id)
