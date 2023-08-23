@@ -57,7 +57,7 @@ public class EntryServiceImp implements EntryService {
 		
 		if(user!=null) {
 			user.setPassword(password);
-//			user.setRole(UserRole.valueOf(role));
+			// If role is of type enum then use valueOf method
 			user.setRole(role);
 			return lDao.save(user);
 		}
