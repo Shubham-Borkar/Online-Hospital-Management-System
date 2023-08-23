@@ -12,8 +12,9 @@ import com.hms.pojos.Doctor;
 @Repository
 public interface DoctorDao extends JpaRepository<Doctor, Integer> {
 
-//	
-//	@Query("SELECT new com.hms.dto.DoctorDto(d.id,d.name,d.gender,d.address,d.dob,d.phone,s.education,s.speciality) "
+	
+//	@Query("SELECT new com.hms.dto.DoctorDto(d.id,d.name,d.gender,d.address,"+
+//	             "d.dob,d.phone,s.education,s.speciality) "
 //			  + "FROM Doctor d join Staff s on d.id=s.id ")
 //			List<DoctorDto> listofDoctorbyQuery();
 }

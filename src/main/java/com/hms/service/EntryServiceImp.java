@@ -9,6 +9,7 @@ import com.hms.dao.EntryDao;
 import com.hms.pojos.Doctor;
 import com.hms.pojos.Entry;
 import com.hms.pojos.Patient;
+import com.hms.pojos.UserRole;
 
 
 @Service
@@ -18,7 +19,7 @@ public class EntryServiceImp implements EntryService {
 
 	@Override
 	public Entry authenticate(String email, String password) {
-		Entry user = lDao.findByEmail(email);
+		Entry user = lDao.findByEmail(email).orElse(null);
 		
 		if (user!=null && user.getPassword().equals(password))
 			return user;
@@ -27,7 +28,7 @@ public class EntryServiceImp implements EntryService {
 
 	@Override
 	public Doctor findDocByEmail(String email) {
-		Entry findByEmail = lDao.findByEmail(email);
+		Entry findByEmail = lDao.findByEmail(email).orElse(null);
 		if(findByEmail!=null)
 			return findByEmail.getDoctor();
 		return null;
@@ -35,7 +36,7 @@ public class EntryServiceImp implements EntryService {
 
 	@Override
 	public Entry updateEntry(String email, String password, String role) {
-		Entry user = lDao.findByEmail(email);
+		Entry user = lDao.findByEmail(email).orElse(null);
 		/* if (user != null) {
 			if (role.equals("patient")) {
 				date = user.getPatient().getDob();
@@ -56,6 +57,7 @@ public class EntryServiceImp implements EntryService {
 		
 		if(user!=null) {
 			user.setPassword(password);
+//			user.setRole(UserRole.valueOf(role));
 			user.setRole(role);
 			return lDao.save(user);
 		}
@@ -65,7 +67,7 @@ public class EntryServiceImp implements EntryService {
 
 	@Override
 	public Patient FindPatientByEmail(String email) {
-		Entry findByEmail = lDao.findByEmail(email);
+		Entry findByEmail = lDao.findByEmail(email).orElse(null);
 		if(findByEmail!=null)
 			return findByEmail.getPatient();
 		return null;

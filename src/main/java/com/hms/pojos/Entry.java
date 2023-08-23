@@ -1,13 +1,16 @@
 package com.hms.pojos;
 
-//import java.util.Collections;
-//import java.util.List;
+import java.util.Collections;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;
 //import org.springframework.security.core.userdetails.User;
@@ -29,9 +32,14 @@ public class Entry extends BaseClass {
 	@Column(name = "Email", length = 30,unique = true)
 	private String email;
 	
-	@Column(name = "Password", length = 30)
+	@Column(name = "Password", length = 255)
 	private String password;
 	
+//	@Enumerated(EnumType.STRING)
+//	@Column(length = 50)
+//	private UserRole role;
+	
+	@Column(length = 50)
 	private String role;
  
 	@OneToOne
@@ -52,12 +60,6 @@ public class Entry extends BaseClass {
 	public String toString() {
 		return "Login [email=" + email + ", password=" + password + ", role=" + role + "]";
 	}
-//	public User toUser() {
-//		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role);
-//		User user = new User(email, password, 
-//				Collections.singletonList(authority));
-//		return user;
-//	}
 	
 	
 
