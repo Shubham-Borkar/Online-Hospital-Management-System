@@ -24,6 +24,9 @@ import { Route, Routes,Link } from 'react-router-dom';
 import { ToastContainer } from 'react-bootstrap';
 import StaffList from './components/Doctor/StaffList';
 import PatHistory from './components/Doctor/PatHistory';
+import Footer from './components/Layout/Footer';
+import AppByDate from './components/Doctor/AppByDate';
+import AppByDoctor from './components/Doctor/AppByDoctor';
 
 
 
@@ -38,8 +41,8 @@ function App() {
         <Link to="/doctorsDetails"> My Profile</Link>{"   |   "}
         <Link to="/stafflist"> Staff List</Link>{"   |   "}
         <Link to="/patHistory"> Patient App History</Link>{"   |   "}
-        <Link to="/doctor"> My Profile</Link>{"   |   "}
-        <Link to="/doctor"> My Profile</Link>{"   |   "}
+        <Link to="appbydate"> Appointment by date</Link>{"   |   "}
+        <Link to="/appbtdoctor">App by Doctor</Link>{"   |   "}
         <Link to="/doctor"> My Profile</Link>{"   |   "}
         </div>
         
@@ -66,6 +69,8 @@ function App() {
           <Route path="/stafflist" element={<StaffList />} />
           <Route path="/staffEdit" element={<StaffEdit />} />
           <Route path="/patHistory" element={<PatHistory />} />
+          <Route path="/appbydate" element={<AppByDate />} />
+          <Route path="/appbtdoctor" element={<AppByDoctor />} />
           {/* <Route path="/doctorCar" element={<Doctorscar2 />} /> */}
 
 
@@ -84,6 +89,8 @@ function App() {
           <Route path='*' element={<InvalidPage/>} />
         </Routes>
         <ToastContainer theme="colored" />
+        <br/><br/><br/><br/><br/><br/><br/><hr/>
+        <Footer></Footer>
     </div>
   );
 }

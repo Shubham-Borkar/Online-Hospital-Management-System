@@ -25,7 +25,7 @@ function PatHistory() {
 
 
     return (  <><h1>Patient Appointment Data using pid</h1>
-  <input type="text" className="form-control" placeholder="Enter Patient Id" aria-describedby="basic-addon2" value={pid} name='username' onChange={e=>setPid(e.target.value)}/>
+  <input type="text" className="form-control" placeholder="Enter Patient Id" aria-describedby="basic-addon2" value={pid} name='pid' onChange={e=>setPid(e.target.value)}/>
   <br></br>
   <button type="button" class="btn btn-large btn-block btn-info" onClick={select}>Get Appointments</button>
   

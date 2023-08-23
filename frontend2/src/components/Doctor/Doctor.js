@@ -20,6 +20,15 @@ function Doctor() {
       console.log("calling staff list function");
       navigate("/pathistory")
     }
+    const appForDoctorByDate=()=>{
+      console.log("calling staff list function");
+      navigate("/appbtdoctor")
+    }
+    const manageapp=()=>{
+      console.log("calling staff list function");
+      //navigate("/appbtdoctor")
+    }
+    
     return ( <>
     <Header/>
       <center> <br /><br /><br />
@@ -29,7 +38,7 @@ function Doctor() {
           <div className="container">
             <div className="row">
               <div className="col-md-4">
-                <div className="button" onClick={()=> handleButtonClick('1') }>
+                <div className="button" onClick={()=> appForDoctorByDate() }>
                   <img src={BaseApi.base_url+'assets/adminimg/pngs/avail.png'} alt="Image 1"/>
                   <span><b>Todays Schedule</b></span>
                 </div>
@@ -60,7 +69,7 @@ function Doctor() {
                 </div>
               </div>
               <div className="col-md-4">
-                <div className="button" onClick={()=> handleButtonClick('5') }>
+                <div className="button" onClick={()=> manageapp() }>
                   <img src={BaseApi.base_url+'assets/adminimg/pngs/appointments.png'} alt="Image 5"/>
                   <span><b>Manage Apointment</b></span>
                 </div>
