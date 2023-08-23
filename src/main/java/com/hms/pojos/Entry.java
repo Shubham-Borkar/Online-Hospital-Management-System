@@ -17,6 +17,7 @@ import javax.persistence.Enumerated;
 //import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +32,7 @@ public class Entry extends BaseClass {
 
 	@Column(name = "Email", length = 30,unique = true)
 	private String email;
-	
+	@JsonIgnore
 	@Column(name = "Password", length = 255)
 	private String password;
 	

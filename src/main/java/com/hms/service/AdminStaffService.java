@@ -13,10 +13,13 @@ public interface AdminStaffService {
 	//ApiResponse addDoctor(Entry doctorDetails);
 
 	ApiResponse addStaff(RegisterDto staffDetails);
+	
 
 	void deleteStaff(int staffId);
 
 	List<Staff> findAll();
+	
+	List<Staff> findAllHelper();
 
 	Staff updateStaff(Staff staff);
 

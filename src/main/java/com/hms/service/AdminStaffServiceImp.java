@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hms.dao.DoctorDao;
@@ -30,6 +31,8 @@ public class AdminStaffServiceImp implements AdminStaffService {
 	private EntryDao lDao;
 	@Autowired
 	private ModelMapper mapper;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public ApiResponse addDoctor(RegisterDto doctorDetails,String eduString,String speString) {
@@ -60,10 +63,11 @@ public class AdminStaffServiceImp implements AdminStaffService {
 
 	@Override
 	public ApiResponse addStaff(RegisterDto staffDetails) {
-//		 sDao.save(staffDetails.getStaff());
-//		 lDao.save(staffDetails);
 		Staff sdetails=mapper.map(staffDetails, Staff.class);
+		sdetails.setRole("ROLE_HELPER");
 		Entry edetails=mapper.map(staffDetails, Entry.class);
+		edetails.setRole("ROLE_HELPER");
+		edetails.setPassword(passwordEncoder.encode(edetails.getPassword()));
 		Staff ssaved=null;
 		Entry save =null;
 		 try {
@@ -96,6 +100,10 @@ public class AdminStaffServiceImp implements AdminStaffService {
 		return sDao.findAll();
 	}
 
+	@Override
+	public List<Staff> findAllHelper() {
+		return sDao.findByRole("ROLE_HELPER");
+	}
 	@Override
 	public Staff updateStaff(Staff staff) {
 		if(sDao.findById(staff.getId())!=null)

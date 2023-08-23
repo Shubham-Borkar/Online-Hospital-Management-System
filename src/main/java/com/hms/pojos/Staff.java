@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
@@ -37,6 +38,9 @@ public class Staff extends BaseClass {
 	@JsonManagedReference  //(value="user-staff")
 	@OneToOne(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Doctor doctor;
+	
+	@Column(length=50)
+	private String role;
 	
 	private String imagePath;
 

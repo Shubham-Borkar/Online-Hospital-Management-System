@@ -76,7 +76,14 @@ public class AdminStaffController {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		return ResponseEntity.ok(list);
 	}
-	
+	@GetMapping("/helperstaff")
+	public ResponseEntity<?> getAllHelper()
+	{
+		List<Staff> list=StaffImp.findAllHelper();
+		if(list==null)
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		return ResponseEntity.ok(list);
+	}
 	@DeleteMapping("/{staffId}")
 	public ResponseEntity<?> deleteStaff(@PathVariable int staffId)
 	{

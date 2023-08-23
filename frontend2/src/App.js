@@ -20,8 +20,10 @@ import StaffDetails from './components/Admin/StaffDetails'
 import StaffEdit from './components/Admin/StaffEdit'
 import Doctor from './components/Doctor/Doctor'
 import Contact from './pages/Contact'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes,Link } from 'react-router-dom';
 import { ToastContainer } from 'react-bootstrap';
+import StaffList from './components/Doctor/StaffList';
+import PatHistory from './components/Doctor/PatHistory';
 // import DoctorsCar from './components/Home/DoctorsCar';
 // import Doctorscar2 from './components/Home/Doctorscar2';
 
@@ -30,8 +32,18 @@ function App() {
   return (
     <div className="App">
         
-        <BrowserRouter>
+        
         <Header/>
+        <div><hr></hr><hr></hr><hr></hr><hr></hr>
+        <Link to="/doctor"> doctor mp</Link>{"   |   "}
+        <Link to="/doctorsDetails"> My Profile</Link>{"   |   "}
+        <Link to="/stafflist"> Staff List</Link>{"   |   "}
+        <Link to="/patHistory"> Patient App History</Link>{"   |   "}
+        <Link to="/doctor"> My Profile</Link>{"   |   "}
+        <Link to="/doctor"> My Profile</Link>{"   |   "}
+        <Link to="/doctor"> My Profile</Link>{"   |   "}
+        </div>
+        
         <Routes>
           <Route path="/" element={<PatientLogin />} />
           <Route path="/home" element={<Home />} />
@@ -52,7 +64,9 @@ function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/staffAdd" element={<StaffAdd />} />
           <Route path="/staffDetails" element={<StaffDetails />} />
+          <Route path="/stafflist" element={<StaffList />} />
           <Route path="/staffEdit" element={<StaffEdit />} />
+          <Route path="/patHistory" element={<PatHistory />} />
           {/* <Route path="/doctorCar" element={<Doctorscar2 />} /> */}
 
 
@@ -71,8 +85,6 @@ function App() {
           <Route path='*' element={<InvalidPage/>} />
         </Routes>
         <ToastContainer theme="colored" />
-      </BrowserRouter>
-
     </div>
   );
 }

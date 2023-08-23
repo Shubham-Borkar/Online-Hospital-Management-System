@@ -35,6 +35,7 @@ public class SecurityConfig {
 				.and()
 			.csrf().disable(). // disable CSRF to continue with REST APIs
 				authorizeRequests() // specify all authorization rules (i.e authorize all requests)
+//				.antMatchers("/hms/authenticate").permitAll() 
 				.antMatchers("/**").permitAll() // for incoming req ending
 				//after testing
 //				.antMatchers("/patient", 

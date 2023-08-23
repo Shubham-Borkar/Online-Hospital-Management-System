@@ -3,13 +3,23 @@ import '../../mystyle.css'
 import Header from "../Layout/Header";
 import Footer from '../Layout/Footer';
 import { BaseApi } from '../api/BaseApi';
+import { useNavigate } from 'react-router-dom';
 
 function Doctor() {
+  const navigate=useNavigate();
     const handleButtonClick = (buttonId) => {
      if(buttonId==1)
         console.log("Button clicked: " + buttonId);
         // history.push = ("");
     } 
+    const staffList=()=>{
+      console.log("calling staff list function");
+      navigate("/stafflist")
+    }
+    const patHistory=()=>{
+      console.log("calling staff list function");
+      navigate("/pathistory")
+    }
     return ( <>
     <Header/>
       <center> <br /><br /><br />
@@ -25,7 +35,7 @@ function Doctor() {
                 </div>
               </div>
               <div className="col-md-4">
-                <div className="button" onClick={()=> handleButtonClick('2') }>
+                <div className="button" onClick={()=> staffList()}>
                   <img src={BaseApi.base_url+'assets/adminimg/pngs/staff.png'} alt="Image 2"/>
                   <span><b>Staff Available</b></span>
                 </div>
@@ -44,7 +54,7 @@ function Doctor() {
           <div className="container">
             <div className="row">
               <div className="col-md-4">
-                <div className="button" onClick={()=> handleButtonClick('4') }>
+                <div className="button" onClick={()=> patHistory() }>
                   <img src={BaseApi.base_url+'assets/adminimg/pngs/avail.png'} alt="Image 4"/>
                   <span><b>Patient History</b></span>
                 </div>
