@@ -12,6 +12,10 @@ function EditStaff(props) {
         const [address, setAddress] = useState("")
         const [email, setEmail] = useState("")
 
+        const OnTextChange=(args)=>{
+                console.log("func called")
+        }
+
     debugger;
     return ( <>
                 <Header/>
