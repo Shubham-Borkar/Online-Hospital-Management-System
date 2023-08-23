@@ -1,8 +1,10 @@
 package com.hms.service;
 
+import java.time.LocalDate;
 import java.util.List;
 //import java.util.Optional;
 //import java.util.function.Function;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.domain.Example;
@@ -61,6 +63,18 @@ public class AppointServiceImp implements AppointService {
 	public List<Appointment> appointmentByDoctor(int did) {
 		 Doctor doctor = dDao.findById(did).orElse(null);
 		return doctor.getAppoinList();
+	}
+
+	@Override
+	public List<Appointment> appointmentByDate(LocalDate date) {
+		return aDao.findByApointdate(date);
+	}
+
+	@Override
+	public List<Appointment> appointmentByDateAndDoctor(LocalDate date, int did) {
+	    Doctor findById = dDao.findById(did).orElse(null);
+	    if(findById==null) return null;
+		return aDao.getAppointmenyByDateAndDoctor(date, findById);
 	}
 
 }

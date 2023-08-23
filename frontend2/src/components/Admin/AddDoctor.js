@@ -1,15 +1,13 @@
-import axios from 'axios';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
-import './stylesheetsp/common.css'
+import Header from "../Layout/Header";
 import Footer from '../Layout/Footer';
-import Header from '../Layout/Header';
-import { BaseApi } from '../api/BaseApi';
 import { useState } from 'react';
+import axios from 'axios';
+import { BaseApi } from '../api/BaseApi';
 
-function Register() 
-{
-        debugger
+function AddDoctor() {
+
         const [name, setName] = useState("")
         const [gender, setGender] = useState("")
         const [dob, setDob] = useState("")
@@ -17,6 +15,8 @@ function Register()
         const [address, setAddress] = useState("")
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
+        const [education, setEducation] = useState("")
+        const [speciality, setSpeciality] = useState("")
 
         const clearFields=()=>{
                 setName("") 
@@ -28,9 +28,10 @@ function Register()
                 setPassword("")
         }
 
-   const register=()=>{
+    const addDoc=()=>{
         debugger;
-        const url= 'patient/register'
+        // const url= 'adminstaff/register/doctor/'+{education}+'/'+{speciality}
+        const url= 'adminstaff/register/doctor/MD/Heart'
         axios.post(`${BaseApi.server_url}${url}`,
         {
                 name, gender, dob, phone, address, email, password
@@ -44,22 +45,23 @@ function Register()
                 debugger
                 console.log(error)
         })
-   }
+    }
 
-    return (<>
+    return ( <>
                 <Header/>
-                        <center>
-                                <br /><br />
-                        <h1><center>Register here</center></h1>
+            <center> <br /><br /><br />
+                <div style={{width:"600px"}}>
+                <form>
+                        <h1><center>Add Doctor</center></h1>
                         <hr />
                         <div className="table-bordered">
-                              
+                    
                         <div className='form-group'>full name
                         <input type="text" className='form-control widthSize'
                                 name="name"
                                 value={name}
                                 onChange={e=> setName(e.target.value)}/>
-                        </div>
+                        </div> <br />
 
                         <div className='form-group'>gender:
                         &emsp; &emsp;
@@ -70,7 +72,21 @@ function Register()
                         <input type="radio" value="Rather not say" name="gender" 
                                 onChange={e=>setGender(e.target.value)}/> Rather not say
                         </div>
-                         
+
+                        <div className='form-group'>education
+                        <input type="text" className='form-control widthSize'
+                                name="education"
+                                value={education}
+                                onChange={e=> setEducation(e.target.value)}/>
+                        </div> 
+
+                        <div className='form-group'>speciality
+                        <input type="text" className='form-control widthSize'
+                                name="speciality"
+                                value={speciality}
+                                onChange={e=> setSpeciality(e.target.value)}/>
+                        </div> 
+
                         <div className='form-group'>dob
                         <input type="date" className='form-control widthSize'
                                 name="dob"
@@ -105,15 +121,18 @@ function Register()
                                 value={password}
                                 onChange={e=> setPassword(e.target.value)}/>
                         </div> 
-                        
+
                         <button className='btn btn-success'
-                                onClick={register}>
-                                Register
+                                onClick={addDoc}>
+                                Add Doctor
                         </button>
                         </div>
-                        </center>
-                        <Footer/>
-            </>);
+                     
+                </form>
+                </div>
+                </center>
+                     {/* <Footer/>  */}
+    </> );
 }
 
-export default Register;
+export default AddDoctor;

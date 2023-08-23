@@ -1,24 +1,22 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
-import './stylesheetsp/common.css'
+import Header from "../Layout/Header";
 import Footer from '../Layout/Footer';
-import Header from '../Layout/Header';
-import { useEffect, useState } from "react";
-import { BaseApi } from '../api/BaseApi';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { BaseApi } from '../api/BaseApi';
 
-function Profile() 
-{
+function EditDoctor(props) {
+
         
-        const [profile, setProfile] = useState({id: 0, name: "", gender: "", dob: "", phone: "",  
-                                                address: "", imagePath: ""});
-        // const [id, setId] = useState(0)
         const [name, setName] = useState("")
-        const [gender, setGender] = useState("")
+        const [education, setEducation] = useState("")
+        const [speciality, setSpeciality] = useState("")
         const [dob, setDob] = useState("")
         const [phone, setPhone] = useState(0)
         const [address, setAddress] = useState("")
         const [imagePath, setImagePath] = useState("")
+
 
         useEffect(()=>{
                 debugger
@@ -28,42 +26,47 @@ function Profile()
 
         const select=()=>{
                 debugger;
-                const url= 'patient/1';
+                const url= 'doctor/1';
                 axios.get(`${BaseApi.server_url}${url}`)
                 .then(res=>{
                         debugger
-                        setProfile(res.data);
                         setAddress(res.data.address)
                         setDob(res.data.dob)
-                        setGender(res.data.gender)
+                        setEducation(res.data.education)
+                        setSpeciality(res.data.speciality)
                         setImagePath(res.data.imagePath)
                         setName(res.data.name)
                         setPhone(res.data.phone)
                 })
             }
 
-   const update=()=>{
-        debugger
-        const url= 'patient/1';
-        axios.put(`${BaseApi.server_url}${url}`,
-        {
-                name, gender, dob, phone, address, imagePath
-        })
-
-        .then(res=>{
+        const update=()=>{
                 debugger
-                console.log(res.data);
-                select();
-        })
-   }
+                const url= 'patient/1';
+                axios.put(`${BaseApi.server_url}${url}`,
+                {
+                        name, education, speciality, phone, address
+                })
+                .then(res=>{
+                        debugger
+                        console.log(res.data);
+                        select();
+                })
+                .catch(error=>{
+                        console.log(error)
+                })
+           }
 
-    return (<>
+    debugger;
+    return ( <>
                 {/* <Header/> */}
-                        <center>
-                        <h1><center>My Profile</center></h1>
+            <center> <br /><br /><br /><br />
+                <div style={{width:"600px"}}>
+                <form>
+                        <h1><center>Edit Doctor</center></h1>
                         <hr />
                         <div className="table-bordered">
-                                <br />
+                    
                         <div className='form-group input-group-sm'>full name
                         <input type="text" className='form-control widthSize'
                                 name="name"
@@ -71,18 +74,18 @@ function Profile()
                                 onChange={e=> setName(e.target.value)}
                                 />
                         </div>
-                        <div className='form-group input-group-sm'>gender
+                        <div className='form-group input-group-sm'>education
                         <input type="text" className='form-control widthSize'
-                                name="gender"
-                                value={gender}
-                                onChange={e=> setGender(e.target.value)}/>
+                                name="education"
+                                value={education}
+                                onChange={e=> setEducation(e.target.value)}/>
                         </div>
-                         <div className='form-group'>dob
-                        <input type="date" className='form-control widthSize'
-                                name="dob"
-                                value={dob}
-                                onChange={e=> setDob(e.target.value)}/>
-                        </div>  
+                        <div className='form-group input-group-sm'>speciality
+                        <input type="text" className='form-control widthSize'
+                                name="speciality"
+                                value={speciality}
+                                onChange={e=> setSpeciality(e.target.value)}/>
+                        </div> 
                         <div className='form-group'>phone
                         <input type="text" className='form-control widthSize'
                                 name="phone"
@@ -96,20 +99,18 @@ function Profile()
                                 value={address}
                                 onChange={e=> setAddress(e.target.value)}/>
                         </div>
-                        <div className='form-group'>image
-                        <input type="text" className='form-control widthSize'
-                                name="image"
-                                value={imagePath}
-                                onChange={e=> setImagePath(e.target.value)}/>
-                        </div>
+                        
                         <button className='btn btn-success'
                                 onClick={update}>
                                 Save changes
                         </button>
                         </div>
-                        </center>
-                        {/* <Footer/> */}
-            </>);
+                     
+                </form>
+                </div>
+                </center>
+                   {/* <Footer/>    */}
+    </> );
 }
 
-export default Profile;
+export default EditDoctor;

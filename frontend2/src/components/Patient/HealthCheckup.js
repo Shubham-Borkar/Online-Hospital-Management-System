@@ -43,9 +43,6 @@ function HealthCheckup()
                                 onClick={update}>
                                 Confirm Checkup
                         </button>
-                        <br />
-                        {/* {message} */}
-                        <br />
                         </div>
                         </center>
                         <Footer/>

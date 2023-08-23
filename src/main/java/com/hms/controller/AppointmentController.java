@@ -1,5 +1,7 @@
 package com.hms.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,22 @@ public class AppointmentController {
 		return ResponseEntity.ok(list);
 	}
 	
+	@GetMapping("/get/{date}")
+	public ResponseEntity<?> showAppointmentByDate(@PathVariable String date) {
+	    LocalDate datef= LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		List<Appointment> list = appointmentImp.appointmentByDate(datef);
+		if (list == null)
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return ResponseEntity.ok(list);
+	}
+	@GetMapping("/get/{date}/{did}")
+	public ResponseEntity<?> showAppointmentByDate(@PathVariable String date,@PathVariable int did) {
+	    LocalDate datef= LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		List<Appointment> list = appointmentImp.appointmentByDateAndDoctor(datef,did);
+		if (list == null)
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return ResponseEntity.ok(list);
+	}
 	@DeleteMapping("/delete/{aid}")
 	public ResponseEntity<?> cancelAppointment(@PathVariable int aid) {
 		appointmentImp.deleteAppointment(aid);

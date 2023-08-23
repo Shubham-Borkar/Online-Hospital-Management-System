@@ -2,24 +2,21 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
 import Footer from '../Layout/Footer';
 import Header from '../Layout/Header';
-import { useState } from 'react';
 
 function PatientLogin() 
 {
-    const [credentials, setCredentials] = useState({email: "", password: ""})
+    // useState[credentials, setCredentials] = { {email: "", password: ""} }
  
     const OnTextChange=(args)=>{
-        debugger;
-        var copyOfUser = {...credentials};
+        var copyOfUser = {email: "", password: ""};
         // copyOfUser[args.target.name] = args.target.value;
         // setUser(copyOfUser);
         copyOfUser[args.target.name] = args.target.value;
-        setCredentials(copyOfUser);
    }
 
    const Login=()=>{
         // 1236547890
-        console.log(credentials);
+        console.log("Button clicked: ");
    }
 
     return (<>
@@ -31,14 +28,14 @@ function PatientLogin()
                                 <input type="text" className='form-control'
                                         style={{width: 500}}
                                         name="email"
-                                        value={credentials.email}
+                                        value=""
                                         onChange={OnTextChange}/>
                             </div> <br />
                             <div className='form-group input-group-sm'>Password
                                 <input type="text" className='form-control'
                                         style={{width: 500}}
                                         name="password"
-                                        value={credentials.password}
+                                        value=""
                                         onChange={OnTextChange}/>
                             </div> <br />
                         
