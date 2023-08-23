@@ -1,13 +1,12 @@
-import axios from 'axios';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
-import './stylesheetsp/common.css'
+import Header from "../Layout/Header";
 import Footer from '../Layout/Footer';
-import Header from '../Layout/Header';
-import { BaseApi } from '../api/BaseApi';
 import { useState } from 'react';
+import axios from 'axios';
+import { BaseApi } from '../api/BaseApi';
 
-function Register() 
+function AddStaff() 
 {
         debugger
         const [name, setName] = useState("")
@@ -28,9 +27,9 @@ function Register()
                 setPassword("")
         }
 
-   const register=()=>{
+   const staffAdd=()=>{
         debugger;
-        const url= 'patient/register'
+        const url= 'adminstaff/register/staff'
         axios.post(`${BaseApi.server_url}${url}`,
         {
                 name, gender, dob, phone, address, email, password
@@ -47,10 +46,10 @@ function Register()
    }
 
     return (<>
-                <Header/>
+                {/* <Header/> */}
                         <center>
                                 <br /><br />
-                        <h1><center>Register here</center></h1>
+                        <h1><center>Add Staff</center></h1>
                         <hr />
                         <div className="table-bordered">
                               
@@ -107,13 +106,13 @@ function Register()
                         </div> 
                         
                         <button className='btn btn-success'
-                                onClick={register}>
-                                Register
+                                onClick={staffAdd}>
+                                Add Staff
                         </button>
                         </div>
                         </center>
-                        <Footer/>
+                        {/* <Footer/> */}
             </>);
 }
 
-export default Register;
+export default AddStaff;

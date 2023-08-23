@@ -23,7 +23,7 @@ function Admin() {
               <div className="col-md-4">
                 <div className="button" onClick={()=> handleButtonClick('1') }>
                   <img src={BaseApi.base_url+'assets/adminimg/pngs/doctor.png'} alt="Image 1"/>
-                  <span><b>Manage Doctor"s</b></span>
+                  <span><b>Manage Doctors</b></span>
                 </div>
               </div>
               <div className="col-md-4">
@@ -35,7 +35,7 @@ function Admin() {
               <div className="col-md-4">
                 <div className="button" onClick={()=> handleButtonClick('3') }>
                   <img src={BaseApi.base_url+'assets/adminimg/pngs/patient.png'} alt="Image 3"/>
-                  <span><b>Manage Patient"s</b></span>
+                  <span><b>Manage Patients</b></span>
                 </div>
               </div>
             </div>
@@ -54,7 +54,7 @@ function Admin() {
               <div className="col-md-4">
                 <div className="button" onClick={()=> handleButtonClick('5') }>
                   <img src={BaseApi.base_url+'assets/adminimg/pngs/appointments.png'} alt="Image 5"/>
-                  <span><b>Manage Apointment</b></span>
+                  <span><b>Manage Appointment</b></span>
                 </div>
               </div>
               <div className="col-md-4">
