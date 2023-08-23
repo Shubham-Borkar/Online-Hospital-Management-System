@@ -22,8 +22,6 @@ import Doctor from './components/Doctor/Doctor'
 import Contact from './pages/Contact'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-bootstrap';
-// import DoctorsCar from './components/Home/DoctorsCar';
-// import Doctorscar2 from './components/Home/Doctorscar2';
 
 
 function App() {
@@ -53,7 +51,6 @@ function App() {
           <Route path="/staffAdd" element={<StaffAdd />} />
           <Route path="/staffDetails" element={<StaffDetails />} />
           <Route path="/staffEdit" element={<StaffEdit />} />
-          {/* <Route path="/doctorCar" element={<Doctorscar2 />} /> */}
 
 
           {/* <Route
