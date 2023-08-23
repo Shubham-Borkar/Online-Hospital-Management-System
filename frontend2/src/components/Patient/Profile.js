@@ -1,55 +1,60 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
+import './stylesheetsp/common.css'
 import Footer from '../Layout/Footer';
 import Header from '../Layout/Header';
 import { useEffect, useState } from "react";
+import { BaseApi } from '../api/BaseApi';
+import axios from 'axios';
 
 function Profile() 
 {
-        // const [appts, setAppts] = useState([]);
-        const [profile, setProfile] = useState({id: 0, name: "", gender: "", email: "", password: "",
-                                                mobile: "", dob: "", address: ""});
-        const [message, setMessage] = useState("");
+        
+        const [profile, setProfile] = useState({id: 0, name: "", gender: "", dob: "", phone: "",  
+                                                address: "", imagePath: ""});
+        // const [id, setId] = useState(0)
+        const [name, setName] = useState("")
+        const [gender, setGender] = useState("")
+        const [dob, setDob] = useState("")
+        const [phone, setPhone] = useState(0)
+        const [address, setAddress] = useState("")
+        const [imagePath, setImagePath] = useState("")
 
         useEffect(()=>{
+                debugger
                 console.log("inside componentDidMount..");
                 select(); 
-                // fetch();
               }, [])
-
-        useEffect(()=>{ 
-                setTimeout(() => { setMessage(""); }, 3000);  
-              } , [message])
 
         const select=()=>{
                 debugger;
-                var helper = new XMLHttpRequest();
-                // var data =  { "user_id": id };
-                
-                helper.onreadystatechange =()=> {
-                    if (helper.readyState == 4 && helper.status == 200)
-                    {
-                        debugger;
-                        var result = JSON.parse(helper.responseText);
-                        setProfile(result);
-                        console.log("appts Received");
-                    }
-                };
-                helper.open("GET", "http://127.0.0.1:8181/patient/1");
-                helper.send();
-                // helper.setRequestHeader("Content-Type", "application/json");
-                // helper.send(JSON.stringify(data));
+                const url= 'patient/1';
+                axios.get(`${BaseApi.server_url}${url}`)
+                .then(res=>{
+                        debugger
+                        setProfile(res.data);
+                        setAddress(res.data.address)
+                        setDob(res.data.dob)
+                        setGender(res.data.gender)
+                        setImagePath(res.data.imagePath)
+                        setName(res.data.name)
+                        setPhone(res.data.phone)
+                })
             }
 
-    const OnTextChange=(args)=>{
-        // var copyOfUser = {...user};
-        // copyOfUser[args.target.name] = args.target.value;
-        // setUser(copyOfUser);
-   }
-
    const update=()=>{
-        // 1236547890
-        console.log("Button clicked: ");
+        debugger
+        const url= 'patient/1';
+        axios.put(`${BaseApi.server_url}${url}`,
+        {
+                name, gender, dob, phone, address, imagePath
+        })
+
+        .then(res=>{
+                debugger
+                console.log(res.data);
+                select();
+        })
    }
 
     return (<>
@@ -60,65 +65,47 @@ function Profile()
                         <div className="table-bordered">
                                 <br />
                         <div className='form-group input-group-sm'>full name
-                        <input type="text" className='form-control'
-                                style={{width: 500}}
-                                name="full_name"
-                                value={profile.name}
-                                onChange={OnTextChange}/>
+                        <input type="text" className='form-control widthSize'
+                                name="name"
+                                value={name}
+                                onChange={e=> setName(e.target.value)}
+                                />
                         </div>
                         <div className='form-group input-group-sm'>gender
-                        <input type="text" className='form-control'
-                                style={{width: 500}}
+                        <input type="text" className='form-control widthSize'
                                 name="gender"
-                                value={profile.gender}
-                                onChange={OnTextChange}/>
+                                value={gender}
+                                onChange={e=> setGender(e.target.value)}/>
                         </div>
-                        <div className='form-group'>email
-                        <input type="text" className='form-control'
-                                style={{width: 500}}
-                                name="email"
-                                value={profile.email}
-                                onChange={OnTextChange}/>
-                        </div>
-                        <div className='form-group input-group-sm'>password
-                        <input type="text" className='form-control'
-                                style={{width: 500}}
-                                name="password"
-                                value={profile.password}
-                                onChange={OnTextChange}/>
-                        </div>
-                        <div className='form-group'>phone
-                        <input type="text" className='form-control'
-                                style={{width: 500}}
-                                name="phone"
-                                value={profile.phone}
-                                onChange={OnTextChange}/>
-                        </div>
-                        <div className='form-group'>dob
-                        <input type="date" className='form-control'
-                                style={{width: 500}}
+                         <div className='form-group'>dob
+                        <input type="date" className='form-control widthSize'
                                 name="dob"
-                                value={profile.dob}
-                                onChange={OnTextChange}/>
+                                value={dob}
+                                onChange={e=> setDob(e.target.value)}/>
                         </div>  
-                        <div className='form-group'>address
-                        <input type="text" className='form-control'
-                                style={{width: 500}}
-                                name="address"
-                                value={profile.address}
-                                onChange={OnTextChange}/>
+                        <div className='form-group'>phone
+                        <input type="text" className='form-control widthSize'
+                                name="phone"
+                                value={phone}
+                                onChange={e=> setPhone(e.target.value)}/>
                         </div>
-                        {/* <button className='btn btn-primary'
-                                onClick={edit}>
-                                Edit
-                        </button> */}
+                       
+                        <div className='form-group'>address
+                        <input type="text" className='form-control widthSize'
+                                name="address"
+                                value={address}
+                                onChange={e=> setAddress(e.target.value)}/>
+                        </div>
+                        <div className='form-group'>image
+                        <input type="text" className='form-control widthSize'
+                                name="image"
+                                value={imagePath}
+                                onChange={e=> setImagePath(e.target.value)}/>
+                        </div>
                         <button className='btn btn-success'
                                 onClick={update}>
                                 Save changes
                         </button>
-                        <br />
-                        {/* {message} */}
-                        <br />
                         </div>
                         </center>
                         <Footer/>

@@ -1,9 +1,10 @@
 import '../../node_modules/bootstrap/dist/css/bootstrap.css'
+import { BaseApi } from '../components/api/BaseApi';
 import './mystyle.css'
 
 function MyCard() {
     return (<div class="backimg bg-primary">
-                    <img src="http://localhost:3000/assets/images/hospitalback.jpg" alt="Snow" style={{width:"100%"}}/>
+                    <img src={BaseApi.base_url+'assets/images/hospitalback.jpg'} alt="Snow" style={{width:"100%"}}/>
                 </div>);
 }
 

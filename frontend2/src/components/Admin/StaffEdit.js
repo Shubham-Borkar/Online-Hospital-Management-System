@@ -4,7 +4,11 @@ import Header from "../Layout/Header";
 import Footer from '../Layout/Footer';
 
 function StaffEdit(props) {
-    const OnTextChange=()=>{}
+
+    const OnTextChange=()=>{
+
+    }
+
     debugger;
     return ( <>
                 <Header/>
@@ -15,8 +19,6 @@ function StaffEdit(props) {
                         <hr />
                         <div className="table-bordered">
                     
-                        
-
                         <div className='form-group'>Name
                         <input type="text" className='form-control'
                                 style={{width: 500}}
@@ -24,8 +26,6 @@ function StaffEdit(props) {
                                 value={props.name}
                                 onChange={OnTextChange}/>
                         </div>
-
-
 
                         <div className='form-group'>Education
                         <input type="text" className='form-control'
@@ -55,10 +55,6 @@ function StaffEdit(props) {
                                 >
                                 Conform Staff Edit
                         </button>
-                        <br />
-                        {/* {message} */}
-                        <br />
-                       
                         </div>
                      
                 </form>
