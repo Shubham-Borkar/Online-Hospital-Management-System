@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-
+// DTO
 @Getter
 @Setter
 @ToString

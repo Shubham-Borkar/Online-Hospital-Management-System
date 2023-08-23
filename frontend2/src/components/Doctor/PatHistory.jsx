@@ -9,13 +9,14 @@ function PatHistory() {
     const [patAppt, setPatAppt] = useState({id: 0, apointdate: "", slot: "", symptoms: "",patient:{id:0,name:"",gender:"",address:"",dob:"",phone:0}});
 
     useEffect(()=>{
-            console.log("inside componentDidMount..");
-            select(); 
+            console.log("on pid update");
+           // select(); 
             }, [pid])
 
     const select=()=>{
             debugger;
             const url= `appointment/patient/${pid}`;
+           // const url= `appointment/patient/1`;
             axios.get(`${BaseApi.server_url}${url}`)
             .then(res=>{
                     setPatAppts(res.data);
@@ -25,6 +26,9 @@ function PatHistory() {
 
     return (  <><h1>Patient Appointment Data using pid</h1>
   <input type="text" className="form-control" placeholder="Enter Patient Id" aria-describedby="basic-addon2" value={pid} name='username' onChange={e=>setPid(e.target.value)}/>
+  <br></br>
+  <button type="button" class="btn btn-large btn-block btn-info" onClick={select}>Get Appointments</button>
+  
 
 
   <div className='table-responsive'>

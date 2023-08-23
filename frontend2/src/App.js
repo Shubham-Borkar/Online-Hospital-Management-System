@@ -24,8 +24,7 @@ import { Route, Routes,Link } from 'react-router-dom';
 import { ToastContainer } from 'react-bootstrap';
 import StaffList from './components/Doctor/StaffList';
 import PatHistory from './components/Doctor/PatHistory';
-// import DoctorsCar from './components/Home/DoctorsCar';
-// import Doctorscar2 from './components/Home/Doctorscar2';
+
 
 
 function App() {
