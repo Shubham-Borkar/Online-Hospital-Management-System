@@ -33,8 +33,6 @@ function AppointmentShow()
 
 
     return (<>
-                <Header/>
-
                 <hr />
                 <div>
                     <center>
@@ -51,8 +49,6 @@ function AppointmentShow()
                         }
                     </center>
                 </div>
-                        
-                        <Footer/>
             </>);
 }
 

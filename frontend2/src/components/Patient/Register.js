@@ -6,6 +6,7 @@ import Footer from '../Layout/Footer';
 import Header from '../Layout/Header';
 import { BaseApi } from '../api/BaseApi';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 function Register() 
 {
@@ -38,16 +39,18 @@ function Register()
         .then(res=>{
                 debugger
                 console.log(res.data);
+                toast.success('Registration successful')
                 clearFields()
         })
         .catch(error=>{
                 debugger
+                toast.error('please try again')
                 console.log(error)
+               
         })
    }
 
     return (<>
-                <Header/>
                         <center>
                                 <br /><br />
                         <h1><center>Register here</center></h1>
@@ -112,7 +115,6 @@ function Register()
                         </button>
                         </div>
                         </center>
-                        <Footer/>
             </>);
 }
 

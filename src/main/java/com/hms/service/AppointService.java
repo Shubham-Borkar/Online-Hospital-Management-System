@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.hms.dto.AddAppDto;
+import com.hms.dto.ApiResponse;
 import com.hms.pojos.Appointment;
 
 
@@ -23,4 +24,8 @@ public interface AppointService {
 	List<Appointment> appointmentByDateAndDoctor(LocalDate date,int did);
 
 	List<String> slotTimeList(LocalDate date,int did);
+	
+	boolean changeStatus(int aid);
+	
+	String editprescription(int aid,String pre);
 }

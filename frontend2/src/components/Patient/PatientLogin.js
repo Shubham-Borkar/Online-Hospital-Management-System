@@ -20,7 +20,6 @@ function PatientLogin()
    }
 
     return (<>
-                <Header/>
                 <center> <br /><br /><br /><br />
                         <h1>Log in</h1> <br />
                         <div className="table-bordered"> <br />
@@ -46,7 +45,6 @@ function PatientLogin()
                             <br /> <br /><br />
                         </div>
                 </center>
-                <Footer/>
             </>);
 }
 

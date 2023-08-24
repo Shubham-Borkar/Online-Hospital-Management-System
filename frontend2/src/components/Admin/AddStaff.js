@@ -5,6 +5,7 @@ import Footer from '../Layout/Footer';
 import { useState } from 'react';
 import axios from 'axios';
 import { BaseApi } from '../api/BaseApi';
+import { toast } from 'react-toastify';
 
 function AddStaff() 
 {
@@ -16,6 +17,7 @@ function AddStaff()
         const [address, setAddress] = useState("")
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
+        const [role, setRole] = useState("ROLE_HELPER")
 
         const clearFields=()=>{
                 setName("") 
@@ -32,15 +34,17 @@ function AddStaff()
         const url= 'adminstaff/register/staff'
         axios.post(`${BaseApi.server_url}${url}`,
         {
-                name, gender, dob, phone, address, email, password
+                name, gender, dob, phone, address, email, password, role
         })
         .then(res=>{
                 debugger
                 console.log(res.data);
+                toast.success('Registration successful')
                 clearFields()
         })
         .catch(error=>{
                 debugger
+                toast.error('please try again')
                 console.log(error)
         })
    }

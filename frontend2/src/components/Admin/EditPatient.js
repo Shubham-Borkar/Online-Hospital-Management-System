@@ -7,16 +7,13 @@ import axios from 'axios';
 import { BaseApi } from '../api/BaseApi';
 import { toast } from 'react-toastify';
 
-function EditDoctor(props) {
+function EditPatient(props) {
 
         
         const [name, setName] = useState("")
-        const [education, setEducation] = useState("")
-        const [speciality, setSpeciality] = useState("")
         const [dob, setDob] = useState("")
         const [phone, setPhone] = useState(0)
         const [address, setAddress] = useState("")
-        const [imagePath, setImagePath] = useState("")
 
 
         useEffect(()=>{
@@ -27,15 +24,12 @@ function EditDoctor(props) {
 
         const select=()=>{
                 debugger;
-                const url= 'doctor/1';
+                const url= 'patient/1';
                 axios.get(`${BaseApi.server_url}${url}`)
                 .then(res=>{
                         debugger
                         setAddress(res.data.address)
                         setDob(res.data.dob)
-                        setEducation(res.data.education)
-                        setSpeciality(res.data.speciality)
-                        setImagePath(res.data.imagePath)
                         setName(res.data.name)
                         setPhone(res.data.phone)
                 })
@@ -46,7 +40,7 @@ function EditDoctor(props) {
                 const url= 'patient/1';
                 axios.put(`${BaseApi.server_url}${url}`,
                 {
-                        name, education, speciality, phone, address
+                        name, dob, phone, address
                 })
                 .then(res=>{
                         debugger
@@ -63,11 +57,10 @@ function EditDoctor(props) {
 
     debugger;
     return ( <>
-                {/* <Header/> */}
             <center> <br /><br /><br /><br />
                 <div style={{width:"600px"}}>
                 <form>
-                        <h1><center>Edit Doctor</center></h1>
+                        <h1><center>Edit Patient</center></h1>
                         <hr />
                         <div className="table-bordered">
                     
@@ -77,18 +70,6 @@ function EditDoctor(props) {
                                 value={name}
                                 onChange={e=> setName(e.target.value)}
                                 />
-                        </div>
-                        <div className='form-group input-group-sm'>education
-                        <input type="text" className='form-control widthSize'
-                                name="education"
-                                value={education}
-                                onChange={e=> setEducation(e.target.value)}/>
-                        </div>
-                        <div className='form-group input-group-sm'>speciality
-                        <input type="text" className='form-control widthSize'
-                                name="speciality"
-                                value={speciality}
-                                onChange={e=> setSpeciality(e.target.value)}/>
                         </div> 
                         <div className='form-group'>phone
                         <input type="text" className='form-control widthSize'
@@ -113,8 +94,7 @@ function EditDoctor(props) {
                 </form>
                 </div>
                 </center>
-                   {/* <Footer/>    */}
     </> );
 }
 
-export default EditDoctor;
+export default EditPatient;

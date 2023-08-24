@@ -20,6 +20,7 @@ import com.hms.dao.AppointDao;
 import com.hms.dao.DoctorDao;
 import com.hms.dao.PatientDao;
 import com.hms.dto.AddAppDto;
+import com.hms.dto.ApiResponse;
 import com.hms.pojos.Appointment;
 import com.hms.pojos.AppointmentSlot;
 import com.hms.pojos.Doctor;
@@ -98,6 +99,30 @@ public class AppointServiceImp implements AppointService {
 	@Override
 	public List<String> slotTimeList(LocalDate date,int did) {
 		return asDao.slotTimeList(date,did);	 
+	}
+
+	@Override
+	public boolean changeStatus(int aid) {
+	    Appointment findById = aDao.findById(aid).orElse(null);
+	    if(findById==null)
+		return false;
+	    else {
+	    findById.setStatus(true);
+	    aDao.save(findById);
+	    return true;
+	    }
+	}
+
+	@Override
+	public String editprescription(int aid,String pre) {
+		Appointment findById = aDao.findById(aid).orElse(null);
+	    if(findById==null)
+		return null;
+	    else {
+	    findById.setPrescribe(pre);
+	    aDao.save(findById);
+	    return "Prescription updated";
+	    }
 	}
 
 }

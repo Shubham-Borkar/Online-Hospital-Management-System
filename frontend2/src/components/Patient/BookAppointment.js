@@ -6,6 +6,7 @@ import Header from "../Layout/Header";
 import Footer from '../Layout/Footer';
 import axios from 'axios';
 import { BaseApi } from '../api/BaseApi';
+import { toast } from 'react-toastify';
 
 function BookAppointment() 
 {
@@ -13,30 +14,99 @@ function BookAppointment()
         const [patient, setPatient] = useState({id: 0, name: "", gender: "", dob: "", phone: "", 
                                                 address: "", imagePath: ""})
         const [appt, setAppt] = useState({id: 0, apointdate: "", slot: "", symptoms: "", patient});
-        const [did, setDid] = useState(0)
-        const [id, setId] = useState(0)
-        const [apointdate, setApointdate] = useState("")
-        const [slot, setSlot] = useState("")
+        let [did, setDid] = useState("")
+        const [pid, setPid] = useState(2)
+        let [apointdate, setApointdate] = useState("")
+        let [slot, setSlot] = useState("")
         const [symptoms, setSymptoms] = useState("")
         const [doctor, setDoctor] = useState({id: 0, name: "", gender: "", address: "",  dob: "", 
                                                 phone: "", education: "", speciality: ""})
         const [doctors, setDoctors] = useState([])
-        const [patientt, setPatientt] = useState({me: "me"})
-
+        const [slottime, setSlotime] = useState(["10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM",
+                                                "4 PM", "5 PM"])
+        let [slotsbooked, setSlotsbooked] = useState([])
+        // const [patientt, setPatientt] = useState({me: "me"})
+        let [stoshow, setStoshow] = useState([])
 
         useEffect(()=>{
+                debugger
                 console.log("inside componentDidMount..");
                 getDoct(); 
                 getPat()
               }, [])
 
-        const handleChangeDid=function(e){
-                setDid({did:e.target.value});
-              }
+        useEffect(()=>{
+                debugger
+                console.log("inside componentDidUpdate..");
+                setSlotsbooked([])
+                console.log(slotsbooked)
+                setStoshow([])
+                console.log(stoshow)
+              }, [did])
+
+        useEffect(()=>{
+                debugger
+                console.log("inside componentDidUpdate..");
+                setSlotsbooked([])
+                console.log(slotsbooked)
+                setStoshow([])
+                console.log(stoshow)
+              }, [apointdate])
+
+        const uniqueElement=()=>{
+                debugger
+                let array = slottime.filter(function(obj) { return slotsbooked.indexOf(obj) == -1; });
+                console.log(array)
+                setStoshow(array)
+                console.log(stoshow)
+        }
+
+        const slotFunbydid=(args)=>{
+                debugger
+                setDid(+args.target.value)
+                const url = `appointment/appSlotList/${args.target.value}/${apointdate}`
+                axios.get(`${BaseApi.server_url}${url}`)
+                .then(res=>{
+                        debugger
+                        let arr = res.data
+                        arr.map( (a)=>{
+                                slotsbooked.push(a)
+                        })
+                        console.log(slotsbooked)
+                        uniqueElement()
+                })
+                .catch(error=>{
+                        debugger
+                        console.log(error)
+                })
+        }
+
+        const slotFunbyDate=(args)=>{
+                debugger
+                setApointdate(args.target.value)
+                console.log(apointdate)
+                const url = `appointment/appSlotList/${did}/${args.target.value}`
+                axios.get(`${BaseApi.server_url}${url}`)
+                .then(res=>{
+                        debugger
+                        let arr = res.data
+                        arr.map( (a)=>{
+                                slotsbooked.push(a)
+                        })
+                        console.log(slotsbooked)
+                        uniqueElement()
+                })
+                .catch(error=>{
+                        debugger
+                        console.log(error)
+                })
+        }
 
         const handleChangeSlot=function(e){
-                setSlot({slot:e.target.value});
+                debugger
+                setSlot(e.target.value);
               }
+
 //         const OnTextChange=(args)=>{
 //         // var copyOfUser = {...user};
 //         // copyOfUser[args.target.name] = args.target.value;
@@ -85,7 +155,7 @@ function BookAppointment()
 
         const getPat=()=>{
                 debugger
-                const url2 = 'patient/1'
+                const url2 = `patient/${pid}`
                 axios.get(`${BaseApi.server_url}${url2}`)
                 .then(res=>{
                         debugger
@@ -95,25 +165,24 @@ function BookAppointment()
 
         const addAppt=()=>{
         debugger
-         let no = 2
-         let pid=2;
-        const url3 = "appointment/add/"+pid+"/"+no
+        const url3 = "appointment/addappointment"
         axios.post(`${BaseApi.server_url}${url3}`,
         {
-               patientt, slot, symptoms, apointdate
+               pid, slot, symptoms, apointdate, did
         })
         .then(response=>{
                 debugger
                 console.log(response.data)
+                toast.success('booking successful')
         })
         .catch(error=>{
                 debugger
                 console.log(error)
+                toast.success('please try again')
         })
    }
 
     return (<>
-                <Header/>
                         <center> <br /> <br /> <br />
                         <h1>Book Appointment</h1> <hr />
 
@@ -122,16 +191,8 @@ function BookAppointment()
                         <input type="date" className='form-control appstyle'
                                 style={{width: 500}}
                                 name="app_date"
-                                onChange={e=> setApointdate(e.target.value)}/>
-                        </div> <br />
-
-                        <div className='form-group input-group-sm appstyle'>Appointment Slot <br/>
-                                <select id="slotno" onChange={handleChangeSlot} name="app_slotno" style={{width: 500}}>
-                                        <option value="10 am">10 am</option>
-                                        <option value="11 am">11 am</option>
-                                        <option value="12 pm">12 pm</option>
-                                        <option value="1 pm">1 pm</option>
-                                </select>
+                                onChange={slotFunbyDate}/>
+                                {/* e=> setApointdate(e.target.value) */}
                         </div> <br />
 
                         <div className='form-group input-group-sm appstyle'>Symptoms
@@ -141,15 +202,27 @@ function BookAppointment()
                                 onChange={e=> setSymptoms(e.target.value)}/>
                         </div> <br />
 
-                        <div className='form-group appstyle'>Doctor
-                                <select id="did" onChange={handleChangeDid} name="doctor" style={{width: 500}}>
+                        <div className='form-group input-group-sm appstyle'>Doctor
+                                <select id="did" onChange={slotFunbydid} name="doctor" style={{width: 500}}>
                                 {
                                         doctors.map( (doc)=> {
-                                                return <option value={doc.id}>{doc.name} ({doc.speciality})</option>
+                                                return <option value={doc.id} id={doc.id}>{doc.name} ({doc.speciality})</option>
                                         })
                                 }
                                 </select>
-                        </div> 
+                        </div> <br />
+
+                        <div className='form-group input-group-sm appstyle'>Appointment Slot <br/>
+                                <select id="slotno" onChange={handleChangeSlot} name="app_slotno" style={{width: 500}}>
+                                {
+                                        stoshow.map( (sl)=> {
+                                                debugger
+                                                return <option value={sl} id={sl}>{sl}</option>
+                                        })
+
+                                }
+                                </select>
+                        </div> <br />
                         
                         <button className='btn btn-success'
                                 onClick={addAppt}>
@@ -157,7 +230,6 @@ function BookAppointment()
                         </button>
                         </div>
                         </center>
-                        <Footer/>
             </>);
 }
 

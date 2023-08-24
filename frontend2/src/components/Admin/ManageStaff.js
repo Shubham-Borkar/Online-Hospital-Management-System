@@ -8,10 +8,13 @@ import { BaseApi } from '../api/BaseApi';
 import EditStaff from './EditStaff';
 import AddStaff from './AddStaff';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function ManageStaff(props) 
 {
 
+    const navigate=useNavigate();
     const [staffs,setStaffs] =  useState([])
 
     useEffect(()=>{
@@ -21,7 +24,7 @@ function ManageStaff(props)
 
     const select=()=>{
         debugger;
-        const url= 'doctor';
+        const url= 'adminstaff/helperstaff';
         axios.get(`${BaseApi.server_url}${url}`)
             .then(res=>{
                 setStaffs(res.data);
@@ -38,11 +41,12 @@ function ManageStaff(props)
 
    const deleteStaff=()=>{
         console.log("delete staff called");
+        toast.warning('staff delete called')
    }
 
    const addS=()=>{
     debugger;
-    <AddStaff/>
+    navigate("/addStaff")
 }
 debugger;
     return (<>

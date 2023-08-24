@@ -3,6 +3,7 @@ package com.hms.pojos;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,8 +31,14 @@ public class Appointment extends BaseClass {
 	private LocalDate apointdate;
 	//@Temporal(TemporalType.DATE)
 	//private Date apointdate;
+	@Column(length=10)
 	private String slot;
+	@Column(length=100)
 	private String symptoms;
+	@Column(length=100)
+	private String prescribe;
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "pid")
 	private Patient patient;
@@ -42,6 +49,7 @@ public class Appointment extends BaseClass {
 	@JsonIgnore
 	@OneToOne(mappedBy = "appoint")
 	private Invoice invoice;
+	@Column(columnDefinition="tinyint(1) default 0")
 	private boolean status;
     @JsonIgnore
     @OneToOne

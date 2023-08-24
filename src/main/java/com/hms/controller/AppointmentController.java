@@ -93,6 +93,23 @@ public class AppointmentController {
 		List<String> list = appointmentImp.slotTimeList(datef,did);
 		return ResponseEntity.ok(list);
 	}
+	@PostMapping("/updatestatus/{aid}")
+	public ResponseEntity<?> updatestatus(@PathVariable int aid) {	
+			boolean s = appointmentImp.changeStatus(aid);
+			if(s==false)
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("Error while changing Status"));
+			return new ResponseEntity<>(new ApiResponse("Status Updated"),HttpStatus.OK);
+	
+	}
+	@PostMapping("/editprescription/{aid}/{pre}")
+	public ResponseEntity<?> editprescription(@PathVariable int aid,@PathVariable String pre) {
+	
+			String s = appointmentImp.editprescription(aid,pre);
+			if(s==null)
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("Error finding Appointment by id"));
+			return new ResponseEntity<>(s,HttpStatus.OK);
+	
+	}
 
 
 }

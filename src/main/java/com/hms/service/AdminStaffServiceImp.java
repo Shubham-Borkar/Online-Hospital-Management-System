@@ -64,10 +64,13 @@ public class AdminStaffServiceImp implements AdminStaffService {
 	@Override
 	public ApiResponse addStaff(RegisterDto staffDetails) {
 		Staff sdetails=mapper.map(staffDetails, Staff.class);
+		//System.out.println(sdetails+"first mapper");
 		sdetails.setRole("ROLE_HELPER");
 		Entry edetails=mapper.map(staffDetails, Entry.class);
+		//System.out.println(edetails+"before setter");
 		edetails.setRole("ROLE_HELPER");
 		edetails.setPassword(passwordEncoder.encode(edetails.getPassword()));
+		//System.out.println(edetails+"after setter");
 		Staff ssaved=null;
 		Entry save =null;
 		 try {

@@ -20,7 +20,6 @@ function ConsultOnline()
    }
 
     return (<>
-                <Header/>
                 <center> <br /><br /><br /><br />
                         <h1>Please, Enter your query here</h1> <br />
                         <div className="table-bordered"> <br />
@@ -53,7 +52,6 @@ function ConsultOnline()
                             <br /> <br /><br />
                         </div>
                 </center>
-                <Footer/>
             </>);
 }
 
