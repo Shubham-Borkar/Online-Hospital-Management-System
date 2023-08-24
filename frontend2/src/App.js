@@ -33,7 +33,6 @@ import { Route, Routes,Link } from 'react-router-dom';
 import { ToastContainer } from 'react-bootstrap';
 import StaffList from './components/Doctor/StaffList';
 import PatHistory from './components/Doctor/PatHistory';
-import Footer from './components/Layout/Footer';
 import AppByDate from './components/Doctor/AppByDate';
 import AppByDoctor from './components/Doctor/AppByDoctor';
 
