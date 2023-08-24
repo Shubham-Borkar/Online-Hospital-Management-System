@@ -28,6 +28,13 @@ function Resources() {
       })
   }
 
+  const update=(e)=>{
+    debugger
+    console.log(e.target.value)
+    let avail = e.target.value
+
+  }
+
   const bed = 350;
 
   return (<>
@@ -57,11 +64,13 @@ function Resources() {
             if(per>400)
             sty="progress-bar bg-success";
             
+
             
             
             return (<>
 
-              <h2>{s.resource}</h2>
+              <h2 onClick={update} value={s}>
+                {s.resource} ({s.availableCount}/{s.totalCount})</h2>
               <div className="progress" style={{ width: "500px", height: "50px" }}>
                 <div
                   className={sty}
@@ -74,20 +83,6 @@ function Resources() {
             </>);
           })
         }
-
-
-
-
-
-        <h2>Beds Occupied</h2>
-        <div className="progress" style={{ width: "500px", height: "50px" }}>
-          <div
-            className="progress-bar bg-success"
-            role="progressbar"
-            style={{ width: bed }}>
-            <span className="sr-only">40% Complete (success)</span>
-          </div>
-        </div>
        
       </center>
     </div>

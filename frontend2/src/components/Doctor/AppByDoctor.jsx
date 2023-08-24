@@ -4,22 +4,23 @@ import { BaseApi } from '../api/BaseApi';
 
 function AppByDoctor() {
     const [date,setDate]=useState("");
-    const [patAppts, setPatAppts] = useState([]);
+    const [pattAppts, setPattAppts] = useState([]);
 
     const getlist=()=>{
         debugger;
         const did=1;
-        const url= `appointment/get/${date}/${did}`;
-       // const url= `appointment/patient/1`;
-        axios.get(`${BaseApi.server_url}${url}`)
+       const url=`appointment/getAppList/${date}/${did}`
+       axios.get(`${BaseApi.server_url}${url}`)
         .then(res=>{
                 debugger;
-                setPatAppts(res.data);
+                setPattAppts(res.data);
+                debugger;
                 console.log(res.data)
                 })
+                .catch((error)=>console.log(error))  
         }
 
-    return (  <><h1>Appointments by date</h1>
+    return (  <><h1>Appointments for Doctor by date</h1>
     
     <input type="date"id="input" class="form-control" title="" placeholder="Enter the Date to Get Appointment"  value={date} name="date" onChange={e=>setDate(e.target.value)}/>
     <button type="button" class="btn btn-large btn-block btn-info" onClick={getlist}>Get Appointments By Date</button>
@@ -30,7 +31,7 @@ function AppByDoctor() {
                            <tbody>
                             <tr><th>Appointment Id</th><th>Name</th><th>Date</th><th>Slot</th><th>Symptoms</th></tr>
                         {
-                        patAppts.map( (s)=> {
+                        pattAppts.map( (s)=> {
                                 return <><tr>
                                         <td>{s.id}</td>
                                         <td>{s.patient.name}</td>
