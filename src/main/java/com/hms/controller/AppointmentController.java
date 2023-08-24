@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hms.dto.AddAppDto;
+import com.hms.dto.ApiResponse;
 import com.hms.pojos.Appointment;
 import com.hms.service.AppointService;
 import com.hms.service.AppointServiceImp;
@@ -28,18 +30,16 @@ public class AppointmentController {
 	@Autowired
 	private AppointService appointmentImp;
 
-	@PostMapping("/add/{pid}/{did}")
-	public ResponseEntity<?> addAppointment(@PathVariable int pid, @PathVariable int did,
-			@RequestBody Appointment appointmentDetails) {
+	@PostMapping("/addappointment")
+	public ResponseEntity<?> addAppointment(@RequestBody AddAppDto appointmentDetails) {
 
 		System.out.println(appointmentDetails);
-		try {
-			Appointment app = appointmentImp.addAppointment(appointmentDetails, pid, did);
+	
+			Appointment app = appointmentImp.addAppointment(appointmentDetails);
+			if(app==null)
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("Error"));
 			return new ResponseEntity<>(app,HttpStatus.CREATED);
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	
 	}
 
 	@GetMapping("/patient/{pid}")
@@ -58,7 +58,7 @@ public class AppointmentController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return ResponseEntity.ok(list);
 	}
-	@GetMapping("/get/{date}/{did}")
+	@GetMapping("/getAppList/{date}/{did}")
 	public ResponseEntity<?> showAppointmentByDate(@PathVariable String date,@PathVariable int did) {
 	    LocalDate datef= LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		List<Appointment> list = appointmentImp.appointmentByDateAndDoctor(datef,did);
@@ -85,6 +85,12 @@ public class AppointmentController {
 		List<Appointment> list = appointmentImp.appointmentByDoctor(did);
 		if (list == null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return ResponseEntity.ok(list);
+	}
+	@GetMapping("/appSlotList/{did}/{date}")
+	public ResponseEntity<?> getAppSlotByDate(@PathVariable String date,@PathVariable int did) {
+		LocalDate datef= LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		List<String> list = appointmentImp.slotTimeList(datef,did);
 		return ResponseEntity.ok(list);
 	}
 

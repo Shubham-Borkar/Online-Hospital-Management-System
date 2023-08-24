@@ -6,6 +6,7 @@ import java.util.List;
 //import java.util.function.Function;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.domain.Example;
 //import org.springframework.data.domain.Page;
@@ -14,10 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Service;
 
+import com.hms.dao.AppSlotDao;
 import com.hms.dao.AppointDao;
 import com.hms.dao.DoctorDao;
 import com.hms.dao.PatientDao;
+import com.hms.dto.AddAppDto;
 import com.hms.pojos.Appointment;
+import com.hms.pojos.AppointmentSlot;
 import com.hms.pojos.Doctor;
 import com.hms.pojos.Patient;
 
@@ -30,15 +34,29 @@ public class AppointServiceImp implements AppointService {
 	private DoctorDao dDao;
 	@Autowired
 	private PatientDao pDao;
+	@Autowired
+	private AppSlotDao asDao;
+	@Autowired
+	private ModelMapper mapper;
 
 	@Override
-	public Appointment addAppointment(Appointment app, int pid, int did) {
-		 Patient patient = pDao.findById(pid).orElse(null);
-		 Doctor doctor = dDao.findById(did).orElse(null);
-		 app.setDoctor(doctor);
-		 app.setPatient(patient);
-		 aDao.save(app);
-		return app;
+	public Appointment addAppointment(AddAppDto app) {
+		AppointmentSlot aslot=new AppointmentSlot(app.getApointdate(),app.getSlot(),app.getDid());
+		AppointmentSlot slotsaved=null;
+		try {
+			slotsaved = asDao.save(aslot);
+		}catch(Exception e) {
+			return null;	
+		} 
+		
+		 Patient patient = pDao.findById(app.getPid()).orElse(null);
+		 Doctor doctor = dDao.findById(app.getDid()).orElse(null);
+		 Appointment amapped=mapper.map(app, Appointment.class);
+		 amapped.setDoctor(doctor);
+		 amapped.setPatient(patient);
+		 amapped.setAppointSlot(slotsaved);
+		 aDao.save(amapped);
+		return amapped;
 	}
 
 	@Override
@@ -75,6 +93,11 @@ public class AppointServiceImp implements AppointService {
 	    Doctor findById = dDao.findById(did).orElse(null);
 	    if(findById==null) return null;
 		return aDao.getAppointmenyByDateAndDoctor(date, findById);
+	}
+
+	@Override
+	public List<String> slotTimeList(LocalDate date,int did) {
+		return asDao.slotTimeList(date,did);	 
 	}
 
 }

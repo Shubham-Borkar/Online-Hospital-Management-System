@@ -42,6 +42,10 @@ public class Appointment extends BaseClass {
 	@JsonIgnore
 	@OneToOne(mappedBy = "appoint")
 	private Invoice invoice;
+	private boolean status;
+    @JsonIgnore
+    @OneToOne
+	private AppointmentSlot appointSlot;
 //	private boolean checkedStatus;
 //	private String Prescription;
 
