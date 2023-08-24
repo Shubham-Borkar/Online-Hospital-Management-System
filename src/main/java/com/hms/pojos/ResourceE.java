@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name="resource")
 public class ResourceE extends BaseClass {
-	@Column(length=30)
+	@Column(length=30,unique=true)
 	private String resource;
 	private int totalCount;
 	private int availableCount;

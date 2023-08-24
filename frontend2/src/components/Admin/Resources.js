@@ -2,75 +2,97 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
 import Header from "../Layout/Header";
 import Footer from '../Layout/Footer';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { BaseApi } from '../api/BaseApi';
 
 
 function Resources() {
+  const [res, setRes] = useState([]);
 
-    const ambulance=400;
-    const bed=350;
-    const ward=220;
-    const blood=300;
-    const stretchers=450;
+  useEffect(() => {
+    debugger
+    console.log("on pid update");
+    select();
+  }, [])
 
-    return (<>
-        <Header/>
-<div> <br /><br /><br /><br />
-    <center>
+  const select = () => {
+    debugger;
+    const url = `resource`;
+    axios.get(`${BaseApi.server_url}${url}`)
+      .then(res => {
+        debugger;
+        setRes(res.data);
+        debugger;
+        console.log(res.data)
+      })
+  }
 
-<h2>Beds Occupied</h2>
-<div className="progress" style={{width: "500px",height: "50px"}}>
-  <div
-    className="progress-bar progress-bar-info"
-    role="progressbar"
-    style={{ width: bed }}>
-    <span className="sr-only">40% Complete (success)</span>
-  </div>
-</div>
+  const bed = 350;
 
-<h2>Reserved Blood</h2>
-<div className="progress" style={{width: "500px",height: "50px"}}>
-  <div
-    className="progress-bar progress-bar-warning"
-    role="progressbar"
-    style={{ width: bed }}>
-    <span className="sr-only">40% Complete (success)</span>
-  </div>
-</div>
+  return (<>
+   {/* 
+   {
+          res.map((s) => {
+            let per=((s.availableCount)/s.totalCount)*500;
+            return <>
+            <h2>{s.resource}</h2>
+            <h3>{per}</h3>
+            </>
+})
+ } 
+ */}
+    <Header />
+    <div> <br /><br /><br /><br />
+      <center>
 
-<h2>Rooms Occupied</h2>
-<div className="progress" style={{width: "500px",height: "50px"}}>
-  <div
-    className="progress-bar progress-bar-info"
-    role="progressbar"
-    style={{ width: ward }}>
-    <span className="sr-only">40% Complete (success)</span>
-  </div>
-</div>
+        {
+          res.map((s) => {
+            var per=((s.availableCount)/s.totalCount)*500;
+            var sty="progress-bar bg-danger";
+            if(per>150)
+            sty="progress-bar bg-warning"
+            if(per>300)
+            sty="progress-bar bg-info"
+            if(per>400)
+            sty="progress-bar bg-success";
+            
+            
+            
+            return (<>
 
-<h2>Ambulance Available</h2>
-<div className="progress" style={{width: "500px",height: "50px"}}>
-  <div
-    className="progress-bar progress-bar-danger"
-    role="progressbar"
-    style={{ width: ambulance }}>
-    <span className="sr-only">40% Complete (success)</span>
-  </div>
-</div>
+              <h2>{s.resource}</h2>
+              <div className="progress" style={{ width: "500px", height: "50px" }}>
+                <div
+                  className={sty}
+                  role="progressbar"
+                  style={{ width: per }}>
+                  <span className="sr-only">{per/5}Percent Available (success)</span>
+                </div>
+              </div>
+
+            </>);
+          })
+        }
 
 
-<h2>Stretchers Available</h2>
-<div className="progress" style={{width: "500px",height: "50px"}}>
-  <div
-    className="progress-bar progress-bar-success"
-    role="progressbar"
-    style={{ width: stretchers }} >
-    <span className="sr-only">40% Complete (success)</span>
-  </div>
-</div>
-</center>
-</div>
-<Footer/>
-        </>) 
+
+
+
+        <h2>Beds Occupied</h2>
+        <div className="progress" style={{ width: "500px", height: "50px" }}>
+          <div
+            className="progress-bar bg-success"
+            role="progressbar"
+            style={{ width: bed }}>
+            <span className="sr-only">40% Complete (success)</span>
+          </div>
+        </div>
+       
+      </center>
+    </div>
+
+  </>)
 }
 
 export default Resources;
