@@ -20,7 +20,6 @@ function HealthCheckup()
    }
 
     return (<>
-                <Header/>
                         <center> <br /> <br /> <br /> <br />
                         <h1>Book Health Check-up</h1>
                         <div className="table-bordered"> <br />
@@ -45,7 +44,6 @@ function HealthCheckup()
                         </button>
                         </div>
                         </center>
-                        <Footer/>
             </>);
 }
 

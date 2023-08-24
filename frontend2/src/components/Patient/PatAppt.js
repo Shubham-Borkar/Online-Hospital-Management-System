@@ -24,7 +24,6 @@ function PatAppt() {
             }
 
     return (<>
-            <Header/>
             <hr />
             <div>
                 <center>
@@ -41,8 +40,6 @@ function PatAppt() {
                     }
                 </center>
             </div>
-        
-        <Footer/>
     </>);
 }
 

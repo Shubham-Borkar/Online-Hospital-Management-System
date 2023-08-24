@@ -66,7 +66,6 @@ function Appointment()
    }
 
     return (<>
-                <Header/>
                         <center> <br /> <br /> <br />
                         <h1>Book Appointment</h1> <hr />
 
@@ -109,7 +108,6 @@ function Appointment()
                         </button>
                         </div>
                         </center>
-                        <Footer/>
             </>);
 }
 

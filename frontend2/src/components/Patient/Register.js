@@ -47,7 +47,6 @@ function Register()
    }
 
     return (<>
-                <Header/>
                         <center>
                                 <br /><br />
                         <h1><center>Register here</center></h1>
@@ -112,7 +111,6 @@ function Register()
                         </button>
                         </div>
                         </center>
-                        <Footer/>
             </>);
 }
 

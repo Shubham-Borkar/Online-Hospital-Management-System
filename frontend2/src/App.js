@@ -36,6 +36,9 @@ import PatHistory from './components/Doctor/PatHistory';
 import AppByDate from './components/Doctor/AppByDate';
 import AppByDoctor from './components/Doctor/AppByDoctor';
 import ManageApp from './components/Doctor/ManageApp';
+import ManagePatients from './components/Admin/ManagePatients';
+import EditPatient from './components/Admin/EditPatient';
+import StaffAvailability from './components/Admin/StaffAvailability';
 
 
 
@@ -86,6 +89,9 @@ function App() {
           <Route path="/appbtdoctor" element={<AppByDoctor />} />
           <Route path="/staffList" element={<StaffList />} />
           <Route path="/manageApp" element={<ManageApp />} />
+          <Route path="/managePatient" element={<ManagePatients />} />
+          <Route path="/editPatient" element={<EditPatient />} />
+          <Route path="/staffAvail" element={<StaffAvailability />} />
           {/* <Route path="/doctorCar" element={<Doctorscar2 />} /> */}
 
 

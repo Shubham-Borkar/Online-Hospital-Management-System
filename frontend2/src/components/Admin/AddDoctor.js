@@ -31,7 +31,7 @@ function AddDoctor() {
     const addDoc=()=>{
         debugger;
         // const url= 'adminstaff/register/doctor/'+{education}+'/'+{speciality}
-        const url= 'adminstaff/register/doctor/MD/Heart'
+        const url= `adminstaff/register/doctor/${education}/${speciality}`
         axios.post(`${BaseApi.server_url}${url}`,
         {
                 name, gender, dob, phone, address, email, password

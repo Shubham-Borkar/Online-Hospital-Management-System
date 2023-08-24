@@ -28,7 +28,6 @@ function DoctorList() {
             }
 
     return (<>
-            <Header/>
             <hr />
             <div>
                 <center>
@@ -46,8 +45,6 @@ function DoctorList() {
                     }
                 </center>
             </div>
-        
-        <Footer/>
     </>);
 }
 

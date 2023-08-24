@@ -14,7 +14,7 @@ function BookAppointment()
                                                 address: "", imagePath: ""})
         const [appt, setAppt] = useState({id: 0, apointdate: "", slot: "", symptoms: "", patient});
         const [did, setDid] = useState(0)
-        const [id, setId] = useState(0)
+        const [pid, setPid] = useState(2)
         const [apointdate, setApointdate] = useState("")
         const [slot, setSlot] = useState("")
         const [symptoms, setSymptoms] = useState("")
@@ -85,7 +85,7 @@ function BookAppointment()
 
         const getPat=()=>{
                 debugger
-                const url2 = 'patient/1'
+                const url2 = `patient/${pid}`
                 axios.get(`${BaseApi.server_url}${url2}`)
                 .then(res=>{
                         debugger
@@ -95,12 +95,10 @@ function BookAppointment()
 
         const addAppt=()=>{
         debugger
-         let no = 2
-         let pid=2;
-        const url3 = "appointment/add/"+pid+"/"+no
+        const url3 = "appointment/addappointment"
         axios.post(`${BaseApi.server_url}${url3}`,
         {
-               patientt, slot, symptoms, apointdate
+               pid, slot, symptoms, apointdate, did
         })
         .then(response=>{
                 debugger
@@ -113,7 +111,6 @@ function BookAppointment()
    }
 
     return (<>
-                <Header/>
                         <center> <br /> <br /> <br />
                         <h1>Book Appointment</h1> <hr />
 
@@ -157,7 +154,6 @@ function BookAppointment()
                         </button>
                         </div>
                         </center>
-                        <Footer/>
             </>);
 }
 

@@ -19,6 +19,7 @@ function Profile()
         const [phone, setPhone] = useState(0)
         const [address, setAddress] = useState("")
         const [imagePath, setImagePath] = useState("")
+        const [pid, setPid] = useState(4)
 
         useEffect(()=>{
                 debugger
@@ -28,7 +29,7 @@ function Profile()
 
         const select=()=>{
                 debugger;
-                const url= 'patient/1';
+                const url= `patient/${pid}`;
                 axios.get(`${BaseApi.server_url}${url}`)
                 .then(res=>{
                         debugger
@@ -44,7 +45,7 @@ function Profile()
 
    const update=()=>{
         debugger
-        const url= 'patient/1';
+        const url= `patient/${pid}`;
         axios.put(`${BaseApi.server_url}${url}`,
         {
                 name, gender, dob, phone, address, imagePath
@@ -58,7 +59,6 @@ function Profile()
    }
 
     return (<>
-                {/* <Header/> */}
                         <center>
                         <h1><center>My Profile</center></h1>
                         <hr />
@@ -108,7 +108,6 @@ function Profile()
                         </button>
                         </div>
                         </center>
-                        {/* <Footer/> */}
             </>);
 }
 
