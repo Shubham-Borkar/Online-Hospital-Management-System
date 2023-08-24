@@ -39,6 +39,8 @@ import ManageApp from './components/Doctor/ManageApp';
 import ManagePatients from './components/Admin/ManagePatients';
 import EditPatient from './components/Admin/EditPatient';
 import StaffAvailability from './components/Admin/StaffAvailability';
+import ResourceUpdate from './components/Doctor/ResourceUpdate';
+import DoctorProfile from './components/Doctor/DoctorProfile';
 
 
 
@@ -57,6 +59,9 @@ function App() {
         <Link to="/appbtdoctor">App by Doctor</Link>{"   |   "}
         <Link to="/resources"> Resources</Link>{"   |   "}
         <Link to="/manageApp"> Manage App</Link>{"   |   "}
+        <Link to="/resourceUpdate"> resourceUpdate</Link>{"   |   "}
+        <Link to="/doctorProfile"> doctorProfile </Link>{"   |   "}
+        
         
         </div>
         
@@ -92,6 +97,8 @@ function App() {
           <Route path="/managePatient" element={<ManagePatients />} />
           <Route path="/editPatient" element={<EditPatient />} />
           <Route path="/staffAvail" element={<StaffAvailability />} />
+          <Route path="/resourceUpdate" element={<ResourceUpdate/>} />
+          <Route path="/doctorProfile" element={<DoctorProfile />} />
           {/* <Route path="/doctorCar" element={<Doctorscar2 />} /> */}
 
 
