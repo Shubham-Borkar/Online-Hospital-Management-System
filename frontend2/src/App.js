@@ -35,6 +35,7 @@ import StaffList from './components/Doctor/StaffList';
 import PatHistory from './components/Doctor/PatHistory';
 import AppByDate from './components/Doctor/AppByDate';
 import AppByDoctor from './components/Doctor/AppByDoctor';
+import ManageApp from './components/Doctor/ManageApp';
 
 
 
@@ -45,13 +46,15 @@ function App() {
         
         <Header/>
         <div><hr></hr><hr></hr><hr></hr><hr></hr>
-        <Link to="/doctor"> doctor mp</Link>{"   |   "}
+        <Link to="/doctorMenu"> doctor mp</Link>{"   |   "}
         <Link to="/doctorsDetails"> My Profile</Link>{"   |   "}
-        <Link to="/stafflist"> Staff List</Link>{"   |   "}
+        <Link to="/staffList"> Staff List</Link>{"   |   "}
         <Link to="/patHistory"> Patient App History</Link>{"   |   "}
         <Link to="appbydate"> Appointment by date</Link>{"   |   "}
         <Link to="/appbtdoctor">App by Doctor</Link>{"   |   "}
-        <Link to="/doctor"> My Profile</Link>{"   |   "}
+        <Link to="/resources"> Resources</Link>{"   |   "}
+        <Link to="/manageApp"> Manage App</Link>{"   |   "}
+        
         </div>
         
         <Routes>
@@ -81,6 +84,8 @@ function App() {
           <Route path="/patHistory" element={<PatHistory />} />
           <Route path="/appbydate" element={<AppByDate />} />
           <Route path="/appbtdoctor" element={<AppByDoctor />} />
+          <Route path="/staffList" element={<StaffList />} />
+          <Route path="/manageApp" element={<ManageApp />} />
           {/* <Route path="/doctorCar" element={<Doctorscar2 />} /> */}
 
 

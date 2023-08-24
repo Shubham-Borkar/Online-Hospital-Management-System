@@ -13,20 +13,19 @@ function Doctor() {
         // history.push = ("");
     } 
     const staffList=()=>{
-      console.log("calling staff list function");
       navigate("/stafflist")
     }
     const patHistory=()=>{
-      console.log("calling staff list function");
       navigate("/pathistory")
     }
     const appForDoctorByDate=()=>{
-      console.log("calling staff list function");
       navigate("/appbtdoctor")
     }
     const manageapp=()=>{
-      console.log("calling staff list function");
-      //navigate("/appbtdoctor")
+      navigate("/manageApp")
+    }
+    const getresources=()=>{
+      navigate("/resources")
     }
     
     return ( <>
@@ -50,7 +49,7 @@ function Doctor() {
                 </div>
               </div>
               <div className="col-md-4">
-                <div className="button" onClick={()=> handleButtonClick('3') }>
+                <div className="button" onClick={()=> getresources() }>
                   <img src={BaseApi.base_url+'assets/adminimg/pngs/resources.png'} alt="Image 3"/>
                   <span><b>Hospital Resources</b></span>
                 </div>
