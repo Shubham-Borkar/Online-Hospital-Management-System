@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
 import Footer from '../Layout/Footer';
@@ -6,6 +7,9 @@ import './stylesheetsp/health.css'
 
 function HealthCheckup() 
 {
+        const [apointdate, setApointdate] = useState("")
+        const [slot, setSlot] = useState("")
+        
     const OnTextChange=(args)=>{
         // var copyOfUser = {...user};
         // copyOfUser[args.target.name] = args.target.value;

@@ -1,14 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
-import Footer from '../Layout/Footer';
-import Header from '../Layout/Header';
 import { BaseApi } from '../api/BaseApi';
 import './stylesheetsp/btndiv.css'
 
 function Patient() 
 {
 
+  // const pid = 2
   const navigate=useNavigate();
     const handleButtonClick = (buttonId) => {
       // debugger;
@@ -23,6 +22,7 @@ function Patient()
 
     const getBookAppt=()=>{
       navigate("/bookAppointment")
+      // <Routes path="/bookAppointment"
     }
 
     const getAppt=()=>{
