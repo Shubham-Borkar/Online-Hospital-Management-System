@@ -5,6 +5,7 @@ import Footer from '../Layout/Footer';
 import { useState } from 'react';
 import axios from 'axios';
 import { BaseApi } from '../api/BaseApi';
+import { toast } from 'react-toastify';
 
 function AddDoctor() {
 
@@ -39,10 +40,12 @@ function AddDoctor() {
         .then(res=>{
                 debugger
                 console.log(res.data);
+                toast.success('Registration successful')
                 clearFields()
         })
         .catch(error=>{
                 debugger
+                toast.error('please try again')
                 console.log(error)
         })
     }

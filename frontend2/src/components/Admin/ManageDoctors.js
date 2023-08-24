@@ -8,6 +8,7 @@ import axios from 'axios';
 import AddDoctor from './AddDoctor';
 import EditDoctor from './EditDoctor';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function ManageDoctors(props) 
 {
@@ -39,6 +40,7 @@ function ManageDoctors(props)
 
     const deleteDoctor=()=>{
         console.log("delete doctor called");
+        toast.warning('doctor delete called')
     }
 
     const addDoc=()=>{

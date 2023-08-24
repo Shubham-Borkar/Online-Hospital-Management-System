@@ -5,6 +5,7 @@ import { BaseApi } from '../api/BaseApi';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import EditPatient from './EditPatient';
+import { toast } from 'react-toastify';
 
 function ManagePatients(props) 
 {
@@ -36,6 +37,7 @@ function ManagePatients(props)
 
     const deletePatient=()=>{
         console.log("delete doctor called");
+        toast.warning('patient delete called')
     }
 
     const addPatient=()=>{

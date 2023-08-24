@@ -6,6 +6,7 @@ import Header from '../Layout/Header';
 import { useEffect, useState } from "react";
 import { BaseApi } from '../api/BaseApi';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function Profile() 
 {
@@ -54,7 +55,13 @@ function Profile()
         .then(res=>{
                 debugger
                 console.log(res.data);
-                select();
+                toast.success('Updates saved successfully')
+                select()
+        })
+        .catch(error=>{
+                debugger
+                toast.error('please try again')
+                console.log(error)
         })
    }
 

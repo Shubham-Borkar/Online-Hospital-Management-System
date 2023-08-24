@@ -6,6 +6,7 @@ import Header from "../Layout/Header";
 import Footer from '../Layout/Footer';
 import axios from 'axios';
 import { BaseApi } from '../api/BaseApi';
+import { toast } from 'react-toastify';
 
 function BookAppointment() 
 {
@@ -16,7 +17,7 @@ function BookAppointment()
         let [did, setDid] = useState("")
         const [pid, setPid] = useState(2)
         let [apointdate, setApointdate] = useState("")
-        const [slot, setSlot] = useState("")
+        let [slot, setSlot] = useState("")
         const [symptoms, setSymptoms] = useState("")
         const [doctor, setDoctor] = useState({id: 0, name: "", gender: "", address: "",  dob: "", 
                                                 phone: "", education: "", speciality: ""})
@@ -172,10 +173,12 @@ function BookAppointment()
         .then(response=>{
                 debugger
                 console.log(response.data)
+                toast.success('booking successful')
         })
         .catch(error=>{
                 debugger
                 console.log(error)
+                toast.success('please try again')
         })
    }
 
@@ -218,10 +221,6 @@ function BookAppointment()
                                         })
 
                                 }
-                                        {/* <option value="10 am">10 AM</option>
-                                        <option value="11 am">11 am</option>
-                                        <option value="12 pm">12 pm</option>
-                                        <option value="1 pm">1 pm</option> */}
                                 </select>
                         </div> <br />
                         

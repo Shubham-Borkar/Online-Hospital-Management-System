@@ -9,6 +9,7 @@ import EditStaff from './EditStaff';
 import AddStaff from './AddStaff';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function ManageStaff(props) 
 {
@@ -40,6 +41,7 @@ function ManageStaff(props)
 
    const deleteStaff=()=>{
         console.log("delete staff called");
+        toast.warning('staff delete called')
    }
 
    const addS=()=>{

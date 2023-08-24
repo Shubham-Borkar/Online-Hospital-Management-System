@@ -30,7 +30,8 @@ import Footer from './components/Layout/Footer';
 import EditStaff from './components/Admin/EditStaff';
 import EditDoctor from './components/Admin/EditDoctor';
 import { Route, Routes,Link } from 'react-router-dom';
-import { ToastContainer } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import StaffList from './components/Doctor/StaffList';
 import PatHistory from './components/Doctor/PatHistory';
 import AppByDate from './components/Doctor/AppByDate';
@@ -39,8 +40,8 @@ import ManageApp from './components/Doctor/ManageApp';
 import ManagePatients from './components/Admin/ManagePatients';
 import EditPatient from './components/Admin/EditPatient';
 import StaffAvailability from './components/Admin/StaffAvailability';
-import ResourceUpdate from './components/Doctor/ResourceUpdate';
-import DoctorProfile from './components/Doctor/DoctorProfile';
+// import ResourceUpdate from './components/Doctor/ResourceUpdate';
+// import DoctorProfile from './components/Doctor/DoctorProfile';
 
 
 
@@ -61,7 +62,8 @@ function App() {
         <Link to="/manageApp"> Manage App</Link>{"   |   "}
         <Link to="/resourceUpdate"> resourceUpdate</Link>{"   |   "}
         <Link to="/doctorProfile"> doctorProfile </Link>{"   |   "}
-        
+        <Link to="/patientmenu">Patient Menu</Link>{"   |   "}
+        <Link to="/adminmenu">Admin Menu</Link>{"   |   "}
         
         </div>
         
@@ -97,8 +99,8 @@ function App() {
           <Route path="/managePatient" element={<ManagePatients />} />
           <Route path="/editPatient" element={<EditPatient />} />
           <Route path="/staffAvail" element={<StaffAvailability />} />
-          <Route path="/resourceUpdate" element={<ResourceUpdate/>} />
-          <Route path="/doctorProfile" element={<DoctorProfile />} />
+          {/* <Route path="/resourceUpdate" element={<ResourceUpdate/>} /> */}
+          {/* <Route path="/doctorProfile" element={<DoctorProfile />} /> */}
           {/* <Route path="/doctorCar" element={<Doctorscar2 />} /> */}
 
 
@@ -117,7 +119,20 @@ function App() {
           
           <Route path='*' element={<InvalidPage/>} />
         </Routes>
-        <ToastContainer theme="colored" />
+        {/* <div> */}
+          <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+          />
+        {/* </div> */}
         <br/><br/><br/><br/><br/><br/><br/><hr/>
         <Footer></Footer>
     </div>

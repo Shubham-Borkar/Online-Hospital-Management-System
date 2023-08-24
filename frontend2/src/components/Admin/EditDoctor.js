@@ -5,6 +5,7 @@ import Footer from '../Layout/Footer';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BaseApi } from '../api/BaseApi';
+import { toast } from 'react-toastify';
 
 function EditDoctor(props) {
 
@@ -50,9 +51,12 @@ function EditDoctor(props) {
                 .then(res=>{
                         debugger
                         console.log(res.data);
+                        toast.success('Updates saved successfully')
                         select();
                 })
                 .catch(error=>{
+                        debugger
+                        toast.error('please try again')
                         console.log(error)
                 })
            }
