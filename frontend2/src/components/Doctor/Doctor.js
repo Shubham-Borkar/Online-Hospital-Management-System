@@ -27,6 +27,9 @@ function Doctor() {
     const getresources=()=>{
       navigate("/resources")
     }
+    const getDoctorProfile=()=>{
+    navigate("/doctorProfile")
+    }
     
     return ( <>
     <Header/>
@@ -74,9 +77,9 @@ function Doctor() {
                 </div>
               </div>
               <div className="col-md-4">
-                <div className="button" onClick={()=> handleButtonClick('6') }>
+                <div className="button" onClick={()=> getDoctorProfile() }>
                   <img src={BaseApi.base_url+'assets/adminimg/pngs/avail.png'} alt="Image 6"/>
-                  <span><b>Staff Availability</b></span>
+                  <span><b>Doctor Profile</b></span>
                 </div>
               </div>
             </div>
