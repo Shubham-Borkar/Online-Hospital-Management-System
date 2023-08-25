@@ -1,53 +1,82 @@
-import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
-import {BaseApi} from '../api/BaseApi';
+import React, { useState, useEffect } from 'react';
+import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+import { BaseApi } from '../api/BaseApi';
 
 function DoctorsCar() {
+  const doctorData = [
+    {
+      image: 'assets/images/doc1.jpg',
+      name: 'Dr. Doctor 1',
+      content: 'Some representative placeholder content for the first slide.',
+    },
+    {
+      image: 'assets/images/doc2.jpg',
+      name: 'Dr. Doctor 2',
+      content: 'Some representative placeholder content for the second slide.',
+    },
+    {
+      image: 'assets/images/doc3.jpg',
+      name: 'Dr. Doctor 3',
+      content: 'Some representative placeholder content for the third slide.',
+    },
+  ];
 
-    return (<div id="carouselExampleCaptions" className="carousel slide">
-    <div className="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
+  const [activeIndex, setActiveIndex] = useState(0);
 
-    <div className="carousel-inner">
+  const handlePrevClick = () => {
+    setActiveIndex((prevIndex) => (prevIndex === 0 ? doctorData.length - 1 : prevIndex - 1));
+  };
+
+  const handleNextClick = () => {
+    setActiveIndex((prevIndex) => (prevIndex === doctorData.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  useEffect(() => {
+    const interval = setInterval(handleNextClick, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []); // Empty dependency array to run the effect once on mount
+
+  return (
+    <div className="carousel slide">
       <center>
-      <div className="carousel-item active">
-        <img src={BaseApi.base_url+'assets/images/Dockte1.jpg'} className="d-block w-50" alt="doc1.jpg"/>
-        <div className="carousel-caption d-none d-md-block">
-          <h5>Dr. Doctor 1</h5>
-          <p>Some representative placeholder content for the first slide.</p>
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img
+              src={BaseApi.base_url + doctorData[activeIndex].image}
+              className="d-block w-50"
+              alt={`doc${activeIndex + 1}.jpg`}
+            />
+            <div className="carousel-caption d-none d-md-block">
+              <h5 style={{ color: 'black' }}>
+                <b>{doctorData[activeIndex].name}</b>
+              </h5>
+              <p style={{ color: 'black' }}>{doctorData[activeIndex].content}</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="carousel-item">
-        <img src={BaseApi.base_url+'assets/images/doc2.jpg'} className="d-block w-50" alt="doc2.jpg"/>
-        <div className="carousel-caption d-none d-md-block">
-          <h5>Dr. Doctor 2</h5>
-          <p>Some representative placeholder content for the second slide.</p>
-        </div>
-      </div>
-      <div className="carousel-item">
-        <img src={BaseApi.base_url+'assets/images/doc3.jpg'} className="d-block w-50" alt="doc3.jpg"/>
-        <div className="carousel-caption d-none d-md-block">
-          <h5>Dr. Doctor 3</h5>
-          <p>Some representative placeholder content for the third slide.</p>
-        </div>
-      </div>
       </center>
+      <button className="carousel-control-prev" type="button" onClick={handlePrevClick}>
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </button>
+      <button className="carousel-control-next" type="button" onClick={handleNextClick}>
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </button>
+      <div className="custom-carousel-indicators">
+        {doctorData.map((_, index) => (
+          <div
+            key={index}
+            className={`custom-indicator ${index === activeIndex ? 'active' : ''}`}
+            onClick={() => setActiveIndex(index)}
+          ></div>
+        ))}
+      </div>
     </div>
-    <center>
-    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span className="visually-hidden">Previous</span>
-    </button>
-    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-      <span className="carousel-control-next-icon" aria-hidden="true"></span>
-      <span className="visually-hidden">Next</span>
-    </button>
-    </center>
-  </div>
-
-    );
+  );
 }
 
 export default DoctorsCar;
