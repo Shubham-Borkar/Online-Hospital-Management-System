@@ -4,8 +4,8 @@
     height: 200px;
     text-align: center;
     margin: 10px;
-    cursor: pointer;
-    background-color: rgb(100, 200, 200);
+    /* cursor: pointer; */
+    /* background-color: rgb(100, 200, 200); */
     border-radius: 50px;
   }
   

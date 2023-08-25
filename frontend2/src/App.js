@@ -89,8 +89,8 @@ function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/addStaff" element={<AddStaff />} />
           <Route path="/manageStaff" element={<ManageStaff />} />
-          <Route path="/editStaff" element={<EditStaff />} />
-          <Route path="/editDoctor" element={<EditDoctor />} />
+          <Route path="/editStaff/:sid" element={<EditStaff />} />
+          <Route path="/editDoctor/:did" element={<EditDoctor />} />
           <Route path="/patHistory" element={<PatHistory />} />
           <Route path="/appbydate" element={<AppByDate />} />
           <Route path="/appbtdoctor" element={<AppByDoctor />} />

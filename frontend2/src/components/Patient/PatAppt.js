@@ -25,19 +25,30 @@ function PatAppt() {
 
     return (<>
             <hr />
-            <div>
+            <div className='table-responsive'>
                 <center>
-                    {
+                    <table className='table table-bordered'>
+                        <thead>
+                            <tr>
+                            <th>Appointment Id</th>
+                            <th>Appointment Date</th>
+                            <th>Slot</th>
+                            <th>Symptoms</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {
                         patAppts.map( (appt) =>{
-                            return (<div>
-                                        <br/> 
-                                        <h4>{appt.apointdate}</h4>
-                                        <h4>{appt.slot}</h4>
-                                        <h4>{appt.symptoms}</h4>
-                                        <hr/> <hr/> 
-                                    </div>);
-                        })
-                    }
+                            return (<tr>
+                                        <td>{appt.id}</td>
+                                        <td>{appt.apointdate}</td>
+                                        <td>{appt.slot}</td>
+                                        <td>{appt.symptoms}</td>
+                                    </tr>);
+                            })
+                        }
+                        </tbody>
+                    </table>
                 </center>
             </div>
     </>);

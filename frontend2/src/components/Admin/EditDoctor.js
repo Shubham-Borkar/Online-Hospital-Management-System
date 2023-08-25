@@ -6,10 +6,12 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BaseApi } from '../api/BaseApi';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 function EditDoctor(props) {
 
-        
+        // const did = props.data
+        var {did} = useParams();
         const [name, setName] = useState("")
         const [education, setEducation] = useState("")
         const [speciality, setSpeciality] = useState("")
@@ -21,13 +23,16 @@ function EditDoctor(props) {
 
         useEffect(()=>{
                 debugger
+                console.log(did)
+                // console.log(props)
+                // console.log(props.data)
                 console.log("inside componentDidMount..");
                 select(); 
               }, [])
 
         const select=()=>{
                 debugger;
-                const url= 'doctor/1';
+                const url= `doctor/${did}`;
                 axios.get(`${BaseApi.server_url}${url}`)
                 .then(res=>{
                         debugger

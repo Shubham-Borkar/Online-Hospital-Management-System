@@ -108,6 +108,8 @@ function Register()
                                 value={password}
                                 onChange={e=> setPassword(e.target.value)}/>
                         </div> 
+                        <br />
+                        <center></center>
                         
                         <button className='btn btn-success'
                                 onClick={register}>
