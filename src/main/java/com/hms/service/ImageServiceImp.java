@@ -30,8 +30,6 @@ public class ImageServiceImp implements ImageService {
 	
 	
 	
-	
-	
 	@PostConstruct
 	public void init() {
 		System.out.println("in init " + folderLocation);
@@ -103,6 +101,12 @@ public class ImageServiceImp implements ImageService {
 			//OR from DB : return emp.getImage();
 		} else
 			return null;
+	}
+
+	@Override
+	public byte[] downloadImageD(int did) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

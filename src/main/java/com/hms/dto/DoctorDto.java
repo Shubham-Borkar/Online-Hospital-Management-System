@@ -3,6 +3,10 @@ package com.hms.dto;
 import java.time.LocalDate;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,5 +27,7 @@ public class DoctorDto {
 		private long phone;
 		private String education;
 	    private String speciality;
+	    @JsonProperty(access=Access.READ_ONLY)
+	    private int staffid;
 
 }

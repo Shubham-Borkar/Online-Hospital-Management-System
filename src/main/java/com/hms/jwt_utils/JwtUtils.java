@@ -43,7 +43,7 @@ public class JwtUtils {
 	// will be invoked by Authentication controller) , upon successful
 	// authentication
 	public String generateJwtToken(Authentication authentication) {
-		log.info("generate jwt token " + authentication);
+		log.info("generate jwt token logged by slf4j" + authentication);
 		CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
 //JWT : userName,issued at ,exp date,digital signature(does not typically contain password , can contain authorities
 		return Jwts.builder() // JWTs : a Factory class , used to create JWT tokens

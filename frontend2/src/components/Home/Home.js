@@ -18,7 +18,7 @@ function Home() {
                 <br />
                 <DoctorsCar/>
                 <br /> <br /> <br />
-                <Footer/>
+                {/* <Footer/> */}
                 </div>
     </> );
 }

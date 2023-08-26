@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hms.dao.AppSlotDao;
 import com.hms.dao.DoctorDao;
 import com.hms.dao.EntryDao;
 import com.hms.dao.PatientDao;
 import com.hms.dao.StaffDao;
 import com.hms.dto.ApiResponse;
+import com.hms.dto.DoctorDto;
 import com.hms.dto.RegisterDto;
 import com.hms.pojos.Doctor;
 import com.hms.pojos.Entry;
@@ -41,6 +43,7 @@ public class AdminStaffServiceImp implements AdminStaffService {
 		Doctor docSaved=null;
 		try {
 		Staff staffEntity=mapper.map(doctorDetails, Staff.class);
+		staffEntity.setRole("ROLE_DOCTOR");
 		staffSaved=sDao.save(staffEntity);
 		Doctor docDetails=new Doctor(eduString, speString, staffSaved);
 		docSaved=dDao.save(docDetails);
@@ -108,10 +111,14 @@ public class AdminStaffServiceImp implements AdminStaffService {
 		return sDao.findByRole("ROLE_HELPER");
 	}
 	@Override
-	public Staff updateStaff(Staff staff) {
-		if(sDao.findById(staff.getId())!=null)
-		return sDao.save(staff);
-		return null;
+	public Staff updateStaff(DoctorDto staff) {
+		 Staff ssearched=sDao.findById(staff.getId()).orElse(null);
+		 if(ssearched==null)
+			 return null;
+		 
+		 Staff smapped=mapper.map(staff, Staff.class);
+		return sDao.save(smapped);
+		
 	}
 
 	@Override

@@ -55,6 +55,7 @@ public class DoctorServiceImp implements DoctorService {
  		if(docentity!=null) {
  			Staff staff = docentity.getStaff();
  			DoctorDto mapped = mapper.map(staff, DoctorDto.class);
+ 			mapped.setStaffid(staff.getId());
 			mapped.setEducation(docentity.getEducation());
 			mapped.setSpeciality(docentity.getSpeciality());
 			mapped.setId(docentity.getId());

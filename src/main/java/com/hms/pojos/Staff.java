@@ -29,13 +29,11 @@ public class Staff extends BaseClass {
 	private String gender;
 	private String address;
 	@DateTimeFormat(pattern = "yy-MM-dd")
-	//@Temporal(TemporalType.DATE)
-//	private Date dob;
 	private LocalDate dob;
 	private long phone;
 	@OneToOne(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Entry login;
-	@JsonManagedReference  //(value="user-staff")
+	@JsonManagedReference 
 	@OneToOne(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Doctor doctor;
 	

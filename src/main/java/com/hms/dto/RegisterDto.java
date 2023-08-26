@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import com.hms.pojos.Doctor;
-import com.hms.pojos.UserRole;
 
 import lombok.Getter;
 import lombok.Setter;

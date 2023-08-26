@@ -14,6 +14,9 @@ public interface ImageService {
     ApiResponse uploadImageS(int sid,MultipartFile image)throws IOException ;
 	
 	byte[] downloadImageS(int sid) throws IOException;
+	
+
+	byte[] downloadImageD(int did) throws IOException;
 
 
 }

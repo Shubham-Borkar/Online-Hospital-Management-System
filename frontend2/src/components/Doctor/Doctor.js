@@ -5,6 +5,7 @@ import Footer from '../Layout/Footer';
 import { BaseApi } from '../api/BaseApi';
 import { useNavigate } from 'react-router-dom';
 
+
 function Doctor() {
   const navigate=useNavigate();
     const handleButtonClick = (buttonId) => {
@@ -30,11 +31,14 @@ function Doctor() {
     const getDoctorProfile=()=>{
     navigate("/doctorProfile")
     }
-    
+  //  if(loginStatus)
     return ( <>
+    
     <Header/>
+
       <center> <br /><br /><br />
           <h1>Doctors Panel</h1>
+          <h1></h1>
           </center>
           <center>
           <div className="container">

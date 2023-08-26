@@ -32,10 +32,8 @@ public class Patient extends BaseClass {
 
 	private String name;
 	private String gender;
-	
-//	private LocalDate dob;
+
 	@DateTimeFormat(pattern = "yy-MM-dd")
-	//@Temporal(TemporalType.DATE)
 	private LocalDate dob;
 	private long phone;
 	private String address;

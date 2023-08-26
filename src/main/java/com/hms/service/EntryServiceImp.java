@@ -9,7 +9,6 @@ import com.hms.dao.EntryDao;
 import com.hms.pojos.Doctor;
 import com.hms.pojos.Entry;
 import com.hms.pojos.Patient;
-import com.hms.pojos.UserRole;
 
 
 @Service
@@ -72,6 +71,14 @@ public class EntryServiceImp implements EntryService {
 			return findByEmail.getPatient();
 		return null;
 		 
+	}
+
+	@Override
+	public String findRoleByEmail(String email) {
+	    Entry entry=lDao.findByEmail(email).orElse(null);
+	    if(entry==null)
+		return null;
+	    return entry.getRole();
 	}
 
 }

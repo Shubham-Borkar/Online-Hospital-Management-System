@@ -43,8 +43,7 @@ public class Doctor extends BaseClass {
 	public Doctor(String eduString,String speString,Staff staff) {
 		this.education=eduString;
 		this.speciality=speString;
-		this.staff=staff;
-		
+		this.staff=staff;	
 	}
 
 	public String getEducation() {

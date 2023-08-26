@@ -3,6 +3,7 @@ package com.hms.service;
 import java.util.List;
 
 import com.hms.dto.ApiResponse;
+import com.hms.dto.DoctorDto;
 import com.hms.dto.RegisterDto;
 import com.hms.pojos.Entry;
 import com.hms.pojos.Staff;
@@ -10,7 +11,7 @@ import com.hms.pojos.Staff;
 public interface AdminStaffService {
 
 	ApiResponse addDoctor(RegisterDto doctorDetails,String eduString,String speString);
-	//ApiResponse addDoctor(Entry doctorDetails);
+	
 
 	ApiResponse addStaff(RegisterDto staffDetails);
 	
@@ -21,7 +22,7 @@ public interface AdminStaffService {
 	
 	List<Staff> findAllHelper();
 
-	Staff updateStaff(Staff staff);
+	Staff updateStaff(DoctorDto staff);
 
 	Staff getstaffById(int staffId);
 

@@ -29,7 +29,7 @@ import ManageDoctors from './components/Admin/ManageDoctors';
 import Footer from './components/Layout/Footer';
 import EditStaff from './components/Admin/EditStaff';
 import EditDoctor from './components/Admin/EditDoctor';
-import { Route, Routes,Link } from 'react-router-dom';
+import { Route, Routes,Link, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import StaffList from './components/Doctor/StaffList';
@@ -40,23 +40,33 @@ import ManageApp from './components/Doctor/ManageApp';
 import ManagePatients from './components/Admin/ManagePatients';
 import EditPatient from './components/Admin/EditPatient';
 import StaffAvailability from './components/Admin/StaffAvailability';
+import DoctorProfile from './components/Doctor/DoctorProfile';
+import ProtectedRoute from './components/Doctor/ProtectedRoute';
+import { useSelector } from 'react-redux';
 // import ResourceUpdate from './components/Doctor/ResourceUpdate';
 // import DoctorProfile from './components/Doctor/DoctorProfile';
 
-
-
 function App() {
+  const loginStatus = useSelector((state) => state.auth.status)
+  const role=useSelector((state) => state.auth.role)
+  const Private = ({Component}) => {
+    const auth = (loginStatus&& sessionStorage.getItem("token")) 
+    return auth ? <Component /> : <Navigate to="/patientLogin" />
+}
   return (
     <div className="App">
         
         
         <Header/>
         <div><hr></hr><hr></hr><hr></hr><hr></hr>
+        <Link to="/login">Login</Link>{"   |   "}
+        
+        <Link to="/patientLogin">Patient Login</Link>{"   |   "}
         <Link to="/doctorMenu"> doctor mp</Link>{"   |   "}
         <Link to="/doctorsDetails"> My Profile</Link>{"   |   "}
         <Link to="/staffList"> Staff List</Link>{"   |   "}
         <Link to="/patHistory"> Patient App History</Link>{"   |   "}
-        <Link to="appbydate"> Appointment by date</Link>{"   |   "}
+        <Link to="/appbydate"> Appointment by date</Link>{"   |   "}
         <Link to="/appbtdoctor">App by Doctor</Link>{"   |   "}
         <Link to="/resources"> Resources</Link>{"   |   "}
         <Link to="/manageApp"> Manage App</Link>{"   |   "}
@@ -64,10 +74,20 @@ function App() {
         <Link to="/doctorProfile"> doctorProfile </Link>{"   |   "}
         <Link to="/patientmenu">Patient Menu</Link>{"   |   "}
         <Link to="/adminmenu">Admin Menu</Link>{"   |   "}
+
         
         </div>
         
         <Routes>
+
+        {/* <Route path="/doctorMenu" element={<Doctor/>} /> */}
+        {/* <ProtectedRoute path="/doctorMenu"
+                               component={Doctor}/> */}
+     <Route path="/doctorMenu" element={<Private Component={Doctor} />} />
+     <Route path="/patientmenu" element={<Private Component={Patient} />}/>
+     <Route path="/adminmenu" element={<Private Component={Admin} />} />
+
+
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/bookAppointment" element={<BookAppointment />} />
@@ -82,7 +102,6 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/register" element={<Register />} />
           <Route path="/adminMenu" element={<Admin />} />
-          <Route path="/doctorMenu" element={<Doctor />} />
           <Route path="/addDoctor" element={<AddDoctor />} />
           <Route path="/manageDoctors" element={<ManageDoctors />} />
           <Route path="/login" element={<Login />} />
@@ -100,7 +119,7 @@ function App() {
           <Route path="/editPatient" element={<EditPatient />} />
           <Route path="/staffAvail" element={<StaffAvailability />} />
           {/* <Route path="/resourceUpdate" element={<ResourceUpdate/>} /> */}
-          {/* <Route path="/doctorProfile" element={<DoctorProfile />} /> */}
+          <Route path="/doctorProfile" element={<DoctorProfile />} />
           {/* <Route path="/doctorCar" element={<Doctorscar2 />} /> */}
 
 

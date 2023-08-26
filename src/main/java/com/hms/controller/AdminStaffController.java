@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hms.dto.DoctorDto;
 import com.hms.dto.RegisterDto;
 import com.hms.pojos.Staff;
 import com.hms.service.AdminStaffService;
@@ -94,13 +95,13 @@ public class AdminStaffController {
 	}
 	
 	@PutMapping("/{staffId}")
-	public ResponseEntity<?> updateStaffDetails(@PathVariable int staffId, @RequestBody Staff staffDetails)
+	public ResponseEntity<?> updateStaffDetails(@PathVariable int staffId, @RequestBody DoctorDto staffDetails)
 	{
 		staffDetails.setId(staffId);
 		System.out.println(staffDetails);
-//		Staff updatedStaff=StaffImp.updateStaff(staffDetails);
-//		if(updatedStaff!=null)
-//		return ResponseEntity.ok(updatedStaff);
+		Staff updatedStaff=StaffImp.updateStaff(staffDetails);
+		if(updatedStaff!=null)
+		return ResponseEntity.ok(updatedStaff);
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		
 	}
