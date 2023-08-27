@@ -38,6 +38,7 @@ function DoctorProfile() {
           setSelectedFile(event.target.files[0]); 
         };
         const handleRefresh = () => {
+          debugger
           window.location.reload();
         };
 

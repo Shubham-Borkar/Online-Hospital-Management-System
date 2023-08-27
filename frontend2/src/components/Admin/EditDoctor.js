@@ -24,8 +24,6 @@ function EditDoctor(props) {
         useEffect(()=>{
                 debugger
                 console.log(did)
-                // console.log(props)
-                // console.log(props.data)
                 console.log("inside componentDidMount..");
                 select(); 
               }, [])
@@ -68,52 +66,52 @@ function EditDoctor(props) {
 
     debugger;
     return ( <>
-                {/* <Header/> */}
-            <center> <br /><br /><br /><br />
+            <center> 
                 <div style={{width:"600px"}}>
                 <form>
                         <h1><center>Edit Doctor</center></h1>
                         <hr />
                         <div className="table-bordered">
                     
-                        <div className='form-group input-group-sm'>full name
+                        <div className='form-group input-group-sm'><h5> full name</h5>
                         <input type="text" className='form-control widthSize'
                                 name="name"
                                 value={name}
                                 onChange={e=> setName(e.target.value)}
                                 />
-                        </div>
-                        <div className='form-group input-group-sm'>education
+                        </div> <br />
+
+                        <div className='form-group input-group-sm'><h5> education</h5>
                         <input type="text" className='form-control widthSize'
                                 name="education"
                                 value={education}
                                 onChange={e=> setEducation(e.target.value)}/>
-                        </div>
-                        <div className='form-group input-group-sm'>speciality
+                        </div> <br />
+                        <div className='form-group input-group-sm'><h5>speciality</h5>
                         <input type="text" className='form-control widthSize'
                                 name="speciality"
                                 value={speciality}
                                 onChange={e=> setSpeciality(e.target.value)}/>
-                        </div> 
-                        <div className='form-group'>phone
+                        </div> <br />
+                        <div className='form-group'><h5>phone</h5>
                         <input type="text" className='form-control widthSize'
                                 name="phone"
                                 value={phone}
                                 onChange={e=> setPhone(e.target.value)}/>
-                        </div>
+                        </div> <br />
                        
-                        <div className='form-group'>address
+                        <div className='form-group'><h5>address</h5>
                         <input type="text" className='form-control widthSize'
                                 name="address"
                                 value={address}
                                 onChange={e=> setAddress(e.target.value)}/>
-                        </div>
+                        </div> <br />
                         
-                        <button className='btn btn-success'
+                        <button className='btn btn-outline-success'
                                 onClick={update}>
-                                Save changes
+                                Apply changes
                         </button>
-                        </div>
+                        </div> <br />
                      
                 </form>
                 </div>

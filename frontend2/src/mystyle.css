@@ -63,53 +63,20 @@
     color: red;
   }
 
-  /* .smallbutton {
-    display: inline-block;
-    width: 80px;
-    height: 40px;
-    text-align: center;
-    margin: 10px;
-    cursor: pointer;
-    background-color: rgb(136, 228, 171);
-    border-radius: 5px;
-  } */
+  .back {
+    /* The image used */
+  background-image: url("http://localhost:8181/images/HospitalBack.jpg");
+  /* {BaseApi.server_url+'images/HospitalBack.jpg'} */
 
-  /*  <!------------------ Hover Effect Style : Demo - 4 --------------->
-        <div class="container mt-40">
-            <h3 class="text-center">Hover Effect Style : Demo - 4</h3>
-            <div class="row mt-30">
-                <div class="col-md-4 col-sm-6">
-                    <div class="box4">
-                        <img class="pic-1" src="https://www.w3schools.com/bootstrap4/img_avatar3.png">
-                        <div class="box-content">
-                            <h3 class="title">Williamson</h3>
-                            <span class="post">Web Developer</span>
-                            <ul class="icon">
-                                <li><a href="#" class="fa fa-search"></a></li>
-                                <li><a href="#" class="fa fa-link"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-        */
+  /* Add the blur effect */
+  /* filter: blur(8px); */
+  /* -webkit-filter: blur(8px); */
 
+  /* Full height */
+  height: 100%;
 
-/*********************** Demo - 4 *******************/
-/* .box4{position:relative}
-.box4:before{width:0;height:200%;background:rgba(0,0,0,.5);position:absolute;top:0;left:-250px;bottom:0;transform:skewX(-36deg);transition:all .5s ease 0s}
-.box4:hover:before{width:200%}
-.box4 img{width:100%;height:auto}
-.box4 .box-content{width:100%;height:100%;padding-top:20%;position:absolute;top:0;left:0;transform:scale(0);transition:all .3s ease 0s}
-.box4 .icon,.box5 .icon{list-style:none;padding:0}
-.box4:hover .box-content{transform:scale(1)}
-.box4 .title{font-size:22px;font-weight:700;color:#fff;margin:0 0 10px}
-.box4 .post{display:block;font-size:15px;font-weight:600;color:#fff;margin-bottom:20px}
-.box4 .icon{margin:0}
-.box4 .icon li{display:inline-block}
-.box4 .icon li a{display:block;width:35px;height:35px;line-height:35px;font-size:20px;background:#fff;color:#ee4266;margin-right:10px;transition:all .3s ease 0s}
-.box5 .icon,.box5 .icon li{display:inline-block}
-@media only screen and (max-width:990px){.box4{margin-bottom:30px}
-}
-@media only screen and (max-width:767px){.box4:before{left:-400px}
-.box4:hover:before{width:300%}
-} */
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  }

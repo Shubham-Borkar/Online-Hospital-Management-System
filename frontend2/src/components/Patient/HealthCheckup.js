@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
-import Footer from '../Layout/Footer';
-import Header from '../Layout/Header';
 import './stylesheetsp/health.css'
 import axios from 'axios';
 import { BaseApi } from '../api/BaseApi';
@@ -12,17 +10,17 @@ function HealthCheckup()
 {
         let [apointdate, setApointdate] = useState("")
         let [slot, setSlot] = useState("")
-        const [patient, setPatient] = useState({id: 0, name: "", gender: "", dob: "", phone: "", 
-                                                address: ""})
-        let [did, setDid] = useState("")
-        const [pid, setPid] = useState(3)
+        const pid= sessionStorage.getItem("id")
         const [slottime, setSlotime] = useState(["10 AM", "12 PM", "2 PM", "4 PM"])
         let [slotsbooked, setSlotsbooked] = useState([])
         let [stoshow, setStoshow] = useState([])
+        const [day, setDay] = useState("")
+        const [mday, setMday] = useState("")
 
         useEffect(()=>{
                 debugger
                 console.log("inside componentDidMount..");
+                currentdate()
               }, [])
 
         useEffect(()=>{
@@ -68,10 +66,29 @@ function HealthCheckup()
                 setSlot(e.target.value);
               }
 
+        const currentdate=()=>{
+                debugger
+                var today, dd, mm, mmm, yyyy;
+                today= new Date();
+                dd=today.getDate()+1;
+                mm=today.getMonth()+1;
+                if(mm<10)
+                        mm= '0'+mm
+                mmm=today.getMonth()+3;
+                if(mmm<10)
+                        mmm= '0'+mmm
+                yyyy=today.getFullYear();
+                const dddd = yyyy+'-'+mm+'-'+dd;
+                setDay(dddd)
+                const ddd = yyyy+'-'+mmm+'-'+dd;
+                setMday(ddd)
+        }
+
         const addAppt=()=>{
                 debugger
                 const url3 = "appointment/addappointment"
-                axios.post(`${BaseApi.server_url}${url3}`,
+                        debugger
+                        axios.post(`${BaseApi.server_url}${url3}`,
                 {
                        pid, slot, apointdate
                 })
@@ -84,24 +101,25 @@ function HealthCheckup()
                 .catch(error=>{
                         debugger
                         console.log(error)
-                        toast.success('please try again')
+                        toast.info('please try again')
                 })
            }
         
 
     return (<>
-                        <center> <br /> <br /> <br /> <br />
+                        <center>
                         <h1>Book Health Check-up</h1>
+                        <hr />  <br />
                         <div className="table-bordered"> <br />
                         <div className='form-group input-group-sm appstyle'>Checkup Date
-                        <input type="date" className='form-control appstyle'
-                                style={{width: 500}}
+                        <input type="date" 
+                                style={{width: 400}}
                                 name="app_date"
-                                onChange={slotFunbyDate}/>
-                        </div>
+                                onChange={slotFunbyDate} min={day} max={mday}/>
+                        </div> <br />
                         
                         <div className='form-group input-group-sm appstyle'>Appointment Slot <br/>
-                                <select id="slotno" onChange={handleChangeSlot} name="app_slotno" style={{width: 500}}>
+                                <select id="slotno" onChange={handleChangeSlot} name="app_slotno" style={{width: 400, height:30}}>
                                 {
                                         stoshow.map( (sl)=> {
                                                 debugger
@@ -116,7 +134,7 @@ function HealthCheckup()
                                 onClick={addAppt}>
                                 Confirm Checkup
                         </button>
-                        </div>
+                        </div> <br /><br /><br /><br /><br />
                         </center>
             </>);
 }

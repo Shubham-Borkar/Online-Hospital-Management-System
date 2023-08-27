@@ -1,22 +1,24 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
-import Header from "../Layout/Header";
-import Footer from '../Layout/Footer';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BaseApi } from '../api/BaseApi';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 function EditPatient(props) {
 
-        
+        // const [pid, ]
+        var {pid} = useParams();
+        const [ppid, setPpid] = useState(pid)
         const [name, setName] = useState("")
         const [dob, setDob] = useState("")
         const [phone, setPhone] = useState(0)
+        // const [dob, setDob] = useState("")
         const [address, setAddress] = useState("")
 
 
-        useEffect(()=>{
+              useEffect(()=>{
                 debugger
                 console.log("inside componentDidMount..");
                 select(); 
@@ -24,7 +26,7 @@ function EditPatient(props) {
 
         const select=()=>{
                 debugger;
-                const url= 'patient/1';
+                const url= `patient/${pid}`;
                 axios.get(`${BaseApi.server_url}${url}`)
                 .then(res=>{
                         debugger
@@ -32,12 +34,17 @@ function EditPatient(props) {
                         setDob(res.data.dob)
                         setName(res.data.name)
                         setPhone(res.data.phone)
+                        // setDob(res.data.dob)
+                })
+                .catch(error=>{
+                        debugger
+                        toast.warning("Error, Patient doesn't exist")
                 })
             }
 
         const update=()=>{
                 debugger
-                const url= 'patient/1';
+                const url= `patient/${pid}`;
                 axios.put(`${BaseApi.server_url}${url}`,
                 {
                         name, dob, phone, address
@@ -57,9 +64,9 @@ function EditPatient(props) {
 
     debugger;
     return ( <>
-            <center> <br /><br /><br /><br />
+            <center> 
                 <div style={{width:"600px"}}>
-                <form>
+                {/* <form> */}
                         <h1><center>Edit Patient</center></h1>
                         <hr />
                         <div className="table-bordered">
@@ -70,28 +77,36 @@ function EditPatient(props) {
                                 value={name}
                                 onChange={e=> setName(e.target.value)}
                                 />
-                        </div> 
+                        </div> <br />
+
                         <div className='form-group'>phone
                         <input type="text" className='form-control widthSize'
                                 name="phone"
                                 value={phone}
                                 onChange={e=> setPhone(e.target.value)}/>
-                        </div>
+                        </div> <br />
+
+                        <div className='form-group'>dob
+                        <input type="date" className='form-control widthSize'
+                                name="dob"
+                                value={dob}
+                                onChange={e=> setDob(e.target.value)}/>
+                        </div> <br />
                        
                         <div className='form-group'>address
                         <input type="text" className='form-control widthSize'
                                 name="address"
                                 value={address}
                                 onChange={e=> setAddress(e.target.value)}/>
-                        </div>
+                        </div> <br />
                         
-                        <button className='btn btn-success'
+                        <button className='btn btn-outline-success'
                                 onClick={update}>
-                                Save changes
+                                Apply changes
                         </button>
-                        </div>
+                        </div> <br />
                      
-                </form>
+                {/* </form> */}
                 </div>
                 </center>
     </> );

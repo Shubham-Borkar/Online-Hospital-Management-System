@@ -1,29 +1,31 @@
 import { useState } from 'react';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
-import Footer from '../Layout/Footer';
-import Header from '../Layout/Header';
 import { BaseApi } from '../api/BaseApi';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useDispatch ,useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { login,setAsAdmin,setAsDoctor,setAsHelper,setAsPatient } from '../../redux/authSlice'
+import { login,setAsAdmin,setAsDoctor,setAsHelper,setAsPatient,setEmail,setId } from '../../redux/authSlice'
 
 function PatientLogin() 
 {
  const dispatch = useDispatch()
  const loginStatus = useSelector((state) => state.auth.status)
+ const evalue = useSelector((state) => state.auth.email)
  //
     
  const [email,setEmail]=useState();
  const [password,setPassword]=useState();
+ const FETCH_SUCCESS = 'FETCH_SUCCESS';
+ const FETCH_FAILURE = 'FETCH_FAILURE';
  const navigate = useNavigate()
+ 
 
    const loginn=()=>{
-       
+       debugger
         console.log("Button clicked: "+email+""+password);
-        
+
         const url= `hms/authenticate`;
         axios.post(`${BaseApi.server_url}${url}`,  {
             email,password
@@ -32,11 +34,18 @@ function PatientLogin()
         debugger
         toast.success(`Sucessful Login!! Welcome ${response.data.role}`)
       console.log(response.data)
-
+      sessionStorage.setItem("email",email);
       
       debugger
       console.log("getting redux state"+loginStatus)
       dispatch(login())
+      console.log(loginStatus)
+      // if(true){
+        // dispatch(setEmail({ type: 'FETCH_SUCCESS', payload: email }))
+        // { type: 'FETCH_SUCCESS', payload: data }
+        // console.log(evalue+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+      // }
+      // email = sessionStorage.getItem("email")
       sessionStorage.setItem("token",response.data.jwt);
 
       if(response.data.role=="ROLE_PATIENT"){
@@ -63,8 +72,10 @@ function PatientLogin()
      
       })
       .catch(error => {
+        debugger
+        console.log(error)
          toast.error('Opss wrong ')
-          console.error('Image upload failed:', error);
+          // console.error('Image upload failed:', error);
       });
    }
 
@@ -77,7 +88,7 @@ function PatientLogin()
             <div className="row g-0">
               <div className="col-md-6 col-lg-5 d-none d-md-block">
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                  src={BaseApi.base_url+'assets/images/md.jpeg'}
                   alt="login form"
                   className="img-fluid"
                   style={{ borderRadius: "1rem 0 0 1rem" }}
@@ -85,7 +96,7 @@ function PatientLogin()
               </div>
               <div className="col-md-6 col-lg-7 d-flex align-items-center">
                 <div className="card-body p-4 p-lg-5 text-black">
-                  <form>
+                  {/* <form> */}
                     <div className="d-flex align-items-center mb-3 pb-1">
                       <i
                         className="fas fa-cubes fa-2x me-3"
@@ -148,7 +159,7 @@ function PatientLogin()
                     <a href="#!" className="small text-muted">
                       Privacy policy
                     </a>
-                  </form>
+                  {/* </form> */}
                 </div>
               </div>
             </div>

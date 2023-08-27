@@ -5,7 +5,9 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     status: false,
-    role:"NOT_AUTH"
+    role:"NOT_AUTH",
+    id:0, 
+    email:"USER"
   },
   reducers: {
     // action: action handler
@@ -28,8 +30,16 @@ export const authSlice = createSlice({
     setAsPatient: (state) => {
       state.role = "ROLE_PATIENT"
     },
+    setEmail: (state, action) => {
+      state.email = action.payload
+      // sessionStorage.getItem("email")
+    },
+    setId: (state) => {
+      state.id = 4
+      // sessionStorage.getItem("id")
+    }
   },
 })
 
-export const { login, logout ,setAsAdmin,setAsHelper,setAsDoctor,setAsPatient} = authSlice.actions
+export const { login, logout ,setAsAdmin,setAsHelper,setAsDoctor,setAsPatient,setEmail,setId} = authSlice.actions
 export default authSlice.reducer

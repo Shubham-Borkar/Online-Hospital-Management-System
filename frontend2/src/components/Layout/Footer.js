@@ -1,5 +1,6 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
+import { BaseApi } from '../api/BaseApi';
 
 function Footer() {
     return (<>
@@ -61,7 +62,7 @@ function Footer() {
     {/* </section> */}
     {/* Section: Social media */}
     {/* Section: Links  */}
-    <section className="" style={{backgroundColor: "cyan"}}>
+    <section className="" style={{backgroundColor: "skyblue"}}>
       <div className="container text-center text-md-start mt-0" >
         {/* Grid row */}
         <div className="row mt-0">
@@ -140,12 +141,13 @@ function Footer() {
     {/* Section: Links  */}
     {/* Copyright */}
     <div
-      className="text-center p-4"
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.025)" }}
+      className="text-center p-3"
+      style={{ backgroundColor: "blanchedalmond" }}
     >
-      © 2021 Copyright:
-      <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
-        MDBootstrap.com
+    {/* rgba(0, 0, 0, 0.025) */}
+      © 2023 Copyright : &nbsp;
+      <a className="text-reset fw-bold" href="http://localhost:3000/assets/images/developers.jpg">
+        MarsHospital.com click to know the developers
       </a>
     </div>
     {/* Copyright */}

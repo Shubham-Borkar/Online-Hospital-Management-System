@@ -1,48 +1,54 @@
+import { toast } from 'react-toastify';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
 import Footer from '../Layout/Footer';
 import Header from '../Layout/Header';
+import { useState } from 'react';
 
 function ConsultOnline() 
 {
     // useState[credentials, setCredentials] = { {email: "", password: ""} }
  
-    const OnTextChange=(args)=>{
-        // var copyOfUser = {name: "", details: "", query: ""};
-        // copyOfUser[args.target.name] = args.target.value;
-        // setUser(copyOfUser);
-        // copyOfUser[args.target.name] = args.target.value;
-   }
+    const [name, setName] = useState("")
+    const [details, setDetails] = useState("")
+    const [query, setQuery] = useState("")
+    
 
    const submit=()=>{
         // 1236547890
         console.log("Button clicked: ");
+        toast.success("thank you for your response")
+        setDetails("")
+        setName("")
+        setQuery("")
    }
 
     return (<>
-                <center> <br /><br /><br /><br />
+                <center> 
                         <h1>Please, Enter your query here</h1> <br />
                         <div className="table-bordered"> <br />
                             <div className='form-group input-group-sm'>Patient's Full Name
                                 <input type="text" className='form-control'
                                         style={{width: 500}}
                                         name="name"
-                                        value=""
-                                        onChange={OnTextChange}/>
+                                        value={name}
+                                        onChange={e=>setName(e.target.value)} required/>
                             </div> <br />
+
                             <div className='form-group input-group-sm'>Patient's details
                                 <input type="text" className='form-control'
                                         style={{width: 500}}
                                         name="details"
-                                        value=""
-                                        onChange={OnTextChange}/>
+                                        value={details}
+                                        onChange={e=>setDetails(e.target.value)} required/>
                             </div> <br />
+
                             <div className='form-group input-group-sm'>Patient's Query
-                                <input type="text" className='form-control'
+                                <textarea className='form-control'
                                         style={{width: 500}}
                                         name="query"
-                                        value=""
-                                        onChange={OnTextChange}/>
+                                        value={query}
+                                        onChange={e=>setQuery(e.target.value)} required/>
                             </div> <br />
                         
                             <button className='btn btn-success'

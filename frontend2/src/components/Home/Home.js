@@ -17,6 +17,7 @@ function Home() {
                 <h1 className="head text-white" align="center"> Our Doctors </h1>
                 <br />
                 <DoctorsCar/>
+                
                 <br /> <br /> <br />
                 {/* <Footer/> */}
                 </div>

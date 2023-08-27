@@ -50,9 +50,7 @@ function AddStaff()
    }
 
     return (<>
-                {/* <Header/> */}
                         <center>
-                                <br /><br />
                         <h1><center>Add Staff</center></h1>
                         <hr />
                         <div className="table-bordered">
@@ -62,60 +60,59 @@ function AddStaff()
                                 name="name"
                                 value={name}
                                 onChange={e=> setName(e.target.value)}/>
-                        </div>
+                        </div> <br />
 
-                        <div className='form-group'>gender:
+                        <div className='form-group'><b>Gender:</b>
                         &emsp; &emsp;
                         <input type="radio" value="Male" name="gender" 
-                                onChange={e=>setGender(e.target.value)}/> Male
+                                onChange={e=>setGender(e.target.value)}/> Male &emsp;
                         <input type="radio" value="Female" name="gender" 
-                                onChange={e=>setGender(e.target.value)}/> Female
+                                onChange={e=>setGender(e.target.value)}/> Female &emsp;
                         <input type="radio" value="Rather not say" name="gender" 
                                 onChange={e=>setGender(e.target.value)}/> Rather not say
-                        </div>
+                        </div> <br />
                          
                         <div className='form-group'>dob
                         <input type="date" className='form-control widthSize'
                                 name="dob"
                                 value={dob}
                                 onChange={e=> setDob(e.target.value)}/>
-                        </div>
+                        </div> <br />
 
                         <div className='form-group'>phone
                         <input type="text" className='form-control widthSize'
                                 name="phone"
                                 value={phone}
                                 onChange={e=> setPhone(e.target.value)}/>
-                        </div>
+                        </div> <br />
 
                         <div className='form-group'>address
                         <input type="text" className='form-control widthSize'
                                 name="address"
                                 value={address}
                                 onChange={e=> setAddress(e.target.value)}/>
-                        </div>
+                        </div> <br />
 
                         <div className='form-group'>email
                         <input type="text" className='form-control widthSize'
                                 name="email"
                                 value={email}
                                 onChange={e=> setEmail(e.target.value)}/>
-                        </div>
+                        </div> <br />
 
                         <div className='form-group'>password
                         <input type="text" className='form-control widthSize'
                                 name="password"
                                 value={password}
                                 onChange={e=> setPassword(e.target.value)}/>
-                        </div> 
+                        </div> <br />
                         
                         <button className='btn btn-success'
                                 onClick={staffAdd}>
                                 Add Staff
                         </button>
-                        </div>
+                        </div> <br />
                         </center>
-                        {/* <Footer/> */}
             </>);
 }
 

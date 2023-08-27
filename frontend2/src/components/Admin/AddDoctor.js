@@ -52,84 +52,84 @@ function AddDoctor() {
 
     return ( <>
                 <Header/>
-            <center> <br /><br /><br />
+            <center>
                 <div style={{width:"600px"}}>
                 <form>
                         <h1><center>Add Doctor</center></h1>
                         <hr />
                         <div className="table-bordered">
                     
-                        <div className='form-group'>full name
+                        <div className='form-group'><h5>Full name</h5>
                         <input type="text" className='form-control widthSize'
                                 name="name"
                                 value={name}
                                 onChange={e=> setName(e.target.value)}/>
                         </div> <br />
 
-                        <div className='form-group'>gender:
+                        <div className='form-group'><b> Gender:</b>
                         &emsp; &emsp;
                         <input type="radio" value="Male" name="gender" 
-                                onChange={e=>setGender(e.target.value)}/> Male
+                                onChange={e=>setGender(e.target.value)}/> Male &emsp;
                         <input type="radio" value="Female" name="gender" 
-                                onChange={e=>setGender(e.target.value)}/> Female
+                                onChange={e=>setGender(e.target.value)}/> Female &emsp;
                         <input type="radio" value="Rather not say" name="gender" 
                                 onChange={e=>setGender(e.target.value)}/> Rather not say
-                        </div>
+                        </div> <br />
 
-                        <div className='form-group'>education
+                        <div className='form-group'><h5>Education</h5>
                         <input type="text" className='form-control widthSize'
                                 name="education"
                                 value={education}
                                 onChange={e=> setEducation(e.target.value)}/>
-                        </div> 
+                        </div> <br />
 
-                        <div className='form-group'>speciality
+                        <div className='form-group'><h5>Speciality</h5>
                         <input type="text" className='form-control widthSize'
                                 name="speciality"
                                 value={speciality}
                                 onChange={e=> setSpeciality(e.target.value)}/>
-                        </div> 
+                        </div> <br />
 
-                        <div className='form-group'>dob
+                        <div className='form-group'><h5>Dob</h5>
                         <input type="date" className='form-control widthSize'
                                 name="dob"
                                 value={dob}
                                 onChange={e=> setDob(e.target.value)}/>
-                        </div>
+                        </div> <br />
 
-                        <div className='form-group'>phone
+                        <div className='form-group'><h5>Phone</h5>
                         <input type="text" className='form-control widthSize'
                                 name="phone"
                                 value={phone}
                                 onChange={e=> setPhone(e.target.value)}/>
-                        </div>
+                        </div> <br />
 
-                        <div className='form-group'>address
+                        <div className='form-group'><h5>Address</h5>
                         <input type="text" className='form-control widthSize'
                                 name="address"
                                 value={address}
                                 onChange={e=> setAddress(e.target.value)}/>
-                        </div>
+                        </div> <br />
 
-                        <div className='form-group'>email
+                        <div className='form-group'><h5>Email</h5>
                         <input type="text" className='form-control widthSize'
                                 name="email"
                                 value={email}
                                 onChange={e=> setEmail(e.target.value)}/>
-                        </div>
+                        </div> <br />
 
-                        <div className='form-group'>password
-                        <input type="text" className='form-control widthSize'
+                        <div className='form-group'><h5>Password</h5>
+                        <input type="password" className='form-control widthSize'
                                 name="password"
                                 value={password}
                                 onChange={e=> setPassword(e.target.value)}/>
-                        </div> 
+                        </div> <br />
 
-                        <button className='btn btn-success'
+                        <button className='btn btn-outline-success'
                                 onClick={addDoc}>
                                 Add Doctor
                         </button>
-                        </div>
+                        </div> <br />
                      
                 </form>
                 </div>

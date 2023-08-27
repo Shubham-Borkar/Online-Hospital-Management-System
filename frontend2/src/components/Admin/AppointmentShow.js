@@ -33,22 +33,32 @@ function AppointmentShow()
 
 
     return (<>
-                <hr />
-                <div>
-                    <center>
+                <hr /> <center>
+                <div className='table-responsive col-md-6'> <h4>All Appointments</h4>
+                    <table className='table table-bordered'>
+                        <thead>
+                            <tr>
+                            <th>Appointment Id</th>
+                            <th>Appointment Date</th>
+                            <th>Slot</th>
+                            <th>Symptoms</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         {
-                                appts.map( (appt) =>{
-                                        return (<div>
-                                                <br/> 
-                                                <h4>{appt.apointdate}</h4>
-                                                <h4>{appt.slot}</h4>
-                                                <h4>{appt.symptoms}</h4>
-                                                <hr/> <hr/> 
-                                        </div>);
-                                })
+                        appts.map( (appt) =>{
+                            return (<tr>
+                                        <td>{appt.id}</td>
+                                        <td>{appt.apointdate}</td>
+                                        <td>{appt.slot}</td>
+                                        <td>{appt.symptoms}</td>
+                                    </tr>);
+                            })
                         }
-                    </center>
-                </div>
+                        </tbody>
+                    </table>
+            </div>
+            </center>
             </>);
 }
 

@@ -26,6 +26,10 @@ function Resources() {
         debugger;
         console.log(res.data)
       })
+      .catch(error=>{
+        debugger
+        console.log(error)
+      })
   }
 
   const update=(e)=>{

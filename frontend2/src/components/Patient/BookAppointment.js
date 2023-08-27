@@ -2,8 +2,6 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
 import './stylesheetsp/app.css'
 import { useEffect, useState } from "react";
-import Header from "../Layout/Header";
-import Footer from '../Layout/Footer';
 import axios from 'axios';
 import { BaseApi } from '../api/BaseApi';
 import { toast } from 'react-toastify';
@@ -13,26 +11,25 @@ function BookAppointment()
         // const [appts, setAppts] = useState([]);
         const [patient, setPatient] = useState({id: 0, name: "", gender: "", dob: "", phone: "", 
                                                 address: "", imagePath: ""})
-        const [appt, setAppt] = useState({id: 0, apointdate: "", slot: "", symptoms: "", patient});
         let [did, setDid] = useState("")
-        const [pid, setPid] = useState(2)
+        const [pid, setPid] = useState(sessionStorage.getItem("id"))
         let [apointdate, setApointdate] = useState("")
         let [slot, setSlot] = useState("")
         const [symptoms, setSymptoms] = useState("")
-        const [doctor, setDoctor] = useState({id: 0, name: "", gender: "", address: "",  dob: "", 
-                                                phone: "", education: "", speciality: ""})
         const [doctors, setDoctors] = useState([])
         const [slottime, setSlotime] = useState(["10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM",
                                                 "4 PM", "5 PM"])
         let [slotsbooked, setSlotsbooked] = useState([])
-        // const [patientt, setPatientt] = useState({me: "me"})
         let [stoshow, setStoshow] = useState([])
+        const [day, setDay] = useState("")
+        const [mday, setMday] = useState("")
 
         useEffect(()=>{
                 debugger
                 console.log("inside componentDidMount..");
                 getDoct(); 
-                getPat()
+                getPat();
+                currentdate();
               }, [])
 
         useEffect(()=>{
@@ -42,16 +39,16 @@ function BookAppointment()
                 console.log(slotsbooked)
                 setStoshow([])
                 console.log(stoshow)
-              }, [did])
+              }, [did, apointdate])
 
-        useEffect(()=>{
-                debugger
-                console.log("inside componentDidUpdate..");
-                setSlotsbooked([])
-                console.log(slotsbooked)
-                setStoshow([])
-                console.log(stoshow)
-              }, [apointdate])
+        // useEffect(()=>{
+        //         debugger
+        //         console.log("inside componentDidUpdate..");
+        //         setSlotsbooked([])
+        //         console.log(slotsbooked)
+        //         setStoshow([])
+        //         console.log(stoshow)
+        //       }, [apointdate])
 
         const uniqueElement=()=>{
                 debugger
@@ -59,6 +56,24 @@ function BookAppointment()
                 console.log(array)
                 setStoshow(array)
                 console.log(stoshow)
+        }
+
+        const currentdate=()=>{
+                debugger
+                var today, dd, mm, mmm, yyyy;
+                today= new Date();
+                dd=today.getDate()+1;
+                mm=today.getMonth()+1;
+                if(mm<10)
+                        mm= '0'+mm
+                mmm=today.getMonth()+3;
+                if(mmm<10)
+                        mmm= '0'+mmm
+                yyyy=today.getFullYear();
+                const dddd = yyyy+'-'+mm+'-'+dd;
+                setDay(dddd)
+                const ddd = yyyy+'-'+mmm+'-'+dd;
+                setMday(ddd)
         }
 
         const slotFunbydid=(args)=>{
@@ -155,7 +170,13 @@ function BookAppointment()
 
         const getPat=()=>{
                 debugger
-                const url2 = `patient/${pid}`
+                var p=sessionStorage.getItem("id")
+                setPid(p)
+                console.log(pid)
+                // Comment this later//////////////////////////////////
+                if(pid==0)
+                toast.error("wrong pid")
+                const url2 = `patient/${sessionStorage.getItem("id")}`
                 axios.get(`${BaseApi.server_url}${url2}`)
                 .then(res=>{
                         debugger
@@ -165,6 +186,9 @@ function BookAppointment()
 
         const addAppt=()=>{
         debugger
+        console.log(pid)
+        if(pid==0)
+                toast.error("wrong pid")
         const url3 = "appointment/addappointment"
         axios.post(`${BaseApi.server_url}${url3}`,
         {
@@ -183,27 +207,36 @@ function BookAppointment()
    }
 
     return (<>
-                        <center> <br /> <br /> <br />
-                        <h1>Book Appointment</h1> <hr />
+            <center>
 
+    <section className="vh-100 " style={{ backgroundColor: "#063d76" }}>
+    <div className="container py-10 h-50"> <br /><br /><br />
+      <div className="row d-flex justify-content-center align-items-center h-50">
+        <div className="col col-xl-6">
+          <div className="card" style={{ borderRadius: "2rem" }}>
+            {/* <div className="row g-0"> */}
+            {/* <div className="col-md-2 col-lg-1 d-flex align-items-center"> */}
+                {/* <div className="card-body p-0 p-lg-0 text-orange"> */}
+                       
+                        <h1>Book Appointment</h1> <hr />
                         <div className="table-bordered"> 
                         <div className='form-group input-group-sm appstyle'>Appointment Date
                         <input type="date" className='form-control appstyle'
-                                style={{width: 500}}
+                                style={{width: 400}}
                                 name="app_date"
-                                onChange={slotFunbyDate}/>
+                                onChange={slotFunbyDate} min={day} max={mday}/>
                                 {/* e=> setApointdate(e.target.value) */}
                         </div> <br />
 
                         <div className='form-group input-group-sm appstyle'>Symptoms
                         <input type="text" className='form-control appstyle'
-                                style={{width: 500}}
+                                style={{width: 400}}
                                 name="symptoms"
                                 onChange={e=> setSymptoms(e.target.value)}/>
                         </div> <br />
 
                         <div className='form-group input-group-sm appstyle'>Doctor
-                                <select id="did" onChange={slotFunbydid} name="doctor" style={{width: 500}}>
+                                <select  id="did" onChange={slotFunbydid} name="doctor" style={{width: 400, height: 30}}>
                                 {
                                         doctors.map( (doc)=> {
                                                 return <option value={doc.id} id={doc.id}>{doc.name} ({doc.speciality})</option>
@@ -213,7 +246,7 @@ function BookAppointment()
                         </div> <br />
 
                         <div className='form-group input-group-sm appstyle'>Appointment Slot <br/>
-                                <select id="slotno" onChange={handleChangeSlot} name="app_slotno" style={{width: 500}}>
+                                <select  id="slotno" onChange={handleChangeSlot} name="app_slotno" style={{width: 400, height: 30}}>
                                 {
                                         stoshow.map( (sl)=> {
                                                 debugger
@@ -228,8 +261,18 @@ function BookAppointment()
                                 onClick={addAppt}>
                                 Add Appointment
                         </button>
-                        </div>
-                        </center>
+                        </div> <br /> <br /><br />
+                        {/* </div> */}
+
+                        
+              {/* </div> */}
+            {/* </div> */}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </center>
             </>);
 }
 
