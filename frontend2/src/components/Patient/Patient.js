@@ -10,11 +10,9 @@ import { toast } from 'react-toastify';
 function Patient() 
 {
 
-  // const pid = 2
   const navigate=useNavigate();
   var pid =sessionStorage.getItem("id")
   console.log("id for first render"+pid)
-        // var [pemail, setPEmail] = useState("")
         var pemail=""
 
         useEffect(()=>{
@@ -22,13 +20,6 @@ function Patient()
           console.log("inside componentDidMount..");
           getPat()
         }, [])
-
-    const handleButtonClick = (buttonId) => {
-      // debugger;
-        // Handle button click event here
-        console.log("Button clicked: " + buttonId);
-        // history.push = ("");
-    } 
 
     const getPat=()=>{
       debugger
@@ -56,7 +47,6 @@ function Patient()
 
     const getBookAppt=()=>{
       navigate("/bookAppointment")
-      // <Routes path="/bookAppointment"
     }
 
     const getAppt=()=>{

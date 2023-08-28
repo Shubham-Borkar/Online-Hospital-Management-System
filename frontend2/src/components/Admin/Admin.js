@@ -1,7 +1,5 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
-import Header from "../Layout/Header";
-import Footer from '../Layout/Footer';
 import { BaseApi } from '../api/BaseApi';
 import { useNavigate } from 'react-router-dom';
 

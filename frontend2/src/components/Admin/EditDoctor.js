@@ -18,7 +18,8 @@ function EditDoctor(props) {
         const [dob, setDob] = useState("")
         const [phone, setPhone] = useState(0)
         const [address, setAddress] = useState("")
-        const [imagePath, setImagePath] = useState("")
+        // const [imagePath, setImagePath] = useState("")
+        const [sid, setSid] = useState("")
 
 
         useEffect(()=>{
@@ -38,15 +39,16 @@ function EditDoctor(props) {
                         setDob(res.data.dob)
                         setEducation(res.data.education)
                         setSpeciality(res.data.speciality)
-                        setImagePath(res.data.imagePath)
+                        // setImagePath(res.data.imagePath)
                         setName(res.data.name)
                         setPhone(res.data.phone)
+                        setSid(res.data.staffid)
                 })
             }
 
         const update=()=>{
                 debugger
-                const url= 'patient/1';
+                const url= `adminstaff/${sid}/ROLE_DOCTOR`;
                 axios.put(`${BaseApi.server_url}${url}`,
                 {
                         name, education, speciality, phone, address
@@ -54,13 +56,21 @@ function EditDoctor(props) {
                 .then(res=>{
                         debugger
                         console.log(res.data);
+                        // select();
                         toast.success('Updates saved successfully')
-                        select();
+                        setAddress(res.data.address)
+                        setDob(res.data.dob)
+                        setEducation(res.data.education)
+                        setSpeciality(res.data.speciality)
+                        // setImagePath(res.data.imagePath)
+                        setName(res.data.name)
+                        setPhone(res.data.phone)
+                        setSid(res.data.staffid)
                 })
                 .catch(error=>{
                         debugger
-                        toast.error('please try again')
                         console.log(error)
+                        toast.error('please try again')
                 })
            }
 
@@ -68,7 +78,6 @@ function EditDoctor(props) {
     return ( <>
             <center> 
                 <div style={{width:"600px"}}>
-                <form>
                         <h1><center>Edit Doctor</center></h1>
                         <hr />
                         <div className="table-bordered">
@@ -112,8 +121,6 @@ function EditDoctor(props) {
                                 Apply changes
                         </button>
                         </div> <br />
-                     
-                </form>
                 </div>
                 </center>
                    {/* <Footer/>    */}

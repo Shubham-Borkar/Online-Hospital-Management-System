@@ -40,13 +40,13 @@ function AddDoctor() {
         .then(res=>{
                 debugger
                 console.log(res.data);
-                toast.success('Registration successful')
                 clearFields()
+                toast.success('Registration successful')
         })
         .catch(error=>{
                 debugger
-                toast.error('please try again')
                 console.log(error)
+                toast.error('please try again')
         })
     }
 

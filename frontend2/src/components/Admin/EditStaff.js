@@ -15,7 +15,7 @@ function EditStaff(props) {
         const [dob, setDob] = useState("")
         const [phone, setPhone] = useState(0)
         const [address, setAddress] = useState("")
-        const [email, setEmail] = useState("")
+        const [gender, setGender] = useState("")
 
         useEffect(()=>{
                 debugger
@@ -34,22 +34,27 @@ function EditStaff(props) {
                         setDob(res.data.dob)
                         setName(res.data.name)
                         setPhone(res.data.phone)
-                        setEmail(res.data.email)
+                        setGender(res.data.gender)
                 })
             }
 
             const update=()=>{
                 debugger
-                const url= `adminstaff/${sid}`;
+                const url= `adminstaff/${sid}/ROLE_HELPER`;
                 axios.put(`${BaseApi.server_url}${url}`,
                 {
-                        name, email, phone, dob, address
+                        name, phone, dob, address, gender
                 })
                 .then(res=>{
                         debugger
                         console.log(res.data);
                         toast.success('Changes applied successfully')
-                        select();
+                        // select();
+                        setAddress(res.data.address)
+                        setDob(res.data.dob)
+                        setName(res.data.name)
+                        setPhone(res.data.phone)
+                        setGender(res.data.gender)
                 })
                 .catch(error=>{
                         debugger
@@ -62,7 +67,6 @@ function EditStaff(props) {
     return ( <>
             <center> 
                 <div style={{width:"600px"}}>
-                <form>
                         <h1><center>Update HelperStaff</center></h1>
                         <hr />
                         <div className="table-bordered">
@@ -75,12 +79,12 @@ function EditStaff(props) {
                                 onChange={e=> setName(e.target.value)}/>
                         </div> <br />
 
-                        <div className='form-group'>Email
+                        <div className='form-group'>Gender
                         <input type="text" className='form-control'
                                 style={{width: 500}}
-                                name="Email"
-                                value={email}
-                                onChange={e=> setEmail(e.target.value)}/>
+                                name="gender"
+                                value={gender}
+                                onChange={e=> setGender(e.target.value)}/>
                         </div> <br />
 
                         <div className='form-group'>Contact No.
@@ -112,7 +116,6 @@ function EditStaff(props) {
                         </button>
                         </div> <br />
                      
-                </form>
                 </div>
                 </center>
     </> );

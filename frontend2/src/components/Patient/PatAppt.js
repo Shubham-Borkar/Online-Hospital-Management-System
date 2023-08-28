@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { BaseApi } from "../api/BaseApi";
 import axios from "axios";
-import Header from "../Layout/Header";
-import Footer from "../Layout/Footer";
 import { toast } from "react-toastify";
 
 function PatAppt() {
@@ -39,7 +37,6 @@ function PatAppt() {
 
     const viewInvoice=(e)=>{
         debugger
-
         
         const url= `invoice/${e.target.value}`;
             axios.get(`${BaseApi.server_url}${url}`)
@@ -83,7 +80,7 @@ function PatAppt() {
                             <th>Appointment Date</th>
                             <th>Slot</th>
                             <th>Symptoms</th>
-                            <th>Ivoice</th>
+                            <th>Invoice</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,7 +91,7 @@ function PatAppt() {
                                         <td>{appt.apointdate}</td>
                                         <td>{appt.slot}</td>
                                         <td>{appt.symptoms}</td>
-                                        <td><button className="btn btn-outline-success" value={appt.id} onClick={viewInvoice}>View Invoice</button></td>
+                                        <td><button className="btn btn-outline-success" value={appt.id} onClick={e=>viewInvoice(e)}>View Invoice</button></td>
                                     </tr>);
                             })
                         }

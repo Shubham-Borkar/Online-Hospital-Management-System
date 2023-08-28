@@ -17,7 +17,7 @@ function AddStaff()
         const [address, setAddress] = useState("")
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
-        const [role, setRole] = useState("ROLE_HELPER")
+        // const [role, setRole] = useState("ROLE_HELPER")
 
         const clearFields=()=>{
                 setName("") 
@@ -31,10 +31,10 @@ function AddStaff()
 
    const staffAdd=()=>{
         debugger;
-        const url= 'adminstaff/register/staff'
+        const url= 'adminstaff/register/helper'
         axios.post(`${BaseApi.server_url}${url}`,
         {
-                name, gender, dob, phone, address, email, password, role
+                name, gender, dob, phone, address, email, password
         })
         .then(res=>{
                 debugger

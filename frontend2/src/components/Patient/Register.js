@@ -2,12 +2,10 @@ import axios from 'axios';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
 import './stylesheetsp/common.css'
-import Footer from '../Layout/Footer';
-import Header from '../Layout/Header';
 import { BaseApi } from '../api/BaseApi';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import emailjs from '@emailjs/browser';
+import { Link } from 'react-router-dom';
 
 function Register() 
 {
@@ -21,12 +19,18 @@ function Register()
         const [password, setPassword] = useState("")
         const [confPass, setConfPass] = useState("")
         const [message, setMessage] = useState("")
-        const form = useRef();
+        const [day, setDay] = useState("")
+        const [mday, setMday] = useState("")
 
         useEffect(()=>{
                 debugger
                 console.log("inside componentDidMount..");
-                // select();
+                currentdate();
+              }, [])
+
+        useEffect(()=>{
+                debugger
+                console.log("inside componentDidUpdate..");
               }, [message])
 
         const clearFields=()=>{
@@ -39,33 +43,60 @@ function Register()
                 setPassword("")
         }
 
-        const validate=()=> {
+        const currentdate=()=>{
                 debugger
-                if(!password==confPass)
-                setMessage("Passwords did not match")
-               
-                else 
-                register()
+                var today, dd, mm, mmm, yyyy;
+                today= new Date();
+                dd=today.getDate()-1;
+                mm=today.getMonth()+1;
+                if(mm<10)
+                        mm= '0'+mm
+                mmm=today.getMonth()+1;
+                if(mmm<10)
+                        mmm= '0'+mmm
+                yyyy=today.getFullYear();
+                const dddd = yyyy+'-'+mm+'-'+dd;
+                setDay(dddd)
+                const ddd = yyyy+'-'+mmm+'-'+dd;
+                setMday(ddd)
         }
 
-        // const EmailContactForm = () => {
-        //         const form = useRef();
-               
-                const sendEmail = () => {
-                        debugger
-                //   e.preventDefault(); 
-                  // prevents the page from reloading when you hit “Send”
-               
-                  emailjs.sendForm('service_kv8eu6x', 'template_wv6wan9', form.current, 'r7LqBferEnrpeUpWH')
-                    .then((result) => {
-                        debugger
-                        toast.success('Email Sent')
-                    }, (error) => {
-                        debugger
-                        toast.warning('invalid email')
-                    });
-                };
-        
+        const validate=()=> {
+                debugger
+                // const abc = [name, gender, dob, phone, address, email, password]
+                // abc.map((a)=>{
+                //         debugger
+                //         if (a=="")
+                //         toast.warning(`Please, Enter full ${a}`)
+                // })
+                var em=/\S+@\S+\.\S+/;
+                if (name  =="") 
+                toast.warning('Please, Enter full name')
+                else if (/^\d+$/.test(name))
+                toast.warning('Invalid, name contains numbers')
+                else if (gender=="")
+                toast.warning('Please, Choose Gender')
+                else if (dob=="")
+                toast.warning('Please, Enter date of birth')
+                else if (phone=="")
+                toast.warning('Please, Enter phone')
+                else if (address=="")
+                toast.warning('Please, Enter address')
+                else if (/^\d+$/.test(address))
+                toast.warning('Invalid, address contains numbers')
+                else if (email=="")
+                toast.warning('Please, Enter email')
+                else if (em.test(email))
+                toast.warning('Please, Enter valid email')
+                else if (password=="")
+                toast.warning('Please, Enter password')
+                // else if (^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$.test(password))
+                // toast.warning('Password must contain at least 1 capital, 1 small, a no & 1 special character')
+                else if(!password==confPass)
+                toast.warning("Passwords did not match")
+                else
+                register()
+        }
 
    const register=()=>{
         debugger;
@@ -78,9 +109,8 @@ function Register()
         .then(res=>{
                 debugger
                 console.log(res.data);
-                
-                toast.success('Registration successful')
                 clearFields()
+                toast.success('Registration successful')
         })
         .catch(error=>{
                 debugger
@@ -90,13 +120,29 @@ function Register()
         })
    }
 
-    return (<>
+    return (<div>
+        {/* ////////////////////////////// */}
+        <section className="vh-100 " style={{ backgroundColor: "#063d76" }}>
+    <div className="container py-1 h-100">
+      <div className="row d-flex justify-content-center align-items-center h-100">
+        <div className="col col-xl-6">
+          <div className="card" style={{ borderRadius: "1rem" }}>
+            <div className="row g-0">
+            <div className="col-md-6 col-lg-7 d-flex align-items-center">
+                <div className="card-body p-1 p-lg-5 text-orange">
+                  {/* <form> */}
+                    <div className="align-items-center">
+                      <span className="h6 fw-bold">
+                        <img src={BaseApi.base_url+'assets/images/img.png'} style={{width:'100px', height: '60px'}}></img>
+                        Mars Hospitals</span>
+                    </div>
+            
                         <center>
                         <h1>Register here</h1>
                         <hr />
                         <div>{message}</div>
                         <div className="table-bordered">
-                        <form ref={form}>
+                        {/* <form ref={form}> */}
                         <div className='form-group'>full name
                         <input type="text" className='form-control widthSize'
                                 name="name"
@@ -104,12 +150,12 @@ function Register()
                                 onChange={e=> setName(e.target.value)} required/>
                         </div> <br />
 
-                        <div className='form-group'>gender:
+                        <div className='form-group box'>Gender:
                         &emsp; &emsp;
                         <input type="radio" value="Male" name="gender" 
-                                onChange={e=>setGender(e.target.value)}/> Male
+                                onChange={e=>setGender(e.target.value)}/> Male &emsp;&emsp;
                         <input type="radio" value="Female" name="gender" 
-                                onChange={e=>setGender(e.target.value)}/> Female
+                                onChange={e=>setGender(e.target.value)}/> Female &emsp;&emsp;
                         <input type="radio" value="Rather not say" name="gender" 
                                 onChange={e=>setGender(e.target.value)}/> Rather not say
                         </div> <br />
@@ -118,11 +164,11 @@ function Register()
                         <input type="date" className='form-control widthSize'
                                 name="dob"
                                 value={dob}
-                                onChange={e=> setDob(e.target.value)} required/>
+                                onChange={e=> setDob(e.target.value)} max={mday} required/>
                         </div> <br />
 
                         <div className='form-group'>phone
-                        <input type="text" className='form-control widthSize'
+                        <input type="number" className='form-control widthSize'
                                 name="phone"
                                 value={phone}
                                 onChange={e=> setPhone(e.target.value)} required/>
@@ -160,10 +206,18 @@ function Register()
                                 onClick={validate}>
                                 Register
                         </button> 
-                        </form>
-                        </div> <br />
+                        </div> <br />Already registered ?
+                        <Link to="/patientLogin" className="small">Click here</Link>
                         </center>
-            </>);
+                        </div>
+                        </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> <br /><br /><br /><br /> <br />
+            </div>);
 }
 
 export default Register;

@@ -1,7 +1,5 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
-import Header from "../Layout/Header";
-import Footer from '../Layout/Footer';
 import { useEffect, useState } from "react";
 import StaffEdit from './EditStaff';
 import { BaseApi } from '../api/BaseApi';

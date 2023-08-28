@@ -1,8 +1,6 @@
 import { toast } from 'react-toastify';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
-import Footer from '../Layout/Footer';
-import Header from '../Layout/Header';
 import { useState } from 'react';
 
 function ConsultOnline() 

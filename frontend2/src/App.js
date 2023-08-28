@@ -41,8 +41,10 @@ import ManagePatients from './components/Admin/ManagePatients';
 import EditPatient from './components/Admin/EditPatient';
 import StaffAvailability from './components/Admin/StaffAvailability';
 import DoctorProfile from './components/Doctor/DoctorProfile';
+
 import { useSelector } from 'react-redux';
-import { PrivateToDoctor, PrivateToAdmin, PrivateToPatient, PrivateToAandD } from './components/Admin/ProtectedRoute';
+import { PrivateToDoctor, PrivateToAdmin, PrivateToPatient, PrivateToAandD, PrivateToHelper } from './components/Admin/ProtectedRoute';
+import AddInvoice from './components/Admin/AddInvoice';
 
 function App() {
 
@@ -81,7 +83,10 @@ function App() {
         
         <Routes>
 
-       
+        {/* Helper Specific Protected Routes */}
+        <Route path="/addInvoice/:aid" element=
+          {<PrivateToHelper Component={AddInvoice} />} />
+
         {/* Doctor Specific Protected Routes */}
         <Route path="/doctorMenu" element=
           {<PrivateToDoctor Component={Doctor} />} />
@@ -136,7 +141,7 @@ function App() {
         <Route path="/managePatient" element=
           {<PrivateToAdmin Component={ManagePatients} />} />
 
-          <Route path="/editPatient" element=
+          <Route path="/editPatient/:pid" element=
           {<PrivateToAdmin Component={EditPatient} />} />
 
           <Route path="/staffAvail" element=

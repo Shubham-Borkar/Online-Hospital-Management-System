@@ -5,7 +5,7 @@ import { BaseApi } from '../api/BaseApi';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useDispatch ,useSelector} from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { login,setAsAdmin,setAsDoctor,setAsHelper,setAsPatient,setEmail,setId } from '../../redux/authSlice'
 
 function PatientLogin() 
@@ -13,12 +13,9 @@ function PatientLogin()
  const dispatch = useDispatch()
  const loginStatus = useSelector((state) => state.auth.status)
  const evalue = useSelector((state) => state.auth.email)
- //
     
  const [email,setEmail]=useState();
  const [password,setPassword]=useState();
- const FETCH_SUCCESS = 'FETCH_SUCCESS';
- const FETCH_FAILURE = 'FETCH_FAILURE';
  const navigate = useNavigate()
  
 
@@ -40,12 +37,6 @@ function PatientLogin()
       console.log("getting redux state"+loginStatus)
       dispatch(login())
       console.log(loginStatus)
-      // if(true){
-        // dispatch(setEmail({ type: 'FETCH_SUCCESS', payload: email }))
-        // { type: 'FETCH_SUCCESS', payload: data }
-        // console.log(evalue+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-      // }
-      // email = sessionStorage.getItem("email")
       sessionStorage.setItem("token",response.data.jwt);
 
       if(response.data.role=="ROLE_PATIENT"){
@@ -75,7 +66,7 @@ function PatientLogin()
         debugger
         console.log(error)
          toast.error('Opss wrong ')
-          // console.error('Image upload failed:', error);
+         console.log(error)
       });
    }
 
@@ -96,7 +87,6 @@ function PatientLogin()
               </div>
               <div className="col-md-6 col-lg-7 d-flex align-items-center">
                 <div className="card-body p-4 p-lg-5 text-black">
-                  {/* <form> */}
                     <div className="d-flex align-items-center mb-3 pb-1">
                       <i
                         className="fas fa-cubes fa-2x me-3"
@@ -139,27 +129,20 @@ function PatientLogin()
                     <div className="pt-1 mb-4">
                       <button
                         className="btn btn-dark btn-lg btn-block"
-                        type="button" onClick={loginn}
-                      >
+                        type="button" onClick={loginn}>
                         Login
                       </button>
                     </div>
-                    <a className="small text-muted" href="#!">
-                      Forgot password?
-                    </a>
+                    <Link to="/register" className="small text-muted">Forgot password?</Link>
+                    
                     <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
-                      Don't have an account?{" "}
-                      <a href="#!" style={{ color: "#393f81" }}>
-                        Register here
-                      </a>
+                      Don't have an account ?{"    "}
+                      <Link to="/register" style={{ color: "#393f81" }}>Register here</Link>
                     </p>
-                    <a href="#!" className="small text-muted">
-                      Terms of use.
-                    </a>
-                    <a href="#!" className="small text-muted">
-                      Privacy policy
-                    </a>
-                  {/* </form> */}
+                    
+                    {/* <Link to="/register" className="small text-muted">Terms of use.</Link> */}
+                    
+                    {/* <Link to="/register" className="small text-muted">Privacy policy</Link> */}
                 </div>
               </div>
             </div>
