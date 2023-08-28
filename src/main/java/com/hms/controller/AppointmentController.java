@@ -53,7 +53,7 @@ public class AppointmentController {
 						+ "\r\n"
 						+ "MARS HOSPITAL";
 				EmailDetails edetails=new EmailDetails("vedantborkar29@gmail.com", body, "MARS Hospital, Appointment Scheduled !!!");
-			return new ResponseEntity<>(emailService.sendSimpleMail(edetails),HttpStatus.CREATED);
+			return new ResponseEntity<>(app,HttpStatus.CREATED);
 			}
 	
 	}
