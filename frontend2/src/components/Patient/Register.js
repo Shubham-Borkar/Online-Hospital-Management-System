@@ -71,38 +71,39 @@ function Register()
                 // })
                 var em=/\S+@\S+\.\S+/;
                 if (name  =="") 
-                toast.warning('Please, Enter full name')
+                toast.info('Please, Enter full name')
                 else if (/^\d+$/.test(name))
-                toast.warning('Invalid, name contains numbers')
+                toast.info('Invalid, name contains numbers')
                 else if (gender=="")
-                toast.warning('Please, Choose Gender')
+                toast.info('Please, Choose Gender')
                 else if (dob=="")
-                toast.warning('Please, Enter date of birth')
+                toast.info('Please, Enter date of birth')
                 else if (phone=="")
-                toast.warning('Please, Enter phone')
+                toast.info('Please, Enter phone')
                 else if (address=="")
-                toast.warning('Please, Enter address')
+                toast.info('Please, Enter address')
                 else if (/^\d+$/.test(address))
-                toast.warning('Invalid, address contains numbers')
+                toast.info('Invalid, address contains numbers')
                 else if (email=="")
-                toast.warning('Please, Enter email')
+                toast.info('Please, Enter email')
                 else if (em.test(email))
-                toast.warning('Please, Enter valid email')
+                toast.info('Please, Enter valid email')
                 else if (password=="")
-                toast.warning('Please, Enter password')
+                toast.info('Please, Enter password')
                 // else if (^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$.test(password))
                 // toast.warning('Password must contain at least 1 capital, 1 small, a no & 1 special character')
                 else if(!password==confPass)
-                toast.warning("Passwords did not match")
+                toast.info("Passwords did not match")
                 else
                 register()
         }
 
    const register=()=>{
         debugger;
+        var tokenn=sessionStorage.getItem("token")
         const url= 'patient/register'
-        // sendEmail()
         axios.post(`${BaseApi.server_url}${url}`,
+        { headers: {"Authorization" : `Bearer ${tokenn}`}},
         {
                 name, gender, dob, phone, address, email, password
         })
@@ -119,14 +120,14 @@ function Register()
                
         })
    }
-
+ 
     return (<div>
         {/* ////////////////////////////// */}
         <section className="vh-100 " style={{ backgroundColor: "#063d76" }}>
     <div className="container py-1 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col col-xl-6">
-          <div className="card" style={{ borderRadius: "1rem" }}>
+          <div className="card" style={{ borderRadius: "2rem" }}>
             <div className="row g-0">
             <div className="col-md-6 col-lg-7 d-flex align-items-center">
                 <div className="card-body p-1 p-lg-5 text-orange">

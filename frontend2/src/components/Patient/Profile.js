@@ -16,7 +16,7 @@ function Profile()
         const [dob, setDob] = useState("")
         const [phone, setPhone] = useState("")
         const [address, setAddress] = useState("")
-        const [imagePath, setImagePath] = useState("")
+        // const [imagePath, setImagePath] = useState("")
         // const [pid, setPid] = useState(0)
         // const [pemail, setPEmail] = useState("")
         var pid=sessionStorage.getItem("id")
@@ -64,21 +64,21 @@ function Profile()
         const select = ()=>{
                 debugger;
                 pid = sessionStorage.getItem("id");
+                var tokenn=sessionStorage.getItem("token")
                 const url= `patient/${sessionStorage.getItem("id")}`;
-                if(pid==0)
-                toast.error("wrong pid")
-                axios.get(`${BaseApi.server_url}${url}`)
+                axios.get(`${BaseApi.server_url}${url}`,
+                { headers: {"Authorization" : `Bearer ${tokenn}`}})
                 .then(res=>{
                         debugger
                         // setProfile(res.data);
                         setAddress(res.data.address)
                         setDob(res.data.dob)
                         setGender(res.data.gender)
-                        setImagePath(res.data.imagePath)
+                        // setImagePath(res.data.imagePath)
                         setName(res.data.name)
                         setPhone(res.data.phone) 
                 //         if(phone==0)
-                // toast.error("wrong phone")
+                // toast.info("wrong phone")
                 })
                 .catch(error=>{
                         debugger
@@ -86,55 +86,80 @@ function Profile()
                 })
             };
 
-   const update= ()=>{
-        debugger
-        const url= `patient/${localStorage.getItem("id")}`;
-        axios.put(`${BaseApi.server_url}${url}`,
-        {
-                name, gender, dob, phone, address, imagePath
-                // profile
-        })
+//    const update= ()=>{
+//         debugger
+//         var tokenn=sessionStorage.getItem("token")
+//         const url= `patient/${localStorage.getItem("id")}`;
+//         axios.put(`${BaseApi.server_url}${url}`,
+//         { headers: {"Authorization" : `Bearer ${tokenn}`}},
+//         {
+//                 name, gender, dob, phone, address
+//         })
 
-        .then(res=>{
-                debugger
+//         .then(res=>{
+//                 debugger
+//                 console.log(res.data);
+//                 toast.success('Updates saved successfully')
+//                 setAddress(res.data.address)
+//                         setDob(res.data.dob)
+//                         setGender(res.data.gender)
+//                         setName(res.data.name)
+//                         setPhone(res.data.phone)
+//         })
+//         .catch(error=>{
+//                 debugger
+//                 toast.info('please try again')
+//                 console.log(error)
+//         })
+//    };
+
+const update = () => {
+        debugger;
+        var tokenn = sessionStorage.getItem("token");
+        const url = `patient/${localStorage.getItem("id")}`;
+        
+        const headers = {
+            "Authorization": `Bearer ${tokenn}`
+        };
+    
+        const requestData = {
+            name,
+            gender,
+            dob,
+            phone,
+            address
+        };
+    
+        axios.put(`${BaseApi.server_url}${url}`, requestData, { headers })
+            .then(res => {
+                debugger;
                 console.log(res.data);
-                toast.success('Updates saved successfully')
-                //  select()
-                setAddress(res.data.address)
-                        setDob(res.data.dob)
-                        setGender(res.data.gender)
-                        setImagePath(res.data.imagePath)
-                        setName(res.data.name)
-                        setPhone(res.data.phone)
-                //         if(phone==0)
-                // toast.error("wrong phone")
-        })
-        .catch(error=>{
-                debugger
-                toast.error('please try again')
-                console.log(error)
-        })
-   };
+                toast.success('Updates saved successfully');
+                setAddress(res.data.address);
+                setDob(res.data.dob);
+                setGender(res.data.gender);
+                setName(res.data.name);
+                setPhone(res.data.phone);
+            })
+            .catch(error => {
+                debugger;
+                toast.info('please try again');
+                console.log(error);
+            });
+    };
+    
 
 
 
     return (<div>
 {/* ////////////////////////////////////////////////////////////////////////////////////////////// */}
-<section className="vh-100 " style={{ backgroundColor: "#063d76" }}>
-    <div className="container py-1 h-100">
-      <div className="row d-flex justify-content-center align-items-center h-100">
+<section className="vh-70 " style={{ backgroundColor: "#063d76" }}>
+    <div className="container py-10 h-50">
+      <div className="row d-flex justify-content-center align-items-center h-50">
         <div className="col col-xl-6">
-          <div className="card" style={{ borderRadius: "1rem" }}>
+          <div className="card" style={{ borderRadius: "2rem" }}>
             <div className="row g-0">
-              {/* <div className="col-md-6 col-lg-5 d-none d-md-block">
-                <img
-                  src=""
-                  alt="login form"
-                  className="img-fluid"
-                  style={{ borderRadius: "1rem 0 0 1rem" }}
-                />
-              </div> */}
-              <div className="col-md-6 col-lg-7 d-flex align-items-center">
+              <div className="col-md-12 col-lg-12 d-flex align-items-center">
                 <div className="card-body p-1 p-lg-5 text-orange">
                   {/* <form> */}
                     <div className="align-items-center">
@@ -180,14 +205,14 @@ function Profile()
                                 onChange={e=> setAddress(e.target.value)}/>
                         </div> <br />
 
-                        <div className='form-group'>image
+                        {/* <div className='form-group'>image
                         <input type="text" className='form-control widthSize'
                                 name="image"
                                 value={imagePath}
                                 onChange={e=> setImagePath(e.target.value)}/>
-                        </div> <br />
+                        </div> <br /> */}
 
-                        <button className='btn btn-success'
+                        <button className='btn btn-outline-info'
                                 onClick={update}>
                                 Save changes
                         </button>

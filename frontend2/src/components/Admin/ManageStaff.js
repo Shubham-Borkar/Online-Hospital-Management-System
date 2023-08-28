@@ -1,10 +1,7 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
 import { useEffect, useState } from "react";
-import StaffEdit from './EditStaff';
 import { BaseApi } from '../api/BaseApi';
-import EditStaff from './EditStaff';
-import AddStaff from './AddStaff';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -22,8 +19,10 @@ function ManageStaff(props) {
 
     const select = () => {
         debugger;
+        var tokenn=sessionStorage.getItem("token")
         const url = 'adminstaff/helperstaff';
-        axios.get(`${BaseApi.server_url}${url}`)
+        axios.get(`${BaseApi.server_url}${url}`,
+        { headers: {"Authorization" : `Bearer ${tokenn}`}})
             .then(res => {
                 setStaffs(res.data);
             })
@@ -52,6 +51,7 @@ function ManageStaff(props) {
       //     console.log(key[0] + ', ' + key[1]);
       // }
       debugger
+      var tokenn=sessionStorage.getItem("token")
       const url= `adminstaff/uploadStaffImage/${event.target.value}`;
       axios.post(`${BaseApi.server_url}${url}`, imageInput, {
         headers: {
@@ -101,10 +101,10 @@ function ManageStaff(props) {
                         let altImg = `staff${staff.id} img`
                         
                         return (<>
-                            <div className="card mb-6" style={{ maxWidth: 800, backgroundColor: 'skyblue' }}>
+                            <div className="card mb-6" style={{ maxWidth: 900, backgroundColor: 'skyblue' }}>
                                 <div className="row g-0">
                                     <div className="col-md-4">
-                                        <img style={{ width: 400, height: 230 }}
+                                        <img style={{ width: 500, height: 270 }}
                                             src={imgSrc}
                                             className="img-fluid rounded-start"
                                             alt={altImg} />
@@ -121,7 +121,7 @@ function ManageStaff(props) {
                                             <p>
                                             <input type="file" name="image" id="imageInput" accept="image/*"   onChange={handleFileChange} ></input>
                                                 
-                                                <button onClick={(e) => handlefilesubmit(e)} className='btn btn-outline-primary' value={staff.id}>Update Image</button> &emsp;&emsp;
+                                                <button onClick={(e) => handlefilesubmit(e)} className='btn btn-outline-primary' value={staff.id}>Update Image</button> &emsp;&emsp;&emsp;&emsp;
                                                 <button onClick={(e) => editSt(e)} className='btn btn-outline-success' value={staff.id}>Edit Staff</button> &emsp;&emsp;
                                                 <button onClick={(e) => deleteStaff(e)} className='btn btn-outline-danger' value={staff.id}>Delete Staff</button> &emsp;&emsp;
                                             </p>

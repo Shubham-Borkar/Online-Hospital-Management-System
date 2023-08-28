@@ -21,25 +21,53 @@ function PatAppt() {
                 }, 6000);
             }, [message])
 
-    const select=()=>{
-            debugger;
-            const url= `appointment/patient/${sessionStorage.getItem("id")}`;
-            axios.get(`${BaseApi.server_url}${url}`)
-            .then(res=>{
-                debugger
-                    setPatAppts(res.data);
-                    })
-            .catch(error=>{
-                debugger
-                console.log(error)
+    // const select=()=>{
+    //         debugger;
+    //         var tokenn=sessionStorage.getItem("token")
+    //         const url= `appointment/patient/${sessionStorage.getItem("id")}`;
+    //         axios.get(`${BaseApi.server_url}${url}`,
+    //         { headers: {"Authorization" : `Bearer ${tokenn}`}})
+    //         .then(res=>{
+    //             debugger
+    //                 setPatAppts(res.data);
+    //                 toast.success('apt got from api')
+    //                 })
+    //         .catch(error=>{
+    //             debugger
+    //             console.log(error)
+    //             toast.info('get apt api failed')
+    //         })
+    //         }
+
+    const select = () => {
+        debugger;
+        var tokenn = sessionStorage.getItem("token");
+        const url = `appointment/patient/${sessionStorage.getItem("id")}`;
+        
+        const headers = {
+            "Authorization": `Bearer ${tokenn}`
+        };
+    
+        axios.get(`${BaseApi.server_url}${url}`, { headers })
+            .then(res => {
+                debugger;
+                setPatAppts(res.data);
+                toast.success('apt got from api');
             })
-            }
+            .catch(error => {
+                debugger;
+                console.log(error);
+                toast.info('get apt api failed');
+            });
+    };
+    
 
     const viewInvoice=(e)=>{
         debugger
-        
+        var tokenn=sessionStorage.getItem("token")
         const url= `invoice/${e.target.value}`;
-            axios.get(`${BaseApi.server_url}${url}`)
+            axios.get(`${BaseApi.server_url}${url}`,
+            { headers: {"Authorization" : `Bearer ${tokenn}`}})
             .then(res=>{
                 debugger
                     setAinvoice(res.data);
@@ -47,7 +75,7 @@ function PatAppt() {
                     if(res.data.id!=null)
                     toast.success(`invoice ${e.target.value}`)
                 else
-                    toast.warning(`invoice ${e.target.value} not yet filed`)
+                    toast.info(`invoice ${e.target.value} not yet filed`)
                     })
             .catch(error=>{
                 debugger

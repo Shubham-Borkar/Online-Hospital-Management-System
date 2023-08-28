@@ -44,8 +44,10 @@ function HealthCheckup()
                 debugger
                 setApointdate(args.target.value)
                 console.log(apointdate)
+                var tokenn=sessionStorage.getItem("token")
                 const url = `appointment/appSlotList/0/${args.target.value}`
-                axios.get(`${BaseApi.server_url}${url}`)
+                axios.get(`${BaseApi.server_url}${url}`,
+                { headers: {"Authorization" : `Bearer ${tokenn}`}})
                 .then(res=>{
                         debugger
                         let arr = res.data
@@ -84,29 +86,72 @@ function HealthCheckup()
                 setMday(ddd)
         }
 
-        const addAppt=()=>{
-                debugger
-                const url3 = "appointment/addappointment"
-                        debugger
-                        axios.post(`${BaseApi.server_url}${url3}`,
-                {
-                       pid, slot, apointdate
-                })
-                .then(response=>{
-                        debugger
-                        console.log(response.data)
-                        // toastfun()
-                        toast.success('booking successful')
-                })
-                .catch(error=>{
-                        debugger
-                        console.log(error)
-                        toast.info('please try again')
-                })
-           }
+        // const addAppt=()=>{
+        //         debugger
+        //         var tokenn=sessionStorage.getItem("token")
+        //         const url3 = "appointment/addappointment"
+        //         axios.post(`${BaseApi.server_url}${url3}`,
+        //         { headers: {"Authorization" : `Bearer ${tokenn}`}},
+        //         {
+        //                pid, slot, apointdate
+        //         })
+        //         .then(response=>{
+        //                 debugger
+        //                 console.log(response.data)
+        //                 // toastfun()
+        //                 toast.success('booking successful')
+        //         })
+        //         .catch(error=>{
+        //                 debugger
+        //                 console.log(error)
+        //                 toast.info('please try again')
+        //         })
+        //    }
         
+        const addAppt = () => {
+                debugger
+                var tokenn = sessionStorage.getItem("token");
+                const url3 = "appointment/addappointment";
+                
+                const headers = {
+                    "Authorization": `Bearer ${tokenn}`
+                };
+            
+                const requestData = {
+                    pid,
+                    slot,
+                    apointdate
+                };
+            
+                axios.post(`${BaseApi.server_url}${url3}`, requestData, { headers })
+                    .then(response => {
+                        debugger;
+                        console.log(response.data);
+                        // toastfun()
+                        toast.success('booking successful');
+                    })
+                    .catch(error => {
+                        debugger;
+                        console.log(error);
+                        toast.info('please try again');
+                    });
+            }
 
-    return (<>
+    return (<div>
+<section className="vh-50 " style={{ backgroundColor: "#063d76" }}>
+    <div className="container py-10 h-50">
+      <div className="row d-flex justify-content-center align-items-center h-50">
+        <div className="col col-xl-6">
+          <div className="card" style={{ borderRadius: "2rem" }}>
+            <div className="row g-0">
+            <div className="col-md-12 col-lg-12 d-flex align-items-center">
+                <div className="card-body p-10 p-lg-50 text-orange">
+                  {/* <form> */}
+                    <div className="align-items-center">
+                      <span className="h6 fw-bold">
+                        <img src={BaseApi.base_url+'assets/images/img.png'} style={{width:'100px', height: '60px'}}></img>
+                        Mars Hospitals</span>
+                    </div>
                         <center>
                         <h1>Book Health Check-up</h1>
                         <hr />  <br />
@@ -130,13 +175,21 @@ function HealthCheckup()
                                 </select>
                         </div> <br />
                         
-                        <button className='btn btn-success'
+                        <button className='btn btn-outline-info'
                                 onClick={addAppt}>
                                 Confirm Checkup
                         </button>
-                        </div> <br /><br /><br /><br /><br />
+                        </div> <br />
                         </center>
-            </>);
+                        </div>
+                        </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+            </div>);
 }
 
 export default HealthCheckup;

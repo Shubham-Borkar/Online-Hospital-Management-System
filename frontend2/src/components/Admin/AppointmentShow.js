@@ -36,8 +36,10 @@ function AppointmentShow()
 
         const select=()=>{
                 debugger;
+                var tokenn=sessionStorage.getItem("token")
                 const url= 'appointment';
-                axios.get(`${BaseApi.server_url}${url}`)
+                axios.get(`${BaseApi.server_url}${url}`,
+                { headers: {"Authorization" : `Bearer ${tokenn}`}})
                 .then(res=>{
                         setAppts(res.data);
                 })
@@ -51,8 +53,10 @@ function AppointmentShow()
         const viewInvoice=(e)=>{
                 debugger
                 aid=e.target.value;
+                var tokenn=sessionStorage.getItem("token")
                 const url= `invoice/${e.target.value}`;
-                    axios.get(`${BaseApi.server_url}${url}`)
+                    axios.get(`${BaseApi.server_url}${url}`,
+                { headers: {"Authorization" : `Bearer ${tokenn}`}})
                     .then(res=>{
                         debugger
                             setAinvoice(res.data);
@@ -61,12 +65,16 @@ function AppointmentShow()
                             {
                                 toast.success(`invoice ${e.target.value}`)
                             }
+                        else if (sessionStorage.getItem("role") != "ROLE_ADMIN")
+                        {
+                            navigate(`/addInvoice/${e.target.value}`)
+                            toast.info(`invoice ${e.target.value} not yet filed`)
+                        }
                         else
                         {
-                            navigate(`addInvoice/${e.target.value}`)
-                            toast.warning(`invoice ${e.target.value} not yet filed`)
+                            debugger
+                            toast.info(`invoice ${e.target.value} not yet filed`)
                         }
-                            
                             })
                     .catch(error=>{
                         debugger

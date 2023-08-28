@@ -41,14 +41,6 @@ function BookAppointment()
                 console.log(stoshow)
               }, [did, apointdate])
 
-        // useEffect(()=>{
-        //         debugger
-        //         console.log("inside componentDidUpdate..");
-        //         setSlotsbooked([])
-        //         console.log(slotsbooked)
-        //         setStoshow([])
-        //         console.log(stoshow)
-        //       }, [apointdate])
 
         const uniqueElement=()=>{
                 debugger
@@ -79,8 +71,10 @@ function BookAppointment()
         const slotFunbydid=(args)=>{
                 debugger
                 setDid(+args.target.value)
+                var tokenn=sessionStorage.getItem("token")
                 const url = `appointment/appSlotList/${args.target.value}/${apointdate}`
-                axios.get(`${BaseApi.server_url}${url}`)
+                axios.get(`${BaseApi.server_url}${url}`,
+                { headers: {"Authorization" : `Bearer ${tokenn}`}})
                 .then(res=>{
                         debugger
                         let arr = res.data
@@ -95,13 +89,15 @@ function BookAppointment()
                         console.log(error)
                 })
         }
-
+ 
         const slotFunbyDate=(args)=>{
                 debugger
                 setApointdate(args.target.value)
                 console.log(apointdate)
+                var tokenn=sessionStorage.getItem("token")
                 const url = `appointment/appSlotList/${did}/${args.target.value}`
-                axios.get(`${BaseApi.server_url}${url}`)
+                axios.get(`${BaseApi.server_url}${url}`,
+                { headers: {"Authorization" : `Bearer ${tokenn}`}})
                 .then(res=>{
                         debugger
                         let arr = res.data
@@ -122,49 +118,19 @@ function BookAppointment()
                 setSlot(e.target.value);
               }
 
-//         const OnTextChange=(args)=>{
-//         // var copyOfUser = {...user};
-//         // copyOfUser[args.target.name] = args.target.value;
-//         // setUser(copyOfUser);
-//         console.log("value entered");
-//    }
-
-//    const update=()=>{
-//         // 1236547890
-//         alert('Are you sure to book appointment');
-//         console.log("Button clicked");
-//         // add
-//    }
-
-   
-        // var helper = new XMLHttpRequest();
-        // helper.onreadystatechange = ()=>{
-        //     if(helper.readyState == 4 && helper.status == 200)
-        //         {
-        //             debugger;
-        //             var responseReceived = JSON.parse(helper.responseText);
-        //             if(responseReceived.affectedRows==1)
-        //             {
-        //                 // setMessage("Appointment added Successfully!")
-        //                 setAppt({id: 0, date: "", slot: "", symptoms: ""});
-        //             }
-        //             else
-        //             {
-        //                 // setMessage("Something went wrong!, Please try again");
-        //                 setAppt({id: 0, date: "", slot: "", symptoms: ""});
-        //             }
-        //         }
-        // };
-        // helper.open("POST","http://127.0.0.1:8181/appointment/add/"+pid+"/"+did);
-        // helper.setRequestHeader("Content-Type", "application/json")
-        // helper.send(JSON.stringify(appt));
         const getDoct=()=>{
                 debugger
+                var tokenn=sessionStorage.getItem("token")
                 const url1 = 'doctor'
-                axios.get(`${BaseApi.server_url}${url1}`)
+                axios.get(`${BaseApi.server_url}${url1}`,
+                { headers: {"Authorization" : `Bearer ${tokenn}`}})
                 .then(res=>{
                         debugger
                         setDoctors(res.data)
+                })
+                .catch(error=>{
+                        debugger
+                        console.log(error)
                 })
         }
 
@@ -173,51 +139,99 @@ function BookAppointment()
                 var p=sessionStorage.getItem("id")
                 setPid(p)
                 console.log(pid)
-                // Comment this later//////////////////////////////////
-                if(pid==0)
-                toast.error("wrong pid")
+                var tokenn=sessionStorage.getItem("token")
                 const url2 = `patient/${sessionStorage.getItem("id")}`
-                axios.get(`${BaseApi.server_url}${url2}`)
+                axios.get(`${BaseApi.server_url}${url2}`,
+                { headers: {"Authorization" : `Bearer ${tokenn}`}})
                 .then(res=>{
                         debugger
                         setPatient(res.data)
                 })
+                .catch(error=>{
+                        debugger
+                        console.log(error)
+                })
         }
 
-        const addAppt=()=>{
-        debugger
-        console.log(pid)
-        if(pid==0)
-                toast.error("wrong pid")
-        const url3 = "appointment/addappointment"
-        axios.post(`${BaseApi.server_url}${url3}`,
-        {
-               pid, slot, symptoms, apointdate, did
-        })
-        .then(response=>{
-                debugger
-                console.log(response.data)
-                toast.success('booking successful')
-        })
-        .catch(error=>{
-                debugger
-                console.log(error)
-                toast.success('please try again')
-        })
-   }
+//         const addAppt=()=>{
+//         debugger
+//         console.log(pid)
+//         if(pid==0)
+//                 toast.error("wrong pid")
+//         var tokenn=sessionStorage.getItem("token")
+//         const url3 = "appointment/addappointment"
+//         axios.post(`${BaseApi.server_url}${url3}`,
+//         { headers: {"Authorization" : `Bearer ${tokenn}`}},
+//         {
+//                pid, slot, symptoms, apointdate, did
+//         })
+//         .then(response=>{
+//                 debugger
+//                 console.log(response.data)
+//                 toast.success('booking successful')
+//         })
+//         .catch(error=>{
+//                 debugger
+//                 console.log(error)
+//                 toast.warning('please try again')
+//         })
+//    }
+
+const addAppt = () => {
+        debugger;
+        console.log(pid);
+        
+        if (pid === 0) {
+            toast.error("wrong pid");
+            return;
+        }
+        
+        var tokenn = sessionStorage.getItem("token");
+        const url3 = "appointment/addappointment";
+        
+        const headers = {
+            "Authorization": `Bearer ${tokenn}`
+        };
+    
+        const requestData = {
+            pid,
+            slot,
+            symptoms,
+            apointdate,
+            did
+        };
+    
+        axios.post(`${BaseApi.server_url}${url3}`, requestData, { headers })
+            .then(response => {
+                debugger;
+                console.log(response.data);
+                toast.success('booking successful');
+            })
+            .catch(error => {
+                debugger;
+                console.log(error);
+                toast.warning('please try again');
+            });
+    };
+
+    
 
     return (<>
             <center>
 
-    <section className="vh-100 " style={{ backgroundColor: "#063d76" }}>
+    <section className="vh-70 " style={{ backgroundColor: "#063d76" }}>
     <div className="container py-10 h-50"> <br /><br /><br />
       <div className="row d-flex justify-content-center align-items-center h-50">
         <div className="col col-xl-6">
           <div className="card" style={{ borderRadius: "2rem" }}>
-            {/* <div className="row g-0"> */}
-            {/* <div className="col-md-2 col-lg-1 d-flex align-items-center"> */}
-                {/* <div className="card-body p-0 p-lg-0 text-orange"> */}
-                       
+           <div className="row g-0">
+            <div className="col-md-12 col-lg-12 d-flex align-items-center">
+                <div className="card-body p-10 p-lg-50 text-orange">
+                        <div className="align-items-center">
+                      <span className="h6 fw-bold">
+                        <img src={BaseApi.base_url+'assets/images/img.png'} style={{width:'100px', height: '60px'}}></img>
+                        Mars Hospitals</span>
+                    </div>
                         <h1>Book Appointment</h1> <hr />
                         <div className="table-bordered"> 
                         <div className='form-group input-group-sm appstyle'>Appointment Date
@@ -262,11 +276,11 @@ function BookAppointment()
                                 Add Appointment
                         </button>
                         </div> <br /> <br /><br />
-                        {/* </div> */}
+                        </div>
 
                         
-              {/* </div> */}
-            {/* </div> */}
+              </div>
+            </div>
           </div>
         </div>
       </div>

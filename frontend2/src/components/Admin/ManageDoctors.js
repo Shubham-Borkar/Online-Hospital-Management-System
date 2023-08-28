@@ -18,8 +18,10 @@ function ManageDoctors(props) {
 
     const select = () => {
         debugger;
+        var tokenn=sessionStorage.getItem("token")
         const url = 'doctor';
-        axios.get(`${BaseApi.server_url}${url}`)
+        axios.get(`${BaseApi.server_url}${url}`,
+        { headers: {"Authorization" : `Bearer ${tokenn}`}})
             .then(res => {
                 debugger
                 console.log(res.data)
@@ -36,10 +38,10 @@ function ManageDoctors(props) {
           setSelectedFile(event.target.files[0]); 
         };
 
-        const handleRefresh = () => {
-          debugger
-          window.location.reload();
-        };
+        // const handleRefresh = () => {
+        //   debugger
+        //   window.location.reload();
+        // };
 
     const handlefilesubmit=(event) => {
         debugger
@@ -51,8 +53,10 @@ function ManageDoctors(props) {
         //     console.log(key[0] + ', ' + key[1]);
         // }
         debugger
+        var tokenn=sessionStorage.getItem("token")
         const url= `adminstaff/uploadStaffImage/${event.target.value}`;
-        axios.post(`${BaseApi.server_url}${url}`, imageInput, {
+        axios.post(`${BaseApi.server_url}${url}`, imageInput, 
+        {
           headers: {
               'Content-Type': 'multipart/form-data', 
           },
@@ -60,8 +64,8 @@ function ManageDoctors(props) {
       .then(response => {
           debugger;
           console.log(response)
-          handleRefresh() 
-          toast.success(`Photo updated successfully`)
+        //   handleRefresh() 
+          toast.success(`Image will be updated shortly`)
       })
       .catch(error => {
          debugger
@@ -98,10 +102,10 @@ function ManageDoctors(props) {
                         let imgSrc = `${BaseApi.server_url}adminstaff/getStaffImage/${doctor.staffid}`
                         let altImg = `doc${doctor.id} img`
                         return (<>
-                            <div className="card mb-6" style={{ maxWidth: 800, backgroundColor: 'skyblue' }}>
+                            <div className="card mb-6" style={{ maxWidth: 900, backgroundColor: 'skyblue' }}>
                                 <div className="row g-0" >
                                     <div className="col-md-4">
-                                        <img style={{ width: 500, height: 275 }}
+                                        <img style={{ width: 500, height: 320 }}
                                             src={imgSrc}
                                             className="img-fluid rounded-start"
                                             alt={altImg} />
@@ -124,7 +128,7 @@ function ManageDoctors(props) {
         <input type="file" name="image" id="imageInput" accept="image/*"   onChange={handleFileChange} ></input>
         {/* <button className="btn btn-outline-primary" name="image" id="imageFile" type="submit">Update Image</button> */}
         {/* </form> */}
-                                                <button onClick={(e) => handlefilesubmit(e)} className='btn btn-outline-primary' value={doctor.staffid}>Update Image</button> &emsp;
+                                                <button onClick={(e) => handlefilesubmit(e)} className='btn btn-outline-primary' value={doctor.staffid}>Update Image</button> &emsp;&emsp;&emsp;&emsp;&emsp;
                                                 <button onClick={(e) => editDoc(e)} className='btn btn-outline-success' value={doctor.id}>Edit</button> &emsp;&emsp;
                                                 <button onClick={(e) => deleteDoctor(e)} className='btn btn-outline-danger' value={doctor.id}>Delete</button>
                                                 {/* <a className="btn btn-outline-danger" role="button" value={doctor.id} onClick={(e)=>deleteDoctor(e)}>Delete</a> &emsp;&emsp;

@@ -8,7 +8,7 @@ function AddInvoice() {
 
     // const [ainvoice, setAinvoice] = useState([]);
 
-        const [medFees, setMedFees] = useState("")
+        const [medFees, setMedFees] = useState(0)
         const [docFees, setDocFees] = useState("")
         const [labTestFees, setLabTestFees] = useState("")
         const [otherFees, setOtherFees] = useState("")
@@ -20,8 +20,10 @@ function AddInvoice() {
     const fileInvoice=()=>{
         debugger
         console.log(aid)
+        var tokenn=sessionStorage.getItem("token")
         const url = `invoice/add/${aid}`;
-        axios.post(`${BaseApi.server_url}${url}`, 
+        axios.post(`${BaseApi.server_url}${url}`,
+        { headers: {"Authorization" : `Bearer ${tokenn}`}}, 
         {
             idate, medFees, docFees, labTestFees, otherFees, desc
         })
@@ -56,27 +58,45 @@ function AddInvoice() {
                         </tr>
                         <tr>
                             <td>date</td>
-                            <td><input type="date" value={idate} onClick={e=>setIdate(e.target.value)}/>{idate}</td>
+                            <td>
+                                <input type="date" name="date" value={idate} onChange={e=>setIdate(e.target.value)}/>
+                                {/* {idate} */}
+                            </td>
                         </tr>
                         <tr>
                             <td>medFees</td>
-                            <td><input type="number" value={medFees} onClick={e=>setMedFees(e.target.value)}/>{medFees}</td>
+                            <td>
+                                <input type="number" name="date" value={medFees} onChange={e=>setMedFees(e.target.value)}/>
+                                {/* {medFees} */}
+                                </td>
                         </tr>
                         <tr>
                             <td>docFees</td>
-                            <td><input type="number" value={docFees} onClick={e=>setDocFees(e.target.value)}/>{docFees}</td>
+                            <td>
+                                <input type="number" value={docFees} onChange={e=>setDocFees(e.target.value)}/>
+                                {/* {docFees} */}
+                                </td>
                         </tr>
                         <tr>
                             <td>labTestFees</td>
-                            <td><input type="number" value={labTestFees} onClick={e=>setLabTestFees(e.target.value)}/>{labTestFees}</td>
+                            <td>
+                                <input type="number" value={labTestFees} onChange={e=>setLabTestFees(e.target.value)}/>
+                                {/* {labTestFees} */}
+                                </td>
                         </tr>
                         <tr>
                             <td>otherFees</td>
-                            <td><input type="number" value={otherFees} onClick={e=>setOtherFees(e.target.value)}/>{otherFees}</td>
+                            <td>
+                                <input type="number" value={otherFees} onChange={e=>setOtherFees(e.target.value)}/>
+                                {/* {otherFees} */}
+                                </td>
                         </tr>
                         <tr>
                             <td>description</td>
-                            <td><input type="text" value={desc} onClick={e=>setDesc(e.target.value)}/>{desc}</td>
+                            <td>
+                                <input type="text" value={desc} onChange={e=>setDesc(e.target.value)}/>
+                                {/* {desc} */}
+                                </td>
                         </tr>
                 </table>
                 <button className="btn btn-outline-success" onClick={fileInvoice}>File Invoice</button>

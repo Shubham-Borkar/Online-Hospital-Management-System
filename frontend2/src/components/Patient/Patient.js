@@ -25,8 +25,10 @@ function Patient()
       debugger
       pemail = sessionStorage.getItem("email");
       console.log(pemail)
+      var tokenn=sessionStorage.getItem("token")
       const url= `entry/ptemail/${sessionStorage.getItem("email")}`
-      axios.get(`${BaseApi.server_url}${url}`)
+      axios.get(`${BaseApi.server_url}${url}`,
+      { headers: {"Authorization" : `Bearer ${tokenn}`}})
       .then(res=>{
               debugger
               console.log(res.data)
@@ -94,16 +96,16 @@ function Patient()
               </div>
 
               <div className="col-md-4">
-                <div className="button" onClick={()=> getBookHealthCheck('4') }>
+                <div className="button" onClick={()=> getBookHealthCheck() }>
                   <img src={BaseApi.base_url+'assets/images/icons/bookhealthcheckup.png'} alt="Image 4"/>
                   <span><b>Book Health Checkup</b></span>
                 </div>
               </div>
 
               <div className="col-md-4">
-                <div className="button" onClick={()=> getOnlineConsult('5') }>
+                <div className="button" onClick={()=> getOnlineConsult() }>
                   <img src={BaseApi.base_url+'assets/images/icons/consultonline.png'} alt="Image 5"/>
-                  <span><b>Consult Online</b></span>
+                  <span><b>Consult Online</b> (Premium)</span>
                 </div>
               </div>
 

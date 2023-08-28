@@ -1,8 +1,6 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
-import Header from "../Layout/Header";
-import Footer from '../Layout/Footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BaseApi } from '../api/BaseApi';
 import { toast } from 'react-toastify';
@@ -18,6 +16,27 @@ function AddDoctor() {
         const [password, setPassword] = useState("")
         const [education, setEducation] = useState("")
         const [speciality, setSpeciality] = useState("")
+        const [day, setDay] = useState("")
+
+
+        useEffect(()=>{
+                debugger
+                console.log("inside componentDidMount..");
+                currentdate();
+              }, [])
+
+        const currentdate=()=>{
+                debugger
+                var today, dd, mm, mmm, yyyy;
+                today= new Date();
+                dd=today.getDate()-1;
+                mm=today.getMonth()+1;
+                if(mm<10)
+                        mm= '0'+mm
+                yyyy=today.getFullYear();
+                const dddd = yyyy+'-'+mm+'-'+dd;
+                setDay(dddd)
+        }
 
         const clearFields=()=>{
                 setName("") 
@@ -27,34 +46,84 @@ function AddDoctor() {
                 setAddress("")
                 setEmail("")
                 setPassword("")
+                setEducation("")
+                setSpeciality("")
         }
 
-    const addDoc=()=>{
-        debugger;
-        // const url= 'adminstaff/register/doctor/'+{education}+'/'+{speciality}
-        const url= `adminstaff/register/doctor/${education}/${speciality}`
-        axios.post(`${BaseApi.server_url}${url}`,
-        {
-                name, gender, dob, phone, address, email, password
-        })
-        .then(res=>{
-                debugger
-                console.log(res.data);
-                clearFields()
-                toast.success('Registration successful')
-        })
-        .catch(error=>{
-                debugger
-                console.log(error)
-                toast.error('please try again')
-        })
-    }
+//     const addDoc=()=>{
+//         debugger;
+//         var tokenn=sessionStorage.getItem("token")
+//         const url= `adminstaff/register/doctor/${education}/${speciality}`
+//         axios.post(`${BaseApi.server_url}${url}`,
+//         { headers: {"Authorization" : `Bearer ${tokenn}`}},
+//         {
+//                 name, gender, dob, phone, address, email, password
+//         })
+//         .then(res=>{
+//                 debugger
+//                 console.log(res.data);
+//                 clearFields()
+//                 toast.success('Registration successful')
+//         })
+//         .catch(error=>{
+//                 debugger
+//                 console.log(error)
+//                 toast.error('please try again')
+//         })
+//     }
 
-    return ( <>
-                <Header/>
+const addDoc = () => {
+        debugger;
+        var tokenn = sessionStorage.getItem("token");
+        const url = `adminstaff/register/doctor/${education}/${speciality}`;
+        
+        const headers = {
+            "Authorization": `Bearer ${tokenn}`
+        };
+    
+        const requestData = {
+            name,
+            gender,
+            dob,
+            phone,
+            address,
+            email,
+            password
+        };
+    
+        axios.post(`${BaseApi.server_url}${url}`, requestData, { headers })
+            .then(res => {
+                debugger;
+                console.log(res.data);
+                clearFields();
+                toast.success('Registration successful');
+            })
+            .catch(error => {
+                debugger;
+                console.log(error);
+                toast.error('please try again');
+            });
+    };
+    
+
+    return ( <div>
+        <section className="vh-100 " style={{ backgroundColor: "#063d76" }}>
+    <div className="container py-10 h-50">
+      <div className="row d-flex justify-content-center align-items-center h-50">
+        <div className="col col-xl-6">
+          <div className="card" style={{ borderRadius: "2rem" }}>
+            <div className="row g-0">
+            <div className="col-md-12 col-lg-12 d-flex align-items-center">
+                <div className="card-body p-10 p-lg-50 text-orange">
+                  {/* <form> */}
+                    <div className="align-items-center">
+                      <span className="h6 fw-bold">
+                        <img src={BaseApi.base_url+'assets/images/img.png'} style={{width:'100px', height: '60px'}}></img>
+                        Mars Hospitals</span>
+                    </div>
             <center>
                 <div style={{width:"600px"}}>
-                <form>
+                {/* <form> */}
                         <h1><center>Add Doctor</center></h1>
                         <hr />
                         <div className="table-bordered">
@@ -90,11 +159,11 @@ function AddDoctor() {
                                 onChange={e=> setSpeciality(e.target.value)}/>
                         </div> <br />
 
-                        <div className='form-group'><h5>Dob</h5>
+                        <div className='form-group'><h5>Date of birth</h5>
                         <input type="date" className='form-control widthSize'
                                 name="dob"
                                 value={dob}
-                                onChange={e=> setDob(e.target.value)}/>
+                                onChange={e=> setDob(e.target.value)} max={day}/>
                         </div> <br />
 
                         <div className='form-group'><h5>Phone</h5>
@@ -125,17 +194,24 @@ function AddDoctor() {
                                 onChange={e=> setPassword(e.target.value)}/>
                         </div> <br />
 
-                        <button className='btn btn-outline-success'
+                        <button className='btn btn-outline-info'
                                 onClick={addDoc}>
                                 Add Doctor
                         </button>
-                        </div> <br />
+                        </div> <br /> 
                      
-                </form>
-                </div>
+                {/* </form> */}
+                </div> 
                 </center>
-                     {/* <Footer/>  */}
-    </> );
+                </div> 
+                        </div> 
+            </div> 
+          </div> 
+        </div> 
+      </div> 
+    </div> 
+  </section> <br /><br /><br /><br /><br /><br /><br /><br />
+    </div> );
 }
 
 export default AddDoctor;

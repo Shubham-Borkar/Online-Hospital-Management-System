@@ -29,7 +29,7 @@ import ManageDoctors from './components/Admin/ManageDoctors';
 import Footer from './components/Layout/Footer';
 import EditStaff from './components/Admin/EditStaff';
 import EditDoctor from './components/Admin/EditDoctor';
-import { Route, Routes,Link, Navigate } from 'react-router-dom';
+import { Route, Routes, Link, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import StaffList from './components/Doctor/StaffList';
@@ -41,29 +41,29 @@ import ManagePatients from './components/Admin/ManagePatients';
 import EditPatient from './components/Admin/EditPatient';
 import StaffAvailability from './components/Admin/StaffAvailability';
 import DoctorProfile from './components/Doctor/DoctorProfile';
+import AddInvoice from './components/Admin/AddInvoice';
 
 import { useSelector } from 'react-redux';
-import { PrivateToDoctor, PrivateToAdmin, PrivateToPatient, PrivateToAandD, PrivateToHelper } from './components/Admin/ProtectedRoute';
-import AddInvoice from './components/Admin/AddInvoice';
+import { PrivateToDoctor, PrivateToAdmin, PrivateToPatient, PrivateToAandD, PrivateToHelper, PrivateToAandH, PrivateToAandDandH } from './components/Admin/ProtectedRoute';
 
 function App() {
 
   // const loginStatus = useSelector((state) => state.auth.status)
-  const role=useSelector((state) => state.auth.role)
-//   const Private = ({Component}) => {
-//     const auth = (loginStatus&& sessionStorage.getItem("token")) || true
-//     return auth ? <Component /> : <Navigate to="/patientLogin" />
-// }
+  const role = useSelector((state) => state.auth.role)
+  //   const Private = ({Component}) => {
+  //     const auth = (loginStatus&& sessionStorage.getItem("token")) || true
+  //     return auth ? <Component /> : <Navigate to="/patientLogin" />
+  // }
   return (
     <div className="App">
-        <section className="vh-200 back" style={{ backgroundColor: "#063d76", color: "orange"}}>
-    {/* <div className="container py-5 h-100"> */}
-        
-        <Header/>
+      <section className="vh-400 back" style={{ backgroundColor: "#063d76", color: "orange" }}>
+        {/* <div className="container py-5 h-100"> */}
+
+        <Header />
         {/* <div > */}
-          <hr></hr><hr></hr><hr></hr>
+        <hr></hr><hr></hr><hr></hr>
         <Link to="/login">Login</Link>{"   |   "}
-        
+
         <Link to="/patientLogin">Patient Login</Link>{"   |   "}
         <Link to="/doctorMenu"> doctor mp</Link>{"   |   "}
         <Link to="/doctorsDetails"> My Profile</Link>{"   |   "}
@@ -78,128 +78,140 @@ function App() {
         <Link to="/patientmenu">Patient Menu</Link>{"   |   "}
         <Link to="/adminmenu">Admin Menu</Link>{"   |   "}
 
-        
+
         {/* </div> */}
-        
+
         <Routes>
 
-        {/* Helper Specific Protected Routes */}
-        <Route path="/addInvoice/:aid" element=
-          {<PrivateToHelper Component={AddInvoice} />} />
+          {/* Helper Specific Protected Routes */}
+          <Route path="/addInvoice/:aid" element=
+            {<PrivateToHelper Component={AddInvoice} />} />
 
-        {/* Doctor Specific Protected Routes */}
-        <Route path="/doctorMenu" element=
-          {<PrivateToDoctor Component={Doctor} />} />
 
-        <Route path="/doctorProfile" element=
-          {<PrivateToDoctor Component={DoctorProfile} />} />
+
+
+
+          <Route path="/addInvoice/:aid" element=
+            {<PrivateToHelper Component={AddInvoice} />} />
+
+
+          {/* Doctor Specific Protected Routes */}
+          <Route path="/doctorMenu" element=
+            {<PrivateToDoctor Component={Doctor} />} />
+
+          <Route path="/doctorProfile" element=
+            {<PrivateToDoctor Component={DoctorProfile} />} />
 
           <Route path="/patHistory" element=
-          {<PrivateToDoctor Component={PatHistory} />} />
+            {<PrivateToDoctor Component={PatHistory} />} />
 
-           <Route path="/appbydate" element=
-          {<PrivateToDoctor Component={AppByDate} />} />
+          <Route path="/appbydate" element=
+            {<PrivateToDoctor Component={AppByDate} />} />
 
-           <Route path="/appbtdoctor" element=
-          {<PrivateToDoctor Component={AppByDoctor} />} />
+          <Route path="/appbtdoctor" element=
+            {<PrivateToDoctor Component={AppByDoctor} />} />
 
-           <Route path="/staffList" element=
-          {<PrivateToDoctor Component={StaffList} />} />
+          <Route path="/staffList" element=
+            {<PrivateToDoctor Component={StaffList} />} />
 
-           <Route path="/manageApp" element=
-          {<PrivateToDoctor Component={ManageApp} />} />
-     
+          <Route path="/manageApp" element=
+            {<PrivateToDoctor Component={ManageApp} />} />
 
 
-        {/* Patient Specific Protected Routes */}
-        <Route path="/patientmenu" element=
-          {<PrivateToPatient Component={Patient} />} />
 
-        <Route path="/bookAppointment" element=
-          {<PrivateToPatient Component={BookAppointment} />} />
+          {/* Patient Specific Protected Routes */}
+          <Route path="/patientmenu" element=
+            {<PrivateToPatient Component={Patient} />} />
 
-        <Route path="/profile" element=
-          {<PrivateToPatient Component={Profile} />} />
+          <Route path="/bookAppointment" element=
+            {<PrivateToPatient Component={BookAppointment} />} />
+
+          <Route path="/profile" element=
+            {<PrivateToPatient Component={Profile} />} />
 
           <Route path="/patientAppointment" element=
-          {<PrivateToPatient Component={PatAppt} />} />
+            {<PrivateToPatient Component={PatAppt} />} />
 
           <Route path="/consultOnline" element=
-          {<PrivateToPatient Component={ConsultOnline} />} />
+            {<PrivateToPatient Component={ConsultOnline} />} />
 
           <Route path="/getDoctors" element=
-          {<PrivateToPatient Component={DoctorList} />} />
+            {<PrivateToPatient Component={DoctorList} />} />
 
           <Route path="/healthCheckup" element=
-          {<PrivateToPatient Component={HealthCheckup} />} />
+            {<PrivateToPatient Component={HealthCheckup} />} />
 
 
-        {/* Admin Specific Protected Routes */}
-        <Route path="/adminmenu" element=
-          {<PrivateToAdmin Component={Admin} />} />
+          {/* Admin Specific Protected Routes */}
+          <Route path="/addStaff" element=
+            {<PrivateToAdmin Component={AddStaff} />} />
 
-        <Route path="/managePatient" element=
-          {<PrivateToAdmin Component={ManagePatients} />} />
-
-          <Route path="/editPatient/:pid" element=
-          {<PrivateToAdmin Component={EditPatient} />} />
-
-          <Route path="/staffAvail" element=
-          {<PrivateToAdmin Component={StaffAvailability} />} />
-
-          <Route path="/appointmentsShow" element=
-          {<PrivateToAdmin Component={AppointmentShow} />} />
-
-           <Route path="/addStaff" element=
-          {<PrivateToAdmin Component={AddStaff} />} />
-
-           <Route path="/manageStaff" element=
-          {<PrivateToAdmin Component={ManageStaff} />} />
+          <Route path="/manageStaff" element=
+            {<PrivateToAdmin Component={ManageStaff} />} />
 
           <Route path="/editStaff/:sid" element=
-          {<PrivateToAdmin Component={EditStaff} />} />
+            {<PrivateToAdmin Component={EditStaff} />} />
 
           <Route path="/editDoctor/:did" element=
-          {<PrivateToAdmin Component={EditDoctor} />} />
+            {<PrivateToAdmin Component={EditDoctor} />} />
 
           <Route path="/addDoctor" element=
-          {<PrivateToAdmin Component={AddDoctor} />} />
+            {<PrivateToAdmin Component={AddDoctor} />} />
 
           <Route path="/manageDoctors" element=
-          {<PrivateToAdmin Component={ManageDoctors} />} />
+            {<PrivateToAdmin Component={ManageDoctors} />} />
 
-   
 
-          {/*Common to Admin and Doctor*/}
+
+          {/*Common to Admin and Doctor and Helper*/}
           <Route path="/resources" element=
-          {<PrivateToAandD Component={Resources} />} />
-     {/* Non Protected Routes*/}
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/patientLogin" element={<PatientLogin />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/register" element={<Register />} />
-        <Route path='*' element={<InvalidPage />} />
+            {<PrivateToAandDandH Component={Resources} />} />
+
+
+          {/*Common to Admin and Helper*/}
+          <Route path="/adminmenu" element=
+            {<PrivateToAandH Component={Admin} />} />
+
+          <Route path="/managePatient" element=
+            {<PrivateToAandH Component={ManagePatients} />} />
+
+          <Route path="/editPatient/:pid" element=
+            {<PrivateToAandH Component={EditPatient} />} />
+
+          <Route path="/appointmentsShow" element=
+            {<PrivateToAandH Component={AppointmentShow} />} />
+
+          <Route path="/staffAvail" element=
+            {<PrivateToAandH Component={StaffAvailability} />} />
+
+
+          {/* Non Protected Routes*/}
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/patientLogin" element={<PatientLogin />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/register" element={<Register />} />
+          <Route path='*' element={<InvalidPage />} />
 
         </Routes>
         {/* <div> */}
-          <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="dark"
-          />
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         {/* </div> */}
         <br /><br />
         <Footer></Footer>
         {/* </div> */}
-  </section>
+      </section>
     </div>
   );
 }

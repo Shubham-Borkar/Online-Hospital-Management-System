@@ -21,8 +21,10 @@ function ManagePatients(props)
                                     
     const select=()=>{
         debugger;
+        var tokenn=sessionStorage.getItem("token")
                 const url= 'patient';
-                axios.get(`${BaseApi.server_url}${url}`)
+                axios.get(`${BaseApi.server_url}${url}`,
+                { headers: {"Authorization" : `Bearer ${tokenn}`}})
                 .then(res=>{
                         setPatients(res.data);
                             })
@@ -67,7 +69,7 @@ debugger;
                             <div className="card mb-6" style={{ maxWidth: 800, backgroundColor: 'skyblue' }}>
                                 <div className="row g-0">
                                 <div className="col-md-4">
-                                        <img style={{ width: 400, height: 275 }}
+                                        <img style={{ width: 400, height: 250 }}
                                             src={imgSrc}
                                             className="img-fluid rounded-start"
                                             alt={altImg} />

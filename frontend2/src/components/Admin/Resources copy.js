@@ -18,14 +18,20 @@ function Resources() {
 
   const select = () => {
     debugger;
+    var tokenn=sessionStorage.getItem("token")
     const url = `resource`;
-    axios.get(`${BaseApi.server_url}${url}`)
+    axios.get(`${BaseApi.server_url}${url}`,
+    { headers: {"Authorization" : `Bearer ${tokenn}`}})
       .then(res => {
         debugger;
         setRes(res.data);
         debugger;
         console.log(res.data)
       })
+      .catch(error=>{
+        debugger
+        console.log(error)
+})
   }
 
   const bed = 350;

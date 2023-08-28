@@ -13,18 +13,92 @@ function PatientLogin()
  const dispatch = useDispatch()
  const loginStatus = useSelector((state) => state.auth.status)
  const evalue = useSelector((state) => state.auth.email)
-    
- const [email,setEmail]=useState();
- const [password,setPassword]=useState();
+ const [message, setMessage] = useState(0);
+ const [email,setEmail]=useState("");
+ const [password,setPassword]=useState("");
  const navigate = useNavigate()
+//  const [ootp, setOotp] = useState(0);
+ const [passEnt, setPassEnt] = useState(0);
+ const [nPass,setnPass]=useState("");
+ const [vPass,setvPass]=useState("");
+ var sid = 0;
  
+
+ const setPass=()=>{
+  debugger
+  if (email != "")
+  {
+    debugger
+    console.log(email)
+    toast.info('calling email verify / obtain otp api')
+    // var tokenn=sessionStorage.getItem("token")
+    // ,
+    // { headers: {"Authorization" : `Bearer ${tokenn}`}}
+    const url= `getotp/${email}`
+    axios.get(`${BaseApi.server_url}${url}`)
+    .then(res=>{
+      debugger
+      setMessage("OTP obtained")
+      console.log(res.data)
+      sessionStorage.setItem("OTP", res.data)
+      console.log(sessionStorage.getItem("OTP"))
+      toast.info('correct email; ss saved; check & enter otp')
+    })
+    .catch(error=>{
+      debugger
+      console.log(error)
+      toast.warning('this email is not registered, try register with us')
+    })
+  }
+  else
+  {
+    debugger
+    toast.warning('Please enter Email')
+  }
+}
+
+const setNewPass=()=>{
+  debugger
+  if (sessionStorage.getItem("OTP") != passEnt)
+  {
+    debugger
+    toast.warning('incorrect otp, please try again')
+  }
+  else if (nPass != vPass)
+  {
+    debugger
+    toast.warning('Passwords did not match')
+    setMessage("")
+  }
+  else {
+    debugger
+    var tokenn=sessionStorage.getItem("token")
+    const url = `update/${email}/${nPass}`;
+    axios.put(`${BaseApi.server_url}${url}`,
+    { headers: {"Authorization" : `Bearer ${tokenn}`}})
+    .then(res=>{
+      debugger
+      console.log(res.data)
+      toast.success('password set successfully')
+    })
+    .catch(error=>{
+      debugger
+      console.log(error)
+      toast.warning('something went wrong, try again')
+      setMessage("")
+    })
+  }
+}
 
    const loginn=()=>{
        debugger
         console.log("Button clicked: "+email+""+password);
-
+        // var tokenn=sessionStorage.getItem("token")
+        // ,
+        // { headers: {"Authorization" : `Bearer ${tokenn}`}}
         const url= `hms/authenticate`;
-        axios.post(`${BaseApi.server_url}${url}`,  {
+        axios.post(`${BaseApi.server_url}${url}`,  
+        {
             email,password
          })
       .then(response => {
@@ -40,21 +114,26 @@ function PatientLogin()
       sessionStorage.setItem("token",response.data.jwt);
 
       if(response.data.role=="ROLE_PATIENT"){
+        debugger
         dispatch(setAsPatient())
         sessionStorage.setItem("role",response.data.role);
         navigate("/patientmenu")
       }
       if(response.data.role=="ROLE_HELPER"){
+        debugger
         dispatch(setAsHelper())
         sessionStorage.setItem("role",response.data.role);
         navigate("/adminmenu")
+        // //////////////////////////////////
       }
       if(response.data.role=="ROLE_DOCTOR"){
+        debugger
         dispatch(setAsDoctor())
         sessionStorage.setItem("role",response.data.role);
         navigate("/doctorMenu")
       }
       if(response.data.role=="ROLE_ADMIN"){
+        debugger
         dispatch(setAsAdmin())
         sessionStorage.setItem("role",response.data.role);
         navigate("/adminmenu")
@@ -65,10 +144,38 @@ function PatientLogin()
       .catch(error => {
         debugger
         console.log(error)
-         toast.error('Opss wrong ')
+         toast.error('Oopss something went wrong')
          console.log(error)
       });
    }
+
+
+   if(message!="")
+    return(<>
+<br /> <br />
+<center>
+        <div className= 'alert alert-warning col-md-6'>
+        <table>
+          
+          <tr>
+            <td>Enter OTP received</td>
+            <td><input type="number" onChange={e=>setPassEnt(e.target.value)}/></td>
+          </tr>
+
+          <tr>
+            <td>Set New Password</td>
+            <td><input type="password" onChange={e=>setnPass(e.target.value)}/></td>
+          </tr>
+          <tr>
+            <td>Confirm New Password</td>
+            <td><input type="password" onChange={e=>setvPass(e.target.value)}/></td>
+          </tr>
+          <tr>
+            <td colSpan={2}><button className='btn btn-outline-success' onClick={setNewPass}>Set New Password</button></td>
+          </tr>
+        </table>
+    </div>
+    </center> </>)
 
     return (<>
     <section className="vh-100" style={{ backgroundColor: "#063d76" }}>
@@ -133,7 +240,7 @@ function PatientLogin()
                         Login
                       </button>
                     </div>
-                    <Link to="/register" className="small text-muted">Forgot password?</Link>
+                    <p className="small text-muted" onClick={setPass}>Forgot password?</p>
                     
                     <p className="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
                       Don't have an account ?{"    "}

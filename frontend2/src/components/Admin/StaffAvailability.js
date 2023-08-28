@@ -1,7 +1,6 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
 import { useEffect, useState } from "react";
-import { Route } from 'react-router-dom';
 import { BaseApi } from '../api/BaseApi';
 import axios from 'axios';
 
@@ -17,8 +16,10 @@ function StaffAvailability(props)
 
     const select=()=>{
         debugger;
+        var tokenn=sessionStorage.getItem("token")
         const url= 'adminstaff';
-        axios.get(`${BaseApi.server_url}${url}`)
+        axios.get(`${BaseApi.server_url}${url}`,
+        { headers: {"Authorization" : `Bearer ${tokenn}`}})
         .then(res=>{
             debugger
             setStaffs(res.data);
@@ -48,22 +49,22 @@ debugger;
                             <div className="card mb-6" style={{ maxWidth: 800, backgroundColor: 'skyblue' }}>
                                 <div className="row g-0" >
                                     <div className="col-md-4">
-                                        <img style={{ width: 500, height: 275 }}
+                                        <img style={{ width: 500, height: 250 }}
                                             src={imgSrc}
                                             className="img-fluid rounded-start"
                                             alt={altImg} />
                                     </div>
                                     <div className="col-md-8">
                                         <div className="card-body">
-                                            <h5 className="card-title">Dr.{staff.doctor.name} (Contact No:{staff.doctor.phone}) Doc.id:{staff.doctor.id}</h5>
+                                            <h5 className="card-title">Dr.{staff.name} (Contact No:{staff.phone}) Doc.id:{staff.doctor.id}</h5>
                                             <hr></hr>
                                             <p className="card-text">
-                                                Dr.<b>{staff.doctor.name}</b>  is a distinguished medical professional with a specialization in
+                                                Dr.<b>{staff.name}</b>  is a distinguished medical professional with a specialization in
                                                 <b>{staff.doctor.speciality}</b>. They had completed their education as <b>{staff.doctor.education}</b>,
-                                                they are from <b>{staff.doctor.address}</b>
+                                                they are from <b>{staff.address}</b>
                                             </p>
                                             <p className="card-text">
-                                                <small className="text-muted">Date of Birth <b>{staff.doctor.dob}</b></small>
+                                                <small className="text-muted">Date of Birth <b>{staff.dob}</b></small>
                                             </p>
                                         </div>
                                     </div>
