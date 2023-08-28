@@ -6,13 +6,14 @@ import com.hms.pojos.Patient;
 
 public interface EntryService {
 
-	Entry authenticate(String email, String password);
 
 	Doctor findDocByEmail(String email);
 	
 	String findRoleByEmail(String email);
 
-	Entry updateEntry(String email, String password, String role);
+	Entry updateEntryCred(String email, String password);
 
 	Patient FindPatientByEmail(String email);
+	
+	Entry findAnyUserByEmail(String email);
 }

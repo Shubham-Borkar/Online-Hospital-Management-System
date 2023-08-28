@@ -3,6 +3,7 @@ package com.hms.service;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hms.dao.EntryDao;
@@ -15,16 +16,17 @@ import com.hms.pojos.Patient;
 public class EntryServiceImp implements EntryService {
 	@Autowired
 	private EntryDao lDao;
-
+	@Autowired
+	private PasswordEncoder passwordencoder;
+	
+	
 	@Override
-	public Entry authenticate(String email, String password) {
-		Entry user = lDao.findByEmail(email).orElse(null);
-		
-		if (user!=null && user.getPassword().equals(password))
-			return user;
-		return null;
+	public Entry findAnyUserByEmail(String email) {
+		return lDao.findByEmail(email).orElse(null);
 	}
 
+	
+	
 	@Override
 	public Doctor findDocByEmail(String email) {
 		Entry findByEmail = lDao.findByEmail(email).orElse(null);
@@ -34,34 +36,13 @@ public class EntryServiceImp implements EntryService {
 	}
 
 	@Override
-	public Entry updateEntry(String email, String password, String role) {
+	public Entry updateEntryCred(String email, String password) {
 		Entry user = lDao.findByEmail(email).orElse(null);
-		/* if (user != null) {
-			if (role.equals("patient")) {
-				date = user.getPatient().getDob();
-			} else if (role.equals("doctor")) {
-				date = user.getDoctor().getStaff().getDob();
-			} else {
-				date = user.getStaff().getDob();
-			}
-		//	DateFormat dateFormat = new SimpleDateFormat();
-		//	String strDate = dateFormat.format(date);
-			//if (dob.equals(strDate)) {
-				user.setPassword(password);
-				lDao.save(user);
-				return user;
-		//
-				}
-		return null;*/
-		
 		if(user!=null) {
-			user.setPassword(password);
-			// If role is of type enum then use valueOf method
-			user.setRole(role);
+			user.setPassword(passwordencoder.encode(password));
 			return lDao.save(user);
 		}
-		return null;
-		
+		return null;	
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import com.hms.pojos.Patient;
 public interface PatientService {
 	
 	
-	ApiResponse registerPatient(RegisterDto patientDetails);
+	RegisterDto registerPatient(RegisterDto patientDetails);
 	
 	List<Patient> getAllPatients();
 

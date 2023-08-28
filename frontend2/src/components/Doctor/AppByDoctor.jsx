@@ -9,8 +9,10 @@ function AppByDoctor() {
     const getlist=()=>{
         debugger;
         const did=1;
+        var tokenn=sessionStorage.getItem("token")
        const url=`appointment/getAppList/${date}/${did}`
-       axios.get(`${BaseApi.server_url}${url}`)
+       axios.get(`${BaseApi.server_url}${url}`,
+       { headers: {"Authorization" : `Bearer ${tokenn}`}})
         .then(res=>{
                 debugger;
                 setPattAppts(res.data);

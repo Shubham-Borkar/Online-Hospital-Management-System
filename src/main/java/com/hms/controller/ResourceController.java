@@ -17,7 +17,7 @@ import com.hms.pojos.ResourceE;
 import com.hms.service.ResourceService;
 @RequestMapping("/resource")
 @RestController
-@CrossOrigin(origins = "*" ,allowedHeaders = "*")
+@CrossOrigin("*")
 public class ResourceController {
 	@Autowired
 	private ResourceService resImp;

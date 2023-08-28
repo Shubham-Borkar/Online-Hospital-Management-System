@@ -33,22 +33,57 @@ public class SecurityConfig {
 				(request, resp, exc) -> 
 				resp.sendError(HttpStatus.UNAUTHORIZED.value(), "Not yet authenticated"))
 				.and()
+				.cors()
+				.and()
 			.csrf().disable(). // disable CSRF to continue with REST APIs
 				authorizeRequests() // specify all authorization rules (i.e authorize all requests)
-//				.antMatchers("/hms/authenticate").permitAll() 
-				.antMatchers("/**").permitAll() // for incoming req ending
-				//after testing
-//				.antMatchers("/patient", 
-//						"/hms/authenticate", 
-//						"/users/signup",
-//						"/swagger*/**", 
-//						"/v*/api-docs/**"
-//						).permitAll() // for incoming req ending
-																								// with /products/view :
-																								// no authentication n
-																								// authorization needed
-		//		.antMatchers("/doctor").hasRole("PATIENT")// only customer can purchase the products
-		//		.antMatchers("/adminstaff").hasRole("ADMIN") // only admin can add the products
+				.antMatchers("/hms/authenticate","/patient/register","/entry/getotp/*","/swagger*/**","/v*/api-docs/**").permitAll() 
+//+++++++++++++++++++++++++++++++++++++++++++++++
+//				//"/**",
+//				.antMatchers("/appointment/get/*",
+//							"/appointment/getAppList/*/*",
+//							"/appointment/doctor/*",
+//							"/appointment/patient/*",
+//							"/appointment/updatestatus/*",
+//							"/appointment/editprescription/*/*").hasRole("DOCTOR")
+////				,
+////				"/adminstaff/helperstaff"
+//				
+//				.antMatchers("/appointment/addappointment",
+//							"/appointment/appSlotList/*/*",
+//							"/appointment/patient/*",
+//							"/entry/ptemail/*").hasRole("PATIENT")
+//				
+//				
+//				.antMatchers().hasRole("HELPER")
+//				.antMatchers("/adminstaff/register/doctor/*/*",
+//							"/adminstaff/register/helper",
+//							"/appointment",
+//							"/adminstaff/*/*",
+//							"/adminstaff/*",
+//							"/patient",
+//							"/adminstaff").hasRole("ADMIN")
+////				,
+////				"/adminstaff/helperstaff"
+//				
+//				
+//				.antMatchers("/invoice/add/*").hasAnyRole("HELPER","ADMIN")
+//				
+//				
+//				.antMatchers("/invoice/*",
+//							"/patient/*",
+//							"/doctor").hasAnyRole("ADMIN","PATIENT")
+//				
+//				.antMatchers("/doctor/*",
+//						"/adminstaff/uploadStaffImage/*",
+//						"/adminstaff/getStaffImage/*",
+//						
+//						"/resource").hasAnyRole("ADMIN","DOCTOR" )
+//				
+//				.antMatchers("/adminstaff/getStaffImage/*"
+//						).hasAnyRole("ADMIN","DOCTOR","PATIENT")
+				
+//+++++++++++++++++++++++++++++++++++++++++++++++					
 				.anyRequest().authenticated() // all remaining end points accessible only to authenticated users
 				.and().sessionManagement() // configure HttpSession management
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS) // DO NOT use HttpSession for storing any sec

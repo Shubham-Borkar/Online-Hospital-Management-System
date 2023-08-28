@@ -11,6 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,12 +34,17 @@ public class PatientServiceImp implements PatientService {
 	private EntryDao lDao;
 	@Autowired
 	private ModelMapper mapper;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 
 	
 
 
 	@Override
-	public ApiResponse registerPatient(RegisterDto patientDetails) {
+	public RegisterDto registerPatient(RegisterDto patientDetails) {
+		if(lDao.findByEmail(patientDetails.getEmail()).isPresent())
+		return null;
 		Patient pdetails=mapper.map(patientDetails, Patient.class);
 		Entry edetails=mapper.map(patientDetails, Entry.class);
 		Patient psaved=null;
@@ -48,6 +54,9 @@ public class PatientServiceImp implements PatientService {
 		psaved = pDao.save(pdetails);
 		//adding patient into in Entry entity as id is auto genrated which is required in entry table
 		edetails.setPatient(psaved);
+		edetails.setRole("ROLE_PATIENT");
+		edetails.setPassword(passwordEncoder.encode(edetails.getPassword()));
+
 		//adding Entry details in Entry/login table
 		save = lDao.save(edetails);
 		 }
@@ -56,11 +65,11 @@ public class PatientServiceImp implements PatientService {
         	 pDao.delete(pdetails);
          if(save!=null)
         	 lDao.delete(save);
-         return new ApiResponse("Registration Failed");
-			 
+        
+     	return null; 
 		 }
-		
-		return new ApiResponse("Registration Sucessful");
+		 return patientDetails;
+	
 				
 	}
 	
@@ -76,6 +85,8 @@ public class PatientServiceImp implements PatientService {
 
 	@Override
 	public Patient updatePatient(Patient patient) {
+		if(pDao.findById(patient.getId()).isEmpty())
+			return null;
 		return pDao.save(patient);
 
 	}

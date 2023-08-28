@@ -12,7 +12,6 @@ public interface AdminStaffService {
 
 	ApiResponse addDoctor(RegisterDto doctorDetails,String eduString,String speString);
 	
-
 	ApiResponse addStaff(RegisterDto staffDetails);
 	
 

@@ -14,12 +14,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class InvoiceDto {
-//	 "idate": "2023-08-16T12:10:28.250Z",
-//	  "medFees": 7777,
-//	  "docFees": 8888,
-//	  "labTestFees": 9999,
-//	  "otherFees": 1010,
-//	  "desc": "string",
 	@PastOrPresent
 	private LocalDate idate;
 	private double medFees; 

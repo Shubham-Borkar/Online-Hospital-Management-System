@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { BaseApi } from '../api/BaseApi';
+import { hfortoken } from "../Admin/ProtectedRoute";
 
 function StaffList() {
     const [staffs,setStaffs] =  useState([]);
@@ -13,12 +14,19 @@ function StaffList() {
      }, []); 
 
      function loadStaff() {
+        debugger
+        var tokenn=sessionStorage.getItem("token");
         const url= 'adminstaff/helperstaff';
         debugger;
-        axios.get(`${BaseApi.server_url}${url}`)
-        .then(
-            result=>{setStaffs(result.data);console.log(setStaffs)})  
-        .catch((error)=>console.log(error))  
+        axios.get(`${BaseApi.server_url}${url}`,
+        { headers: {"Authorization" : `Bearer ${tokenn}`}}
+        )
+        .then((result)=>{
+            debugger
+            setStaffs(result.data);console.log(setStaffs)})  
+        .catch((error)=>{
+            debugger
+            console.log(error)})  
      }
   
 

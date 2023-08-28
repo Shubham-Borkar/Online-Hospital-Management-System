@@ -38,6 +38,10 @@ public class AdminStaffServiceImp implements AdminStaffService {
 	
 	@Override
 	public ApiResponse addDoctor(RegisterDto doctorDetails,String eduString,String speString) {
+		if(lDao.findByEmail(doctorDetails.getEmail()).isPresent())
+			return new ApiResponse("Doctor with Email Id Already Present");
+			
+		
 		Entry savedEntry=null;
 		Staff staffSaved=null;
 		Doctor docSaved=null;
@@ -48,8 +52,10 @@ public class AdminStaffServiceImp implements AdminStaffService {
 		Doctor docDetails=new Doctor(eduString, speString, staffSaved);
 		docSaved=dDao.save(docDetails);
 		Entry docEntry=mapper.map(doctorDetails, Entry.class);
+		docEntry.setPassword(passwordEncoder.encode(docEntry.getPassword()));
 		docEntry.setDoctor(docSaved);
 		docEntry.setStaff(staffSaved);
+		docEntry.setRole("ROLE_DOCTOR");
 		savedEntry = lDao.save(docEntry);
 		}
 		catch(RuntimeException e)
@@ -66,6 +72,9 @@ public class AdminStaffServiceImp implements AdminStaffService {
 
 	@Override
 	public ApiResponse addStaff(RegisterDto staffDetails) {
+		if(lDao.findByEmail(staffDetails.getEmail()).isPresent())
+			return new ApiResponse("Staff with Email Id Already Present");
+			
 		Staff sdetails=mapper.map(staffDetails, Staff.class);
 		//System.out.println(sdetails+"first mapper");
 		sdetails.setRole("ROLE_HELPER");
@@ -98,6 +107,7 @@ public class AdminStaffServiceImp implements AdminStaffService {
 
 	@Override
 	public void deleteStaff(int staffId) {
+		if(sDao.findById(staffId).isPresent())
 		sDao.deleteById(staffId);
 	}
 
@@ -110,15 +120,22 @@ public class AdminStaffServiceImp implements AdminStaffService {
 	public List<Staff> findAllHelper() {
 		return sDao.findByRole("ROLE_HELPER");
 	}
+	
+
+	
 	@Override
 	public Staff updateStaff(DoctorDto staff) {
+		 System.out.println(staff+" before find staff by id");
 		 Staff ssearched=sDao.findById(staff.getId()).orElse(null);
+		 
 		 if(ssearched==null)
 			 return null;
-		 
-		 Staff smapped=mapper.map(staff, Staff.class);
-		return sDao.save(smapped);
 		
+		 Staff smapped=mapper.map(staff, Staff.class);
+		 smapped.setImagePath(ssearched.getImagePath());
+		 smapped.setRole(ssearched.getRole());
+
+		 return sDao.save(smapped);
 	}
 
 	@Override

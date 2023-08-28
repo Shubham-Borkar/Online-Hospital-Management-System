@@ -15,9 +15,11 @@ function PatHistory() {
 
     const select=()=>{
             debugger;
+            var tokenn=sessionStorage.getItem("token")
             const url= `appointment/patient/${pid}`;
            // const url= `appointment/patient/1`;
-            axios.get(`${BaseApi.server_url}${url}`)
+            axios.get(`${BaseApi.server_url}${url}`,
+            { headers: {"Authorization" : `Bearer ${tokenn}`}})
             .then(res=>{
                     setPatAppts(res.data);
                     })

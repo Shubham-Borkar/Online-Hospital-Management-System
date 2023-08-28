@@ -35,6 +35,7 @@ public class JwtUtils {
 	
 	private Key key;
 
+	
 	@PostConstruct
 	public void init() {
 		key = Keys.hmacShaKeyFor(jwtSecret.getBytes());

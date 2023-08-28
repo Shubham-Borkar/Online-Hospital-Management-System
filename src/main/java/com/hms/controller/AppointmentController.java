@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hms.dto.AddAppDto;
 import com.hms.dto.ApiResponse;
+import com.hms.dto.EmailDetails;
 import com.hms.pojos.Appointment;
 import com.hms.service.AppointService;
-import com.hms.service.AppointServiceImp;
+import com.hms.service.EmailService;
 
 
 @RestController
@@ -29,6 +30,9 @@ import com.hms.service.AppointServiceImp;
 public class AppointmentController {
 	@Autowired
 	private AppointService appointmentImp;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@PostMapping("/addappointment")
 	public ResponseEntity<?> addAppointment(@RequestBody AddAppDto appointmentDetails) {
@@ -38,7 +42,19 @@ public class AppointmentController {
 			Appointment app = appointmentImp.addAppointment(appointmentDetails);
 			if(app==null)
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("Error"));
-			return new ResponseEntity<>(app,HttpStatus.CREATED);
+			else {
+				String type="Hospital";
+				if(appointmentDetails.getDid()==0) type="General Health Checkup";
+				String body="Dear User,\r\n"
+						+ "\r\n"
+						+ "This is to inform you that your "+type+ " Appointment has been scheduled for Date "+appointmentDetails.getApointdate()+ " for Time Slot "+appointmentDetails.getSlot()+ ". Please take note of the date and time, and ensure your availability.\r\n"
+						+ "\r\n"
+						+ "Thank you,"
+						+ "\r\n"
+						+ "MARS HOSPITAL";
+				EmailDetails edetails=new EmailDetails("vedantborkar29@gmail.com", body, "MARS Hospital, Appointment Scheduled !!!");
+			return new ResponseEntity<>(emailService.sendSimpleMail(edetails),HttpStatus.CREATED);
+			}
 	
 	}
 
@@ -107,7 +123,7 @@ public class AppointmentController {
 			String s = appointmentImp.editprescription(aid,pre);
 			if(s==null)
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("Error finding Appointment by id"));
-			return new ResponseEntity<>(s,HttpStatus.OK);
+			return new ResponseEntity<>(new ApiResponse(pre),HttpStatus.OK);
 	
 	}
 

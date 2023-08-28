@@ -4,6 +4,8 @@ package com.hms.controller;
 
 import java.io.IOException;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hms.custom_exception.ResourceNotFoundException;
+import com.hms.dto.ApiResponse;
 import com.hms.dto.RegisterDto;
 import com.hms.pojos.Patient;
 import com.hms.service.ImageService;
@@ -53,21 +56,19 @@ public class PatientController {
 	
 	@PostMapping("/register")
 	public ResponseEntity<?> registerPatient(@RequestBody RegisterDto patientDetails) {
-		try {
-			return new ResponseEntity<>(patientServiceImp.registerPatient(patientDetails), HttpStatus.CREATED);
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	 RegisterDto rsaved=patientServiceImp.registerPatient(patientDetails);
+			
+	 if(rsaved!=null)
+	 return new ResponseEntity<>(new ApiResponse("Registration Sucessful"), HttpStatus.CREATED);
+	 return new ResponseEntity<>(new ApiResponse("Registration Failed,User with Email Exist"), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-	}
 	@GetMapping("")
 	public ResponseEntity<?> getAllPatient() {
 		try {
 			return new ResponseEntity<>(patientServiceImp.getAllPatients(), HttpStatus.OK);
 
 		} catch (RuntimeException e) {
-			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
@@ -84,14 +85,11 @@ public class PatientController {
 
 	@PutMapping("/{pid}")
 	public ResponseEntity<?> updatePatientDetails(@PathVariable int pid, @RequestBody Patient patientDetails) {
-      try {
 		patientDetails.setId(pid);
-       return new ResponseEntity<>(patientServiceImp.updatePatient(patientDetails),HttpStatus.OK);
-      }catch(RuntimeException e) {
-    	  e.printStackTrace();
-    	  return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-      
-      }
+		Patient patientupdated=patientServiceImp.updatePatient(patientDetails);
+		if (patientupdated!=null)
+			return ResponseEntity.ok(patientupdated);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 }

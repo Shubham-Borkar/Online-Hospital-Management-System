@@ -42,6 +42,7 @@ public class DoctorServiceImp implements DoctorService {
 			mapped.setEducation(doctor.getEducation());
 			mapped.setSpeciality(doctor.getSpeciality());
 			mapped.setId(doctor.getId());
+			mapped.setStaffid(doctor.getStaff().getId());
 			dtolist.add(mapped);
 		}
 		return dtolist;

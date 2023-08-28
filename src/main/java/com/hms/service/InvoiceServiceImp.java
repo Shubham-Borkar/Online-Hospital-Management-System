@@ -23,6 +23,8 @@ public class InvoiceServiceImp implements InvoiceService {
 	@Override
 	public InvoiceDto GenerateInvoice(int appointmentId, InvoiceDto invoiceDetails) {
  		Appointment app = aDao.findById(appointmentId).orElse(null);
+ 		if(app==null)
+ 			return null;
  		Invoice invoiceentity=mapper.map(invoiceDetails, Invoice.class);
  		invoiceentity.setAppoint(app);
  		iDao.save(invoiceentity);

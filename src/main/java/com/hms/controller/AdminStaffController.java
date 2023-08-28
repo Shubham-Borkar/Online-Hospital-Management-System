@@ -12,6 +12,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,8 @@ import com.hms.service.ImageService;
 public class AdminStaffController {
 	@Autowired
 	private AdminStaffService StaffImp;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private ImageService imageServiceImp;
@@ -55,7 +58,7 @@ public class AdminStaffController {
 		}
 	}
 	
-	@PostMapping("/register/staff")
+	@PostMapping("/register/helper")
 	public ResponseEntity<?> addStaffDetails(@RequestBody RegisterDto staffDetails)
 	{
 		System.out.println(staffDetails);
@@ -95,10 +98,9 @@ public class AdminStaffController {
 	}
 	
 	@PutMapping("/{staffId}")
-	public ResponseEntity<?> updateStaffDetails(@PathVariable int staffId, @RequestBody DoctorDto staffDetails)
-	{
+	public ResponseEntity<?> updateStaffDetails(@PathVariable int staffId,@RequestBody DoctorDto staffDetails)
+	{  
 		staffDetails.setId(staffId);
-		System.out.println(staffDetails);
 		Staff updatedStaff=StaffImp.updateStaff(staffDetails);
 		if(updatedStaff!=null)
 		return ResponseEntity.ok(updatedStaff);

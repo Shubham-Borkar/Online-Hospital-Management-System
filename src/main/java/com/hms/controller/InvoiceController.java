@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hms.dto.InvoiceDto;
+import com.hms.pojos.Invoice;
 import com.hms.service.InvoiceService;
 import com.hms.service.InvoiceServiceImp;
 
 
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "*" ,allowedHeaders = "*")
 //@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/invoice")
@@ -30,12 +31,12 @@ public class InvoiceController {
 	@PostMapping("/add/{aid}")
 	public ResponseEntity<?> generateInvoice(@PathVariable int aid,@RequestBody @Valid InvoiceDto invoiceDetails)
 	{
-		try { 		
-			return new ResponseEntity<>(InvoiceImp.GenerateInvoice(aid, invoiceDetails), HttpStatus.CREATED);
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		InvoiceDto invoice=InvoiceImp.GenerateInvoice(aid, invoiceDetails);
+			if(invoice!=null)
+			return new ResponseEntity<>(invoice, HttpStatus.CREATED);
+
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
 	}
 	
 	@GetMapping("/{aid}")

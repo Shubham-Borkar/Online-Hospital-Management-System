@@ -4,11 +4,12 @@ import { BaseApi } from "../api/BaseApi";
 function ManageApp() {
    const [aid,setAid]=useState(0);
    const [pre,setPre]=useState("");
-   const [flagg,setFlag]=useState("");
+   const [flagg,setFlag]=useState(0);
    const [alist,setAlist]=useState([]);
 
 
    useEffect(()=>{
+    console.log("values"+aid+pre+flagg+alist)
      select(); 
     }, [])
     useEffect(()=>{
@@ -17,30 +18,38 @@ function ManageApp() {
 
    const select=()=>{
     let did=1;
+    var tokenn=sessionStorage.getItem("token");
     const url= `appointment/doctor/${did}`;
-     axios.get(`${BaseApi.server_url}${url}`)
+     axios.get(`${BaseApi.server_url}${url}`,
+     { headers: {"Authorization" : `Bearer ${tokenn}`}})
      .then(res=>{
         setAlist(res.data);
+        debugger
         console.log(res.data)
              })
-             .catch((err)=>console.log(err))
+             .catch((err)=>{debugger; console.log(err)})
      }
 
      const changestatus=()=>{
+        var tokenn=sessionStorage.getItem("token")
     const url= `appointment/updatestatus/${aid}`;
-     axios.post(`${BaseApi.server_url}${url}`)
+     axios.post(`${BaseApi.server_url}${url}`,
+     { headers: {"Authorization" : `Bearer ${tokenn}`}})
      .then(res=>{
         console.log(res.data)
-        setFlag("a");
+        var b=flagg+1;
+        setFlag(b);
              })
              .catch((err)=>console.log(err))
      }
      
      const addprescribtion=()=>{
         const url= `appointment/editprescription/${aid}/${pre}`;
-        axios.post(`${BaseApi.server_url}${url}`)
+        var tokenn=sessionStorage.getItem("token")
+        axios.post(`${BaseApi.server_url}${url}`,
+        { headers: {"Authorization" : `Bearer ${tokenn}`}})
         .then(res=>{
-            setFlag("a");
+            setFlag();
            console.log(res.data)
                 })
                 .catch((err)=>console.log(err))
