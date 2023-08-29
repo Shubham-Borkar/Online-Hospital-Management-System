@@ -35,7 +35,7 @@ function DoctorList() {
       <center>
         {
           doctors.map((doctor) => {
-            let imgSrc = `${BaseApi.server_url}adminstaff/getStaffImage/${doctor.staff.id}`
+            let imgSrc = `${BaseApi.server_url}adminstaff/getStaffImage/${doctor.staffid}`
             console.log(imgSrc)
             let altImg = `Doctor${doctor.id} img`
             return (<>

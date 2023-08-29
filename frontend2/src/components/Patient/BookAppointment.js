@@ -79,6 +79,7 @@ function BookAppointment() {
                 setDid(+args.target.value)
                 var tokenn = sessionStorage.getItem("token")
                 const url = `appointment/appSlotList/${args.target.value}/${apointdate}`
+                if(apointdate!="")
                 axios.get(`${BaseApi.server_url}${url}`,
                         { headers: { "Authorization": `Bearer ${tokenn}` } })
                         .then(res => {
@@ -100,8 +101,11 @@ function BookAppointment() {
                 debugger
                 setApointdate(args.target.value)
                 console.log(apointdate)
+               
+                
                 var tokenn = sessionStorage.getItem("token")
                 const url = `appointment/appSlotList/${did}/${args.target.value}`
+                if(did!="") 
                 axios.get(`${BaseApi.server_url}${url}`,
                         { headers: { "Authorization": `Bearer ${tokenn}` } })
                         .then(res => {
@@ -119,9 +123,9 @@ function BookAppointment() {
                         })
         }
 
-        const handleChangeSlot = (e)=> {
+        const handleChangeSlot = (e) => {
                 debugger
-                        setSlot(e.target.value);
+                setSlot(e.target.value);
         }
 
         const getDoct = () => {
@@ -244,22 +248,8 @@ function BookAppointment() {
                                                                                         </div>
                                                                                         <h1>Book Appointment</h1> <hr />
                                                                                         <div className="table-bordered">
-                                                                                                <div className='form-group input-group-sm appstyle'>Appointment Date
-                                                                                                        <input type="date" className='form-control appstyle'
-                                                                                                                style={{ width: 400 }}
-                                                                                                                name="app_date"
-                                                                                                                onChange={slotFunbyDate} min={day} max={mday} />
-                                                                                                        {/* e=> setApointdate(e.target.value) */}
-                                                                                                </div> <br />
 
-                                                                                                <div className='form-group input-group-sm appstyle'>Symptoms
-                                                                                                        <input type="text" className='form-control appstyle'
-                                                                                                                style={{ width: 400 }}
-                                                                                                                name="symptoms"
-                                                                                                                onChange={e => setSymptoms(e.target.value)} />
-                                                                                                </div> <br />
-
-                                                                                                <div className='form-group input-group-sm appstyle'>Doctor
+                                                                                        <div className='form-group input-group-sm appstyle'>Doctor
                                                                                                         <select id="did" onChange={slotFunbydid} name="doctor" style={{ width: 400, height: 30 }}>
                                                                                                                 <option value="" disabled selected hidden>Choose Doctor</option>
                                                                                                                 {
@@ -270,6 +260,24 @@ function BookAppointment() {
                                                                                                         </select>
                                                                                                 </div> <br />
 
+                                                                                                
+
+                                                                                                <div className='form-group input-group-sm appstyle'>Symptoms
+                                                                                                        <input type="text" className='form-control appstyle'
+                                                                                                                style={{ width: 400 }}
+                                                                                                                name="symptoms"
+                                                                                                                onChange={e => setSymptoms(e.target.value)} />
+                                                                                                </div> <br />
+
+                                                                                                <div className='form-group input-group-sm appstyle'>Appointment Date
+                                                                                                        <input type="date" className='form-control appstyle'
+                                                                                                                style={{ width: 400 }}
+                                                                                                                name="app_date"
+                                                                                                                onChange={slotFunbyDate} min={day} max={mday} />
+                                                                                                        {/* e=> setApointdate(e.target.value) */}
+                                                                                                </div> <br />
+
+                                                                                                
                                                                                                 <div className='form-group input-group-sm appstyle'>Appointment Slot <br />
                                                                                                         <select id="slotno" onChange={handleChangeSlot} name="app_slotno" style={{ width: 400, height: 30 }}>
                                                                                                                 <option value="" disabled selected hidden>Choose Slot</option>

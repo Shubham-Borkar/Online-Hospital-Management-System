@@ -31,7 +31,7 @@ public class JWTRequestFilter extends OncePerRequestFilter {
 		// check for authorization hdr
 		String authHeadr = request.getHeader("Authorization");
 		if (authHeadr != null && authHeadr.startsWith("Bearer")) {
-			System.out.println("got bearer token-->"+authHeadr);
+			//System.out.println("got bearer token-->"+authHeadr);
 			String token = authHeadr.substring(7);
 			//System.out.println("after sub string");
 			Claims claims = utils.validateJwtToken(token);

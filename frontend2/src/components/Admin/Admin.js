@@ -1,9 +1,11 @@
+import { toast } from 'react-toastify';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
 import { BaseApi } from '../api/BaseApi';
 import { useNavigate } from 'react-router-dom';
 
 function Admin() {
+  var userr=sessionStorage.getItem("role")
 
     const navigate=useNavigate();
 
@@ -35,7 +37,7 @@ function Admin() {
 
     return ( <>
       <center> <br /><br /><br />
-          <h1>Admin Panel</h1> <br />
+          <h1>{userr.substring(5)}   &nbsp; Panel</h1> <br />
           </center>
           <center>
           <div className="container">

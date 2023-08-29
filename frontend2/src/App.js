@@ -192,7 +192,7 @@ function App() {
         <br /><br />
                 {/* <div > */}
 
-        <Link to="/login">Login</Link>{"   |   "}
+        {/* <Link to="/login">Login</Link>{"   |   "}
         <Link to="/doctorMenu"> doctor mp</Link>{"   |   "}
         <Link to="/doctorsDetails"> My Profile</Link>{"   |   "}
         <Link to="/staffList"> Staff List</Link>{"   |   "}
@@ -204,7 +204,7 @@ function App() {
         <Link to="/resourceUpdate"> resourceUpdate</Link>{"   |   "}
         <Link to="/doctorProfile"> doctorProfile </Link>{"   |   "}
         <Link to="/patientmenu">Patient Menu</Link>{"   |   "}
-        <Link to="/adminmenu">Admin Menu</Link>{"   |   "}
+        <Link to="/adminmenu">Admin Menu</Link>{"   |   "} */}
         <Footer></Footer>
         {/* </div> */}
      </section>

@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+
 export const PrivateToDoctor = ({ Component }) => {
     debugger
     const loginStatus = useSelector((state) => state.auth.status)
@@ -76,7 +77,8 @@ export const PrivateToAandH = ({ Component }) => {
 
 export const PrivateToAdmin = ({ Component }) => {
     debugger
-    const loginStatus = useSelector((state) => state.auth.status)
+        const loginStatus = useSelector((state) => state.auth.status)
+       
 //const userRole = useSelector((state) => state.auth.role)
     const auth = ((loginStatus || sessionStorage.getItem("token")) && ((sessionStorage.getItem("role") == "ROLE_ADMIN")))
     if (!auth)
@@ -86,4 +88,5 @@ export const PrivateToAdmin = ({ Component }) => {
     }
     else
     return <Component />
+    
 }

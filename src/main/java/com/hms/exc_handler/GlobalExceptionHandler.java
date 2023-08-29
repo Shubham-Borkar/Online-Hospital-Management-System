@@ -46,7 +46,6 @@ public class GlobalExceptionHandler {
 		public ResponseEntity<?> handleException
 		(Exception e){
 			System.out.println("in catch-all  exc");
-			e.printStackTrace();
 			return ResponseEntity.status
 					(HttpStatus.INTERNAL_SERVER_ERROR).
 					body(new ApiResponse(e.getMessage()));

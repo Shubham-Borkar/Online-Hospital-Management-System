@@ -10,6 +10,7 @@ function ManageDoctors(props) {
     const navigate = useNavigate();
     const [doctors, setDoctors] = useState([])
     const [selectedFile, setSelectedFile] = useState(null);
+    var flagg = false;
 
     useEffect(() => {
         console.log("inside componentDidMount..");
@@ -18,7 +19,9 @@ function ManageDoctors(props) {
 
     const select = () => {
         debugger;
-        var tokenn=sessionStorage.getItem("token")
+        if (!flagg) 
+        {
+            var tokenn=sessionStorage.getItem("token")
         const url = 'doctor';
         axios.get(`${BaseApi.server_url}${url}`,
         { headers: {"Authorization" : `Bearer ${tokenn}`}})
@@ -32,11 +35,15 @@ function ManageDoctors(props) {
                 console.log(error)
             })
     }
+    flagg = true
+}
 
          const handleFileChange=(event) => {
           debugger;
           setSelectedFile(event.target.files[0]); 
         };
+        
+        
 
         // const handleRefresh = () => {
         //   debugger
