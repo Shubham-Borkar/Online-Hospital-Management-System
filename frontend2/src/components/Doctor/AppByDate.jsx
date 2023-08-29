@@ -16,12 +16,11 @@ function AppByDate() {
         .then(res=>{
                 debugger;
                 setPatAppts(res.data);
-                console.log(res.data)
                 })
         .catch((err)=>console.log(err))
         }
 
-    return (  <><h1>Appointments by date</h1>
+    return (  <><h1>Appointments by Date</h1>
     
     <input type="date"id="input" class="form-control" title="" placeholder="Enter the Date to Get Appointment"  value={date} name="date" onChange={e=>setDate(e.target.value)}/>
     <button type="button" class="btn btn-large btn-block btn-info" onClick={getlist}>Get Appointments By Date</button>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { BaseApi } from '../api/BaseApi';
 import { hfortoken } from "../Admin/ProtectedRoute";
+import { toast } from "react-toastify";
 
 function StaffList() {
     const [staffs,setStaffs] =  useState([]);
@@ -23,21 +24,18 @@ function StaffList() {
         )
         .then((result)=>{
             debugger
-            setStaffs(result.data);console.log(setStaffs)})  
+            setStaffs(result.data);
+            console.log(setStaffs)})  
         .catch((error)=>{
             debugger
-            console.log(error)})  
+            toast.info('Error Getting Data')})  
      }
   
 
     return ( <>
     <h1>Staff List</h1>
     <center>
-    <div className='table-responsive col-md-8'>
-    <table className='table table-bordered myTable '>
-                           <tbody>
-                            <tr><th>Helper Staff Id</th><th>Name</th><th>Gender</th><th>Address</th><th>Dob</th><th>Phone</th></tr>
-                        {
+                        {/* {
                         staffs.map( (s)=> {
                                 return <><tr>
                                         <td>{s.id}</td>
@@ -50,10 +48,44 @@ function StaffList() {
                                        <tr>&nbsp;</tr>
                                        </>
                                            })
+
+
+                         //
+                                        }
+                                         */}
+                                         {
+                         staffs.map((staff) => {
+                            let imgSrc = `${BaseApi.server_url}adminstaff/getStaffImage/${staff.id}`
+                            console.log(imgSrc)
+                            let altImg = "Staff Image Not Uploded"
+                            return (<>
+                                <div className="card mb-6" style={{ maxWidth: 800, backgroundColor: 'skyblue' }}>
+                                    <div className="row g-0">
+                                    <div className="col-md-4">
+                                            <img style={{ width: 400, height: 250 }}
+                                                src={imgSrc}
+                                                className="img-fluid rounded-start"
+                                                alt={altImg} />
+                                        </div>
+                                        <div className="col-md-8">
+    
+                                            <div className="card-body">
+                                            <h5>Staff Id : <b>{staff.id}</b></h5>
+                                                <h5>Name : <b>{staff.name}</b></h5>
+                                                <h5>Gender : <b>{staff.gender}</b></h5>
+                                                <h5>Date of birth : <b>{staff.dob}</b></h5>
+                                                <h5>phone : <b>{staff.phone}</b></h5>
+                                                <h5>address : <b>{staff.address}</b></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                            </>);
+                        })
+                         
+                         //
                         }
-                           </tbody>
-    </table>
-    </div>
     </center>
     
     </> );

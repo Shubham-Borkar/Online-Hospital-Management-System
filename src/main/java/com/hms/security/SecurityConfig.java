@@ -45,15 +45,17 @@ public class SecurityConfig {
 						"/adminstaff").hasAnyRole("ADMIN","HELPER")
 				.antMatchers("/resource").hasAnyRole("ADMIN","DOCTOR","HELPER")
 				.antMatchers("/patient/*").hasAnyRole("ADMIN","PATIENT","HELPER")
+				
+				.antMatchers("/adminstaff/helperstaff").hasAnyRole("DOCTOR","ADMIN")
 
 				
-				.antMatchers("/invoice/add/*").hasRole("HELPER")
+				.antMatchers("/invoice/add/*","/resource/saveorupdate").hasRole("HELPER")
 
 				.antMatchers("/appointment/get/*",
 							"/appointment/getAppList/*/*",
 							"/appointment/doctor/*",
 							"/appointment/updatestatus/*",
-							"/appointment/editprescription/*/*","/adminstaff/helperstaff").hasRole("DOCTOR")
+							"/appointment/editprescription/*/*").hasRole("DOCTOR")
 			
 		
 				.antMatchers("/adminstaff/register/doctor/*/*",

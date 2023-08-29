@@ -1,61 +1,77 @@
-import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
-import '../../mystyle.css'
-import { BaseApi } from '../api/BaseApi';
-import './header.css'
-
+import { useNavigate } from "react-router-dom";
+import { BaseApi } from "../api/BaseApi";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import Mission from '../../pages/Mission';
 function Header() {
-    return (<nav className="navbar navbar-default" style={ {backgroundColor: "skyblue"}}>
-    <div className="container-fluid">
-      {/* <!-- Brand and toggle get grouped for better mobile display --> */}
-      <div className="navbar-header">
-        {/* <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" 
-                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span className="sr-only">Toggle navigation</span>
-          <span className="icon-bar">123</span>
-          <span className="icon-bar"></span>
-          <span className="icon-bar"></span>
-        </button> */}
-        
-        <a className="navbar-brand" href="Home">Mars Hospital</a>
+  const navigate=useNavigate()
+  var message="Login"
+  if(sessionStorage.getItem("token"))
+  message="  Logout  "
+ 
+  const loginLogout=()=>{
+   if(sessionStorage.getItem("token")){
+    sessionStorage.removeItem("token")
+    sessionStorage.removeItem("role")
+    sessionStorage.removeItem("email")
+    sessionStorage.removeItem("did")
+    sessionStorage.removeItem("id")
+    navigate("/login")
+   }
+   else
+   navigate("/login")
 
-      </div>
-  
-      {/* <!-- Collect the nav links, forms, and other content for toggling --> */} 
-      <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style={{color: "green"}}>
-        <ul className="nav navbar-nav navbarfont">
-        <img src={BaseApi.base_url+'assets/images/img.png'} className="img-responsive imagenav" alt="Responsive image"/>
-        </ul>
-        <form className="navbar-form navbar-left">
-          <div className="form-group">
-            <input type="text" className="form-control" placeholder="Search"/>
-          </div>
-          <button type="submit" className="btn btn-default">Submit</button>
-        </form>
-        <ul className="nav navbar-nav navbar-right">
-          <li><a href="Home">Home <span className="sr-only">(current)</span></a></li>
-          <li><a href="Home">About</a></li>
-          <li><a href="Home">Gallery</a></li>
-          <li><a href="Home">Contact Us</a></li>
-          <li><a href="Home">Register</a></li>
-          <li className="dropdown">
-            <a className="dropdown-toggle" data-toggle="dropdown" role="button" 
-                aria-haspopup="true" aria-expanded="false">
-                    Login 
-                <span className="caret"></span></a>
-            <ul className="dropdown-menu">
-              <li><a href="Home">Action</a></li>
-              <li><a href="Home">Another action</a></li>
-              <li><a href="Home">Something else here</a></li>
-              <li role="separator" className="divider"></li>
-              <li><a href="Home">Separated link</a></li>
-            </ul>
-          </li>
-        </ul>
-        </div>
-      {/* <!-- /.navbar-collapse --> */}
+  }
+  const dashfun=()=>{
+    const role=sessionStorage.getItem("role")
+    if(role=="ROLE_DOCTOR")
+    navigate("/doctorMenu")
+    if(role=="ROLE_PATIENT")
+    navigate("/patientmenu")
+    if(role=="ROLE_HELPER"||role=="ROLE_ADMIN")
+    navigate("/adminmenu")
+  }
+ 
+    return (  <> 
+
+<nav className="navbar navbar-expand-lg navbar-light bg-light">
+  <div className="container-fluid ">
+  <a className="navbar-brand" href="/">
+          <img src={BaseApi.base_url+'assets/images/logo.png'} alt="MARS Hospital" style={{ width: '50px', height: '40px' }} /> Mars Hospital&nbsp; &nbsp; &nbsp;
+        </a>
+        
+    <div className="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul className="navbar-nav">
+        <li className="navbar-brand">
+          <a className="nav-link active" aria-current="page" href="/home">Home Page</a>
+        </li>
+        <li className="navbar-brand">
+          <a className="nav-link" href="/contact">Contact Us</a>
+        </li>
+        <li className="navbar-brand">
+          <a className="nav-link" href="/mission">Mission</a>
+        </li>
+      </ul>
+      
     </div>
-    {/* <!-- /.container-fluid --> */}
-  </nav>);
+    <a className="navbar-brand" onClick={dashfun}>
+    Go to Main DashBoard
+        </a>
+    <div >
+      <button type="button" className="btn btn-outline-info" onClick={loginLogout}
+      style={{width: '150px'}}><h5>{message}</h5></button>
+      </div>
+  </div>
+</nav>
+
+  <br/><br/><br/><br/>
+    </>);
 }
 
 export default Header;
+
+
+
+
+

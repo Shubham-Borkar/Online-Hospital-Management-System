@@ -7,7 +7,7 @@ export const PrivateToDoctor = ({ Component }) => {
     const loginStatus = useSelector((state) => state.auth.status)
    // const userRole = useSelector((state) => state.auth.role)
     const auth = ((loginStatus || sessionStorage.getItem("token")) && (sessionStorage.getItem("role") == "ROLE_DOCTOR"))
-    return auth ? <Component /> : <Navigate to="/patientLogin" />
+    return auth ? <Component /> : <Navigate to="/login" />
 }
 
 
@@ -16,7 +16,7 @@ export const PrivateToHelper = ({ Component }) => {
     const loginStatus = useSelector((state) => state.auth.status)
     //const userRole = useSelector((state) => state.auth.role)
     const auth = ((loginStatus || sessionStorage.getItem("token")) && (sessionStorage.getItem("role") == "ROLE_HELPER"))
-    return auth ? <Component /> : <Navigate to="/patientLogin" />
+    return auth ? <Component /> : <Navigate to="/login" />
 }
 
 export const PrivateToPatient = ({ Component }) => {
@@ -24,7 +24,7 @@ export const PrivateToPatient = ({ Component }) => {
     const loginStatus = useSelector((state) => state.auth.status)
  //   const userRole = useSelector((state) => state.auth.role)
     const auth = ((loginStatus || sessionStorage.getItem("token")) && (sessionStorage.getItem("role") == "ROLE_PATIENT"))
-    return auth ? <Component /> : <Navigate to="/patientLogin" />
+    return auth ? <Component /> : <Navigate to="/login" />
 }
 
 // export const PrivateToAdmin = ({ Component }) => {
@@ -32,7 +32,7 @@ export const PrivateToPatient = ({ Component }) => {
 //     const loginStatus = useSelector((state) => state.auth.status)
 // //const userRole = useSelector((state) => state.auth.role)
 //     const auth = ((loginStatus || sessionStorage.getItem("token")) && (sessionStorage.getItem("role") == "ROLE_ADMIN"))
-//     return auth ? <Component /> : <Navigate to="/patientLogin" />
+//     return auth ? <Component /> : <Navigate to="/login" />
 // }
 
 export const PrivateToAandD = ({ Component }) => {
@@ -40,7 +40,7 @@ export const PrivateToAandD = ({ Component }) => {
     const loginStatus = useSelector((state) => state.auth.status)
 //const userRole = useSelector((state) => state.auth.role)
     const auth = ((loginStatus || sessionStorage.getItem("token")) && ((sessionStorage.getItem("role") == "ROLE_ADMIN")||(sessionStorage.getItem("role") == "ROLE_DOCTOR") ))
-    return auth ? <Component /> : <Navigate to="/patientLogin" />
+    return auth ? <Component /> : <Navigate to="/login" />
 }
 
 export const PrivateToAandDandH = ({ Component }) => {
@@ -48,7 +48,7 @@ export const PrivateToAandDandH = ({ Component }) => {
     const loginStatus = useSelector((state) => state.auth.status)
 //const userRole = useSelector((state) => state.auth.role)
     const auth = ((loginStatus || sessionStorage.getItem("token")) && ((sessionStorage.getItem("role") == "ROLE_ADMIN")||(sessionStorage.getItem("role") == "ROLE_DOCTOR")||(sessionStorage.getItem("role") == "ROLE_HELPER") ))
-    return auth ? <Component /> : <Navigate to="/patientLogin" />
+    return auth ? <Component /> : <Navigate to="/login" />
 }
 
 export const PrivateToAandH = ({ Component }) => {
@@ -56,7 +56,7 @@ export const PrivateToAandH = ({ Component }) => {
     const loginStatus = useSelector((state) => state.auth.status)
 //const userRole = useSelector((state) => state.auth.role)
     const auth = ((loginStatus || sessionStorage.getItem("token")) && ((sessionStorage.getItem("role") == "ROLE_ADMIN")||(sessionStorage.getItem("role") == "ROLE_HELPER") ))
-    return auth ? <Component /> : <Navigate to="/patientLogin" />
+    return auth ? <Component /> : <Navigate to="/login" />
 }
 
 

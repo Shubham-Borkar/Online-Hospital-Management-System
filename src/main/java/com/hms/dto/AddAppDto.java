@@ -17,6 +17,7 @@ import lombok.ToString;
 public class AddAppDto {
 	@NotNull(message = "Appointment Date must not be blank")
 	private LocalDate apointdate;
+	@NotNull(message = "Slot Must not be blank")
 	private String slot;
 	private String symptoms;
 	private int pid;

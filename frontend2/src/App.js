@@ -12,12 +12,7 @@ import Patient from './components/Patient/Patient'
 import Profile from './components/Patient/Profile'
 import Register from './components/Patient/Register'
 import Admin from './components/Admin/Admin'
-import DoctorAdd from './components/Admin/AddDoctor'
-import Login from './components/Admin/Login'
 import Resources from './components/Admin/Resources'
-import StaffAdd from './components/Admin/AddStaff'
-import StaffDetails from './components/Admin/ManageStaff'
-import StaffEdit from './components/Admin/EditStaff'
 import Doctor from './components/Doctor/Doctor'
 import Contact from './pages/Contact'
 import PatAppt from './components/Patient/PatAppt';
@@ -42,9 +37,10 @@ import EditPatient from './components/Admin/EditPatient';
 import StaffAvailability from './components/Admin/StaffAvailability';
 import DoctorProfile from './components/Doctor/DoctorProfile';
 import AddInvoice from './components/Admin/AddInvoice';
-
+import Mission from './pages/Mission';
 import { useSelector } from 'react-redux';
 import { PrivateToDoctor, PrivateToAdmin, PrivateToPatient, PrivateToAandD, PrivateToHelper, PrivateToAandH, PrivateToAandDandH } from './components/Admin/ProtectedRoute';
+
 
 function App() {
 
@@ -52,31 +48,15 @@ function App() {
   const role = useSelector((state) => state.auth.role)
   //   const Private = ({Component}) => {
   //     const auth = (loginStatus&& sessionStorage.getItem("token")) || true
-  //     return auth ? <Component /> : <Navigate to="/patientLogin" />
+  //     return auth ? <Component /> : <Navigate to="/login" />
   // }
   return (
     <div className="App">
-      <div className="vh-1200 back" style={{ backgroundColor: "#063d76", color: "orange" }}>
+     <section className="vh-400 back" style={{ backgroundColor: "#063d76", color: "orange" }}>
         {/* <div className="container py-5 h-100"> */}
 
         <Header />
-        {/* <div > */}
-        <hr></hr><hr></hr><hr></hr>
-        <Link to="/login">Login</Link>{"   |   "}
 
-        <Link to="/patientLogin">Patient Login</Link>{"   |   "}
-        <Link to="/doctorMenu"> doctor mp</Link>{"   |   "}
-        <Link to="/doctorsDetails"> My Profile</Link>{"   |   "}
-        <Link to="/staffList"> Staff List</Link>{"   |   "}
-        <Link to="/patHistory"> Patient App History</Link>{"   |   "}
-        <Link to="/appbydate"> Appointment by date</Link>{"   |   "}
-        <Link to="/appbtdoctor">App by Doctor</Link>{"   |   "}
-        <Link to="/resources"> Resources</Link>{"   |   "}
-        <Link to="/manageApp"> Manage App</Link>{"   |   "}
-        <Link to="/resourceUpdate"> resourceUpdate</Link>{"   |   "}
-        <Link to="/doctorProfile"> doctorProfile </Link>{"   |   "}
-        <Link to="/patientmenu">Patient Menu</Link>{"   |   "}
-        <Link to="/adminmenu">Admin Menu</Link>{"   |   "}
 
 
         {/* </div> */}
@@ -188,9 +168,10 @@ function App() {
           {/* Non Protected Routes*/}
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/patientLogin" element={<PatientLogin />} />
+          <Route path="/login" element={<PatientLogin />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/register" element={<Register />} />
+            <Route path="/mission" element={<Mission />} />
           <Route path='*' element={<InvalidPage />} />
 
         </Routes>
@@ -209,9 +190,24 @@ function App() {
         />
         {/* </div> */}
         <br /><br />
+                {/* <div > */}
+
+        <Link to="/login">Login</Link>{"   |   "}
+        <Link to="/doctorMenu"> doctor mp</Link>{"   |   "}
+        <Link to="/doctorsDetails"> My Profile</Link>{"   |   "}
+        <Link to="/staffList"> Staff List</Link>{"   |   "}
+        <Link to="/patHistory"> Patient App History</Link>{"   |   "}
+        <Link to="/appbydate"> Appointment by date</Link>{"   |   "}
+        <Link to="/appbtdoctor">App by Doctor</Link>{"   |   "}
+        <Link to="/resources"> Resources</Link>{"   |   "}
+        <Link to="/manageApp"> Manage App</Link>{"   |   "}
+        <Link to="/resourceUpdate"> resourceUpdate</Link>{"   |   "}
+        <Link to="/doctorProfile"> doctorProfile </Link>{"   |   "}
+        <Link to="/patientmenu">Patient Menu</Link>{"   |   "}
+        <Link to="/adminmenu">Admin Menu</Link>{"   |   "}
         <Footer></Footer>
         {/* </div> */}
-      </div>
+     </section>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BaseApi } from '../api/BaseApi';
 import axios from "axios";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 function PatHistory() {
     const [pid,setPid]=useState(0);
@@ -22,7 +23,10 @@ function PatHistory() {
             { headers: {"Authorization" : `Bearer ${tokenn}`}})
             .then(res=>{
                     setPatAppts(res.data);
+                    if(res.data.length==0)
+                    toast.info('No Appointments Available')
                     })
+            .catch(()=>toast.info('No Appointments Available'))
             }
 
 

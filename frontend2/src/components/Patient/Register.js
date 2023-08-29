@@ -212,7 +212,7 @@ function Register()
                                 Register
                         </button> 
                         </div> <br />Already registered ?
-                        <Link to="/patientLogin" className="small">Click here</Link>
+                        <Link to="/login" className="small">Click here</Link>
                         </center>
                         </div>
                         </div>

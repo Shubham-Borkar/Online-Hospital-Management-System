@@ -18,9 +18,8 @@ function ManageApp() {
        }, [flagg])
 
    const select=()=>{
-    let did=1;
     var tokenn=sessionStorage.getItem("token");
-    const url= `appointment/doctor/${did}`;
+    const url= `appointment/doctor/${sessionStorage.getItem("did")}`;
      axios.get(`${BaseApi.server_url}${url}`,
      { headers: {"Authorization" : `Bearer ${tokenn}`}})
      .then(res=>{
@@ -42,6 +41,7 @@ function ManageApp() {
      })
      .then(res=>{
         debugger
+        toast.success('Appointment Status Changed Sucessfully')
         console.log(res.data)
         var b=flagg+1;
         setFlagg(b);

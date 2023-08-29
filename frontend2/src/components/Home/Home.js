@@ -10,7 +10,7 @@ function Home() {
     console.log("inside Home")
     return (<>
                 <div className="bg-primary backcolor">
-                <Header/>
+                
                 <MyCard/>
                 <Mission/>
                 <br /> <br />

@@ -52,7 +52,7 @@ function Doctor() {
     return ( <>
     
       <center> <br /><br /><br />
-          <h1>Doctors Panel Token ={sessionStorage.getItem("token")}</h1>
+          <h1>Doctors Panel</h1>
           <h1></h1>
           </center>
           <center>

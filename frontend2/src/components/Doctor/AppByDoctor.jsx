@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { BaseApi } from '../api/BaseApi';
+import { toast } from "react-toastify";
 
 function AppByDoctor() {
     const [date,setDate]=useState("");
@@ -14,10 +15,12 @@ function AppByDoctor() {
         .then(res=>{
                 debugger;
                 setPattAppts(res.data);
-                debugger;
-                console.log(res.data)
+                if(res.data.length==0)
+                toast.info('No Appointments for Given data')
                 })
-                .catch((error)=>console.log(error))  
+                .catch((error)=>{
+                    toast.info('Error getting data')
+                    console.log(error)})  
         }
 
     return (  <><h1>Appointments for Doctor by date</h1>
