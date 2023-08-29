@@ -37,13 +37,17 @@ public class DoctorServiceImp implements DoctorService {
 		List<DoctorDto> dtolist=new ArrayList<DoctorDto>();
 		if(alldoc!=null) {
 		for (Doctor doctor : alldoc) {
-			Staff staff = doctor.getStaff();
+			Staff staff=null;
+			if(doctor.getStaff()!=null)
+			{
+			staff = doctor.getStaff();
 			DoctorDto mapped = mapper.map(staff,DoctorDto.class);
 			mapped.setEducation(doctor.getEducation());
 			mapped.setSpeciality(doctor.getSpeciality());
 			mapped.setId(doctor.getId());
 			mapped.setStaffid(doctor.getStaff().getId());
 			dtolist.add(mapped);
+			}
 		}
 		return dtolist;
 		}

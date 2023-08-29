@@ -31,13 +31,15 @@ function StaffList() {
   
 
     return ( <>
-    <div className='table-responsive'>
-    <table className='table table-bordered myTable'>
+    <h1>Staff List</h1>
+    <center>
+    <div className='table-responsive col-md-8'>
+    <table className='table table-bordered myTable '>
                            <tbody>
                             <tr><th>Helper Staff Id</th><th>Name</th><th>Gender</th><th>Address</th><th>Dob</th><th>Phone</th></tr>
                         {
                         staffs.map( (s)=> {
-                                return <tr>
+                                return <><tr>
                                         <td>{s.id}</td>
                                         <td>{s.name}</td>
                                         <td>{s.gender}</td>
@@ -45,12 +47,14 @@ function StaffList() {
                                         <td>{s.dob}</td>
                                         <td>{s.phone}</td>
                                        </tr>
+                                       <tr>&nbsp;</tr>
+                                       </>
                                            })
                         }
                            </tbody>
     </table>
-    <h5>{name}</h5>
     </div>
+    </center>
     
     </> );
 }

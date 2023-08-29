@@ -27,7 +27,7 @@ public class DoctorController {
 	public ResponseEntity<?> getAllDoctors()
 	{
 	List<DoctorDto> list=doctorImp.getAllDoctors();
-	if(list==null)
+	if(list.isEmpty())
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	return ResponseEntity.ok(list);
 	}

@@ -116,7 +116,7 @@ function Profile()
 const update = () => {
         debugger;
         var tokenn = sessionStorage.getItem("token");
-        const url = `patient/${localStorage.getItem("id")}`;
+        const url = `patient/${sessionStorage.getItem("id")}`;
         
         const headers = {
             "Authorization": `Bearer ${tokenn}`

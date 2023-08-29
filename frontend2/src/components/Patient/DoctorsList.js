@@ -20,9 +20,11 @@ function DoctorList() {
     axios.get(`${BaseApi.server_url}${url}`,
     { headers: {"Authorization" : `Bearer ${tokenn}`}})
       .then(res => {
+        debugger
         setDoctors(res.data);
       })
       .catch(error => {
+        debugger
         console.log(error)
       })
   }

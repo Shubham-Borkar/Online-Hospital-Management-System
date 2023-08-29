@@ -4,15 +4,32 @@ import Header from "../Layout/Header";
 import Footer from '../Layout/Footer';
 import { BaseApi } from '../api/BaseApi';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import axios from 'axios';
+
 
 
 function Doctor() {
   const navigate=useNavigate();
-    const handleButtonClick = (buttonId) => {
-     if(buttonId==1)
-        console.log("Button clicked: " + buttonId);
-        // history.push = ("");
-    } 
+  useEffect(()=>{
+     loadDocData(); 
+    }, [])
+
+    const loadDocData=()=>{
+     
+      debugger;
+      var tokenn=sessionStorage.getItem("token")
+     const url=`entry/dremail/${sessionStorage.getItem("email")}`
+     axios.get(`${BaseApi.server_url}${url}`,
+     { headers: {"Authorization" : `Bearer ${tokenn}`}})
+      .then(res=>{
+              debugger;
+              sessionStorage.setItem("did",res.data.id)
+              sessionStorage.setItem("eid",res.data.id.login.id)
+              })
+              .catch((error)=>console.log(error))  
+      }
+
     const staffList=()=>{
       navigate("/stafflist")
     }
@@ -34,8 +51,6 @@ function Doctor() {
   //  if(loginStatus)
     return ( <>
     
-    <Header/>
-
       <center> <br /><br /><br />
           <h1>Doctors Panel Token ={sessionStorage.getItem("token")}</h1>
           <h1></h1>
@@ -89,7 +104,7 @@ function Doctor() {
             </div>
           </div>
           </center>
-          <Footer/>
+          
           </> );
 }
 

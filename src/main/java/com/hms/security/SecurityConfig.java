@@ -37,16 +37,19 @@ public class SecurityConfig {
 				.and()
 			.csrf().disable(). // disable CSRF to continue with REST APIs
 				authorizeRequests() // specify all authorization rules (i.e authorize all requests)
-				.antMatchers("/**","/hms/authenticate","/patient/register","/entry/getotp/*","/swagger*/**","/v*/api-docs/**").permitAll() 
+				.antMatchers("/hms/authenticate","/patient/register","/entry/getotp/*","/entry/update/*/*","/adminstaff/getStaffImage/*","/adminstaff/uploadStaffImage/*","/swagger*/**","/v*/api-docs/**").permitAll() 
 //+++++++++++++++++++++++++++++++++++++++++++++++
-//				//
-//				.antMatchers("/appointment/get/*",
-//							"/appointment/getAppList/*/*",
-//							"/appointment/doctor/*",
-//							"/appointment/patient/*",
-//							"/appointment/updatestatus/*",
-//							"/appointment/editprescription/*/*").hasRole("DOCTOR")
-////				,
+//				//"/**",
+				.antMatchers("/appointment/get/*",
+							"/appointment/getAppList/*/*",
+							"/appointment/doctor/*",
+							"/appointment/updatestatus/*",
+							"/resource",
+							
+							"/appointment/editprescription/*/*").hasRole("DOCTOR")
+				.antMatchers("/appointment/patient/*").hasAnyRole("DOCTOR","PATIENT")
+				//.antMatchers("/resource").hasAnyRole("DOCTOR","ADMIN")
+				////				,
 ////				"/adminstaff/helperstaff"
 //				
 //				.antMatchers("/appointment/addappointment",

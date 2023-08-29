@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BaseApi } from "../api/BaseApi";
+import { toast } from "react-toastify";
 function DoctorProfile() {
  
     const [doc,setDoc]=useState([])
     let [sidi,setSidi]=useState(0)
     const [selectedFile, setSelectedFile] = useState(null);
-    const [flag,setFlag]=useState("0")
+    const [flag,setFlag]=useState(0)
     // let [sidd,setSidd]=useState(0)
     const [imglink,setImglink]=useState("")
     useEffect(()=>{
@@ -14,23 +15,23 @@ function DoctorProfile() {
        }, [])
       //  useEffect(()=>{
       //   getdocinfo(); 
-      //  }, [sidi])
+      //  }, [flag])
        
        
        const getdocinfo=()=>{
   
         debugger
-        let did=5;
-        const url= `doctor/${did}`;
-         axios.get(`${BaseApi.server_url}${url}`)
+        var tokenn=sessionStorage.getItem("token")
+        const url= `doctor/${sessionStorage.getItem("did")}`;
+         axios.get(`${BaseApi.server_url}${url}`,
+         { headers: {"Authorization" : `Bearer ${tokenn}`}})
          .then(res=>{
             debugger;
             setDoc(res.data);
             setSidi(+res.data.staffid);
             let imagecall= `adminstaff/getStaffImage/${res.data.staffid}`
-            setImglink(`${BaseApi.server_url}${imagecall}`)
-                 })
-                 .catch((err)=>console.log(err))
+            setImglink(`${BaseApi.server_url}${imagecall}`)})
+          .catch((err)=>console.log(err))
          }
 
          const handleFileChange=(event) => {
@@ -39,7 +40,7 @@ function DoctorProfile() {
         };
         const handleRefresh = () => {
           debugger
-          window.location.reload();
+         // window.location.reload();
         };
 
 
@@ -63,11 +64,13 @@ function DoctorProfile() {
         })
         .then(response => {
             debugger;
-            handleRefresh() 
+            // handleRefresh() 
+            toast.success('Image added Sucessfully,Refresh to See latest Changes')
         })
         .catch(error => {
            debugger
-            console.error('Image upload failed:', error);
+            console.log(error);
+            toast.info('image not submitted')
         });
           
 

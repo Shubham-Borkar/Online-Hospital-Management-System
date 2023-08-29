@@ -34,7 +34,7 @@ function PatientLogin()
     // var tokenn=sessionStorage.getItem("token")
     // ,
     // { headers: {"Authorization" : `Bearer ${tokenn}`}}
-    const url= `getotp/${email}`
+    const url= `entry/getotp/${email}`
     axios.get(`${BaseApi.server_url}${url}`)
     .then(res=>{
       debugger
@@ -73,7 +73,7 @@ const setNewPass=()=>{
   else {
     debugger
     var tokenn=sessionStorage.getItem("token")
-    const url = `update/${email}/${nPass}`;
+    const url = `entry/update/${email}/${nPass}`;
     axios.put(`${BaseApi.server_url}${url}`,
     { headers: {"Authorization" : `Bearer ${tokenn}`}})
     .then(res=>{
@@ -164,11 +164,11 @@ const setNewPass=()=>{
 
           <tr>
             <td>Set New Password</td>
-            <td><input type="password" onChange={e=>setnPass(e.target.value)}/></td>
+            <td><input type="password" value={nPass} onChange={e=>setnPass(e.target.value)}/></td>
           </tr>
           <tr>
             <td>Confirm New Password</td>
-            <td><input type="password" onChange={e=>setvPass(e.target.value)}/></td>
+            <td><input type="password" value={vPass} onChange={e=>setvPass(e.target.value)}/></td>
           </tr>
           <tr>
             <td colSpan={2}><button className='btn btn-outline-success' onClick={setNewPass}>Set New Password</button></td>

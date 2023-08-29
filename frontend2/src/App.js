@@ -1,5 +1,5 @@
 import './App.css';
-import './mystyle.css';
+// import './mystyle.css';
 import Header from './components/Layout/Header';
 import Home from './components/Home/Home'
 import BookAppointment from './components/Patient/BookAppointment';
