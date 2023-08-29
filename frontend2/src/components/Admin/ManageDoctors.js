@@ -115,7 +115,7 @@ function ManageDoctors(props) {
                                             <h5 className="card-title">{doctor.id}. Dr.{doctor.name} (Contact No:{doctor.phone}) </h5>
                                             <hr></hr>
                                             <p className="card-text">
-                                                Dr.<b>{doctor.name}</b>  is a distinguished medical professional with a specialization in
+                                                Dr.<b>{doctor.name}</b>  is a distinguished medical professional with a specialization in &nbsp;
                                                 <b>{doctor.speciality}</b>. They had completed their education as <b>{doctor.education}</b>,
                                                 they are from <b>{doctor.address}</b>
                                             </p>

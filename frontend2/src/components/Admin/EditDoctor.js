@@ -5,7 +5,7 @@ import axios from 'axios';
 import { BaseApi } from '../api/BaseApi';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
- 
+
 function EditDoctor(props) {
 
         var {did} = useParams();
@@ -16,6 +16,7 @@ function EditDoctor(props) {
         const [gender, setGender] = useState("")
         const [sid, setSid] = useState("")
         const [day, setDay] = useState("")
+        var flagg = false
 
 
         useEffect(()=>{
@@ -28,6 +29,7 @@ function EditDoctor(props) {
 
         const select=()=>{
                 debugger;
+                if (!flagg) {
                 var tokenn=sessionStorage.getItem("token")
                 const url= `doctor/${did}`;
                 axios.get(`${BaseApi.server_url}${url}`,
@@ -40,11 +42,16 @@ function EditDoctor(props) {
                         setName(res.data.name)
                         setPhone(res.data.phone)
                         setSid(res.data.staffid)
+                        toast.info(`Doctor: ${res.data.name} details`)
                 })
                 .catch(error=>{
                         debugger
                         console.log(error)
+                        toast.info("Error, Doctor doesn't exist")
                 })
+                flagg=true
+        }
+
             }
 
             const currentdate=()=>{

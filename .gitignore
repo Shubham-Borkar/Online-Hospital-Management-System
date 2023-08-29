@@ -33,3 +33,14 @@ build/
 .vscode/
 .frontend
 .frontend2/node_modules
+.frontend2/src/components/Admin/DoctorAdd.js
+.frontend2/src/components/Admin/DoctorDetails.js
+.frontend2/src/components/Admin/index.js
+.frontend2/src/components/Admin/Launch.js
+.frontend2/src/components/Admin/Login.js
+.frontend2/src/components/Admin/Navbaaaar.js
+.frontend2/src/components/Admin/PastAppointments.js
+.frontend2/src/components/Admin/Resources copy.js
+.frontend2/src/components/Admin/StaffAdd.js
+.frontend2/src/components/Admin/StaffEdit.js
+.frontend2/src/components/Patient/Appointment.js

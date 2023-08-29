@@ -6,11 +6,6 @@ import { useNavigate } from 'react-router-dom';
 function Admin() {
 
     const navigate=useNavigate();
-    const handleButtonClick = (buttonId) => {
-     if(buttonId==1)
-        console.log("Button clicked: " + buttonId);
-        // history.push = ("");
-    } 
 
     const getManageDoc=()=>{
       navigate("/manageDoctors")

@@ -1,7 +1,5 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import '../../mystyle.css'
-import Header from "../Layout/Header";
-import Footer from '../Layout/Footer';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -17,9 +15,11 @@ function EditStaff(props) {
         const [address, setAddress] = useState("")
         const [gender, setGender] = useState("")
         const [day, setDay] = useState("")
+        var flagg = false
 
         useEffect(()=>{
                 debugger
+                
                 console.log(sid)
                 console.log("inside componentDidMount..");
                 select(); 
@@ -28,6 +28,7 @@ function EditStaff(props) {
 
               const select=()=>{
                 debugger;
+                if (!flagg) {
                 var tokenn=sessionStorage.getItem("token")
                 const url= `adminstaff/${sid}`;
                 axios.get(`${BaseApi.server_url}${url}`,
@@ -39,11 +40,15 @@ function EditStaff(props) {
                         setName(res.data.name)
                         setPhone(res.data.phone)
                         setGender(res.data.gender)
+                        toast.info(`HelperStaff: ${res.data.name} details`)
                 })
                 .catch(error=>{
                         debugger
                         console.log(error)
+                        toast.info("Error, HelperStaff doesn't exist")
                 })
+                flagg=true
+        }
             }
 
             const currentdate=()=>{

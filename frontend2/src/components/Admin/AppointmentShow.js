@@ -41,6 +41,7 @@ function AppointmentShow()
                 axios.get(`${BaseApi.server_url}${url}`,
                 { headers: {"Authorization" : `Bearer ${tokenn}`}})
                 .then(res=>{
+                    debugger
                         setAppts(res.data);
                 })
                 .catch(error=>{
@@ -82,28 +83,6 @@ function AppointmentShow()
                     })
             }
 
-            const fileInvoice=(e)=>{
-                debugger
-                navigate(`addInvoice/${e.target.value}`)
-                // console.log(aid)
-                // const url = `invoice/add/${aid}`;
-                // axios.post(`${BaseApi.server_url}${url}`, 
-                // {
-                //     idate, medFees, docFees, labTestFees, otherFees, desc
-                // })
-                // .then(res=>{
-                //     debugger
-                //     // setIdate(res.data.id)
-                //     setAinvoice(res.data);
-                //     setMessage(res.data);
-                //     toast.success('invoice added successfully')
-                // })
-                // .catch(error=>{
-                //     debugger
-                //     console.log(error)
-                //     toast.warning('invoice not added')
-                // })
-            }
 
             if(message!="")
     return(<>
@@ -119,45 +98,7 @@ function AppointmentShow()
         <h6>description: {ainvoice.desc}</h6>
     </div>
     </center> </>)
-//     else if(ainvoice=="")
-//     return(<>
-// <br /> <br />
-// <center>
-//         <div className= 'alert alert-warning col-md-3'>
-//         <h3>Invoice for Appointment: {aid}</h3>
-//             <table className='table table-bordered'>
-//                 <tr>
-//                 <th>Details</th>
-//                 <th>Value</th>
-//                 </tr>
-//                 <tr>
-//                     <td>date</td>
-//                     <td><input type="date" onClick={e=>setIdate(e.target.value)}/>{idate}</td>
-//                 </tr>
-//                 <tr>
-//                     <td>medFees</td>
-//                     <td><input type="number" onClick={e=>setMedFees(e.target.value)}/>{medFees}</td>
-//                 </tr>
-//                 <tr>
-//                     <td>docFees</td>
-//                     <td><input type="number" onClick={e=>setDocFees(e.target.value)}/>{docFees}</td>
-//                 </tr>
-//                 <tr>
-//                     <td>labTestFees</td>
-//                     <td><input type="number" onClick={e=>setLabTestFees(e.target.value)}/>{labTestFees}</td>
-//                 </tr>
-//                 <tr>
-//                     <td>otherFees</td>
-//                     <td><input type="number" onClick={e=>setOtherFees(e.target.value)}/>{otherFees}</td>
-//                 </tr>
-//                 <tr>
-//                     <td>description</td>
-//                     <td><input type="text" onClick={e=>setDesc(e.target.value)}/>{desc}</td>
-//                 </tr>
-//         </table>
-//         <button className="btn btn-outline-success" onClick={fileInvoice}>File Invoice</button>
-//     </div>
-//     </center> </>)
+    
     return (<>
                 <hr /> <center>
                 <div className='table-responsive col-md-6'> <h4>All Appointments</h4>

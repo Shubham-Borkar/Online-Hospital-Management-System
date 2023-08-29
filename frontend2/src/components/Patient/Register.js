@@ -41,6 +41,7 @@ function Register()
                 setAddress("")
                 setEmail("")
                 setPassword("")
+                setConfPass("")
         }
 
         const currentdate=()=>{
@@ -69,7 +70,9 @@ function Register()
                 //         if (a=="")
                 //         toast.warning(`Please, Enter full ${a}`)
                 // })
-                var em=/\S+@\S+\.\S+/;
+                // var em=/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+                // /\S+@\S+\.\S+/
+                // const em=/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/
                 if (name  =="") 
                 toast.info('Please, Enter full name')
                 else if (/^\d+$/.test(name))
@@ -80,19 +83,22 @@ function Register()
                 toast.info('Please, Enter date of birth')
                 else if (phone=="")
                 toast.info('Please, Enter phone')
+                else if (!(/^\d{10}$/.test(phone)))
+                // else if (/^[0-9]{10}$/.test(phone))
+                toast.info('Incorrect Phone no')
                 else if (address=="")
                 toast.info('Please, Enter address')
                 else if (/^\d+$/.test(address))
                 toast.info('Invalid, address contains numbers')
                 else if (email=="")
                 toast.info('Please, Enter email')
-                else if (em.test(email))
+                else if (!(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/.test(email)))
                 toast.info('Please, Enter valid email')
                 else if (password=="")
                 toast.info('Please, Enter password')
                 // else if (^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$.test(password))
                 // toast.warning('Password must contain at least 1 capital, 1 small, a no & 1 special character')
-                else if(!password==confPass)
+                else if(password!=confPass)
                 toast.info("Passwords did not match")
                 else
                 register()
@@ -100,10 +106,8 @@ function Register()
 
    const register=()=>{
         debugger;
-        var tokenn=sessionStorage.getItem("token")
         const url= 'patient/register'
         axios.post(`${BaseApi.server_url}${url}`,
-        { headers: {"Authorization" : `Bearer ${tokenn}`}},
         {
                 name, gender, dob, phone, address, email, password
         })
@@ -115,7 +119,7 @@ function Register()
         })
         .catch(error=>{
                 debugger
-                toast.error('please try again')
+                toast.info('spmething went Wrong. Please, try again')
                 console.log(error)
                
         })
@@ -123,13 +127,13 @@ function Register()
  
     return (<div>
         {/* ////////////////////////////// */}
-        <section className="vh-100 " style={{ backgroundColor: "#063d76" }}>
+        <section className="vh-50 " style={{ backgroundColor: "#063d76" }}>
     <div className="container py-1 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col col-xl-6">
           <div className="card" style={{ borderRadius: "2rem" }}>
             <div className="row g-0">
-            <div className="col-md-6 col-lg-7 d-flex align-items-center">
+            <div className="col-md-12 col-lg-12 d-flex align-items-center">
                 <div className="card-body p-1 p-lg-5 text-orange">
                   {/* <form> */}
                     <div className="align-items-center">
@@ -161,35 +165,35 @@ function Register()
                                 onChange={e=>setGender(e.target.value)}/> Rather not say
                         </div> <br />
                          
-                        <div className='form-group'>dob
+                        <div className='form-group'>Date of Birth
                         <input type="date" className='form-control widthSize'
                                 name="dob"
                                 value={dob}
                                 onChange={e=> setDob(e.target.value)} max={mday} required/>
                         </div> <br />
 
-                        <div className='form-group'>phone
-                        <input type="number" className='form-control widthSize'
+                        <div className='form-group'>Phone
+                        <input type="text" className='form-control widthSize'
                                 name="phone"
                                 value={phone}
                                 onChange={e=> setPhone(e.target.value)} required/>
                         </div> <br />
 
-                        <div className='form-group'>address
+                        <div className='form-group'>Address
                         <input type="text" className='form-control widthSize'
                                 name="address"
                                 value={address}
                                 onChange={e=> setAddress(e.target.value)} required/>
                         </div> <br />
 
-                        <div className='form-group'>email
+                        <div className='form-group'>Email
                         <input type="text" className='form-control widthSize'
                                 name="email"
                                 value={email}
                                 onChange={e=> setEmail(e.target.value)} required/>
                         </div> <br />
 
-                        <div className='form-group'>password
+                        <div className='form-group'>Password
                         <input type="password" className='form-control widthSize'
                                 name="password"
                                 value={password}
@@ -217,7 +221,7 @@ function Register()
         </div>
       </div>
     </div>
-  </section> <br /><br /><br /><br /> <br />
+  </section> 
             </div>);
 }
 

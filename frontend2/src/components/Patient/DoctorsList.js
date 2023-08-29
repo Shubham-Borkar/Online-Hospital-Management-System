@@ -35,9 +35,9 @@ function DoctorList() {
       <center>
         {
           doctors.map((doctor) => {
-            let imgSrc = `${BaseApi.server_url}adminstaff/getStaffImage/${doctor.id}`
+            let imgSrc = `${BaseApi.server_url}adminstaff/getStaffImage/${doctor.staff.id}`
             console.log(imgSrc)
-            let altImg = `doc${doctor.id} img`
+            let altImg = `Doctor${doctor.id} img`
             return (<>
               <div className="card mb-6" style={{ maxWidth: 800, backgroundColor: 'skyblue' }}>
                 <div className="row g-0">

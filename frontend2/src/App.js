@@ -56,7 +56,7 @@ function App() {
   // }
   return (
     <div className="App">
-      <section className="vh-400 back" style={{ backgroundColor: "#063d76", color: "orange" }}>
+      <div className="vh-1200 back" style={{ backgroundColor: "#063d76", color: "orange" }}>
         {/* <div className="container py-5 h-100"> */}
 
         <Header />
@@ -211,7 +211,7 @@ function App() {
         <br /><br />
         <Footer></Footer>
         {/* </div> */}
-      </section>
+      </div>
     </div>
   );
 }

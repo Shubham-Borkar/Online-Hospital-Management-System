@@ -127,7 +127,7 @@ function PatAppt() {
                     </table>
                         
                 
-            </div></center>
+            </div></center> <br /><br /><br /><br />
     </>);
     
 }
