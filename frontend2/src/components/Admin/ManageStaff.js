@@ -38,7 +38,7 @@ function ManageStaff(props) {
 
       const handleRefresh = () => {
         debugger
-        window.location.reload();
+        // window.location.reload()
       };
 
   const handlefilesubmit=(event) => {
@@ -61,12 +61,13 @@ function ManageStaff(props) {
     .then(response => {
         debugger;
         console.log(response)
-        handleRefresh() 
-        toast.warning(`staff id.${event.target.value} photo updated`)
+        // handleRefresh() 
+        toast.success(`staff id.${event.target.value} photo updated, please refresh`)
     })
     .catch(error => {
        debugger
-        console.error('Image upload failed:', error);
+        console.log('Image upload failed:', error);
+        toast.info('Image updation failed, please try again')
     });
   }
 

@@ -29,12 +29,11 @@ public class JWTRequestFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		// check for authorization hdr
-		System.out.println("#######0000");
 		String authHeadr = request.getHeader("Authorization");
 		if (authHeadr != null && authHeadr.startsWith("Bearer")) {
 			System.out.println("got bearer token-->"+authHeadr);
 			String token = authHeadr.substring(7);
-			System.out.println("after sub string");
+			//System.out.println("after sub string");
 			Claims claims = utils.validateJwtToken(token);
 			// extract subject from the token
 			String email = utils.getUserNameFromJwtToken(claims);

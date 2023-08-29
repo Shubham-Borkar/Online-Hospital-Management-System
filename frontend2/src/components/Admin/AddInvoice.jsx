@@ -22,11 +22,11 @@ function AddInvoice() {
         console.log(aid)
         var tokenn=sessionStorage.getItem("token")
         const url = `invoice/add/${aid}`;
-        axios.post(`${BaseApi.server_url}${url}`,
-        { headers: {"Authorization" : `Bearer ${tokenn}`}}, 
+        axios.post(`${BaseApi.server_url}${url}`, 
         {
             idate, medFees, docFees, labTestFees, otherFees, desc
-        })
+        },
+        { headers: {Authorization : `Bearer ${tokenn}`,},})
         .then(res=>{
             debugger
             setIdate(res.data.id)

@@ -40,14 +40,26 @@ public class SecurityConfig {
 				.antMatchers("/hms/authenticate","/patient/register","/entry/getotp/*","/entry/update/*/*","/adminstaff/getStaffImage/*","/adminstaff/uploadStaffImage/*","/swagger*/**","/v*/api-docs/**").permitAll() 
 //+++++++++++++++++++++++++++++++++++++++++++++++
 //				//"/**",
+				.antMatchers("/appointment/patient/*").hasAnyRole("DOCTOR","PATIENT")
+				.antMatchers("/appointment","/patient",
+						"/adminstaff").hasAnyRole("ADMIN","HELPER")
+				.antMatchers("/resource").hasAnyRole("ADMIN","DOCTOR","HELPER")
+				.antMatchers("/patient/*").hasAnyRole("ADMIN","PATIENT","HELPER")
+
+				
+				.antMatchers("/invoice/add/*").hasRole("HELPER")
+
 				.antMatchers("/appointment/get/*",
 							"/appointment/getAppList/*/*",
 							"/appointment/doctor/*",
 							"/appointment/updatestatus/*",
-							"/resource",
-							
-							"/appointment/editprescription/*/*").hasRole("DOCTOR")
-				.antMatchers("/appointment/patient/*").hasAnyRole("DOCTOR","PATIENT")
+							"/appointment/editprescription/*/*","/adminstaff/helperstaff").hasRole("DOCTOR")
+			
+		
+				.antMatchers("/adminstaff/register/doctor/*/*",
+						"/adminstaff/register/helper",
+						"/adminstaff/*/*",
+						"/adminstaff/*").hasRole("ADMIN")
 				//.antMatchers("/resource").hasAnyRole("DOCTOR","ADMIN")
 				////				,
 ////				"/adminstaff/helperstaff"
